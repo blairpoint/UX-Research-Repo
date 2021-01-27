@@ -13,7 +13,7 @@ export class NavigationBar extends React.Component {
     render() {
         return(
             <Navbar expand="lg">
-                <Navbar.Brand href="/"><img src={logo} />Research Respository</Navbar.Brand>
+                <Navbar.Brand href="/"><img src={logo} />Research Repository</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
