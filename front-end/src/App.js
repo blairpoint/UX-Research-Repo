@@ -1,7 +1,6 @@
 import './App.css';
 import React from 'react';
 import {Route,Switch, BrowserRouter as Router} from 'react-router-dom';
-import {Layout} from './components/Layout';
 import {NavigationBar} from './components/NavigationBar';
 import {View} from "./View";
 import {Create} from "./Create";
