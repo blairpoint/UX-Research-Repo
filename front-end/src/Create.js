@@ -7,7 +7,7 @@ export class Create extends React.Component {
         this.state={ResearchID:'',Company:'',ProjectName:'',IndustryName:'',Status:'',Privacy_Level:'',Problem_Statement:'',Date:'',ResearcherID:'',Time_Length:'',KeyInsight:'',KeyPainPoint:'',SampleSize:'',LocationID:''};
     }
 
-    addLocation() {
+    addResearch() {
         Axios.post('http://localhost:3001/insert', {
             ResearchID: this.state.ResearchID,
             Company: this.state.Company,
@@ -86,7 +86,7 @@ export class Create extends React.Component {
                 <label htmlFor="LocationID">LocationID:</label>
                 <input onChange={event=>this.setState({LocationID:event.target.value})} type="text" className="form-control" id="LocationID"/>
             </div>
-            <button onClick={()=>this.addLocation()} className="btn btn-warning">Submit</button>
+            <button onClick={()=>this.addResearch()} className="btn btn-warning">Submit</button>
         </div>);
     }
 }

@@ -15,10 +15,6 @@ export class View extends React.Component {
         });
     }
 
-    viewCreate() {
-        this.props.history.push('create');
-    }
-
     delete(id) {
         Axios.post('http://localhost:3001/delete',{
             id:id
@@ -33,7 +29,6 @@ export class View extends React.Component {
     render() {
         return(<div className="container">
             <div className="table-responsive">
-            <button onClick={()=>this.viewCreate()} className="btn btn-success">+ADD</button>
                 <table className="table">
                     <thead>
                         <tr>
