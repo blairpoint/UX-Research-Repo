@@ -33,7 +33,6 @@ export class View extends React.Component {
     render() {
         return(<div className="container">
             <div className="table-responsive">
-            <button onClick={()=>this.viewCreate()} className="btn btn-success">+ADD</button>
                 <table className="table">
                     <thead>
                         <tr>
