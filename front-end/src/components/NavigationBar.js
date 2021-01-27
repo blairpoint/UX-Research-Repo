@@ -6,11 +6,6 @@ import FormControl from 'react-bootstrap/FormControl';
 import logo from "../assets/ibmlogo.JPG";
 
 export class NavigationBar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state={data:''};
-    }
-
     viewCreate() {
         this.props.history.push('create');
     }
@@ -28,7 +23,7 @@ export class NavigationBar extends React.Component {
                             </Form>
                         </Nav.Item>
                         <Nav.Item>
-                            <button onClick={()=>this.viewCreate()} className="btn btn-primary">+ADD</button>
+                            <Link to="/create"><button className="btn btn-primary">+ADD</button></Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>

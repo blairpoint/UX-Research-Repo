@@ -15,10 +15,6 @@ export class View extends React.Component {
         });
     }
 
-    viewCreate() {
-        this.props.history.push('create');
-    }
-
     delete(id) {
         Axios.post('http://localhost:3001/delete',{
             id:id
