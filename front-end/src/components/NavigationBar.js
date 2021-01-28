@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
+import {SearchBar} from "./SearchBar";
 import logo from "../assets/ibmlogo.JPG";
 
 export class NavigationBar extends React.Component {
@@ -13,14 +12,12 @@ export class NavigationBar extends React.Component {
     render() {
         return(
             <Navbar expand="lg">
-                <Navbar.Brand href="/"><img src={logo} />Research Repository</Navbar.Brand>
+                {/*<Navbar.Brand href="/"><img src={logo} />Research Repository</Navbar.Brand>*/}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ml-auto">
+                    <Nav className="m-auto">
                         <Nav.Item>
-                            <Form inline>
-                                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                            </Form>
+                            <SearchBar />
                         </Nav.Item>
                         <Nav.Item>
                             <Link to="/create"><button className="btn btn-primary">+ADD</button></Link>
