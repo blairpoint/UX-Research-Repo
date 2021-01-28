@@ -30,14 +30,16 @@ export class SearchBar extends React.Component {
                     </InputGroup.Prepend>
                     <Form.Control type="text" placeholder="Search" />
                     <DropdownButton
-                        as={InputGroup.Prepend}
-                        variant="outline-secondary"
+                        as={InputGroup.Append}
+                        variant="outline-secondary" //Can change the variant later - maddie
                         title={this.state.cat}
                         id="input-group-dropdown-1"
                         >
                         <Dropdown.Item><div onClick={(e) => this.selectCat(e.target.textContent)}>{this.cat_one}</div></Dropdown.Item>
                         <Dropdown.Item><div onClick={(e) => this.selectCat(e.target.textContent)}>{this.cat_two}</div></Dropdown.Item>
                         <Dropdown.Item><div onClick={(e) => this.selectCat(e.target.textContent)}>{this.cat_three}</div></Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item><div onClick={(e) => this.selectCat(e.target.textContent)}>{this.cat_text}</div></Dropdown.Item>
                     </DropdownButton>
                 </InputGroup>
                 
