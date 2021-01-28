@@ -16,8 +16,6 @@ export class SearchBar extends React.Component {
         
     }
 
-    
-
     selectCat(selection) {
         this.setState({cat: selection});
     };
@@ -25,7 +23,7 @@ export class SearchBar extends React.Component {
     render() {
         return(
             <div className="searchbar">
-                <InputGroup className="mb-3">
+                <InputGroup className="input-group-sm mb-3">
                     <InputGroup.Prepend>
                         <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
                     </InputGroup.Prepend>

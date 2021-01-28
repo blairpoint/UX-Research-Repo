@@ -20,7 +20,7 @@ export class NavigationBar extends React.Component {
                             <SearchBar />
                         </Nav.Item>
                         <Nav.Item>
-                            <Link to="/create"><button className="btn btn-primary">+ADD</button></Link>
+                            <Link to="/create"><button className="btn btn-primary btn-sm">+ Add Research File</button></Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
