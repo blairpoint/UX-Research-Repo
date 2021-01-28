@@ -6,64 +6,64 @@ const ResearchSchema = new mongoose.Schema({
     },
     ResearchID:{
         type:String,
-        required: true
+        required: false
     },
     Status:{
         type:String,
-        required: true
+        required: false
     },
     Privacy_Level:{
         type:String,
-        required: true
+        required: false
     },
     Country:{
         type:String,
-        required: true
+        required: false
     },
     ResearcherID:{
         type:String,
-        required: true
+        required: false
     },
     
     ProjectName:{
         type:String,
-        required: true
+        required: false
     },
     Problem_Statement:{
         type:String,
-        required: true
+        required: false
     },
     Tags:{
         type:String,
-        required: true
+        required: false
     },
     KeyInsight:{
         type:String,
-        required: true
+        required: false
     },
     KeyPainPoint:{
         type:String,
-        required: true
+        required: false
     },
     SampleSize: {
         type:String,
-        required: true
+        required: false
     },
     Methods:{
         type:String,
-        required: true
+        required: false
     },
     Demographic:{
         type:String,
-        required: true
+        required: false
     },
     Industry:{
         type:String,
-        required: true
+        required: false
     },
     Company:{
         type:String,
-        required: true
+        required: false
     },
     URL_ID:{
         type:String,
@@ -75,7 +75,7 @@ const ResearchSchema = new mongoose.Schema({
     },
     Time_in_days:{
         type:String,
-        required: true
+        required: false
     },
     
     
