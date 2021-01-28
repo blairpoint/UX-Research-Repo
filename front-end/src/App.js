@@ -5,6 +5,7 @@ import {NavigationBar} from './components/NavigationBar';
 import {View} from "./View";
 import {Create} from "./Create";
 
+
 function App() {
   return (
       <Router>
@@ -12,6 +13,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={View}/>
           <Route path="/create" exact component={Create}/>
+
         </Switch>
       </Router>
   );

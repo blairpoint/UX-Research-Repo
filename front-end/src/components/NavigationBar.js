@@ -19,7 +19,7 @@ export class NavigationBar extends React.Component {
                     <Nav className="ml-auto">
                         <Nav.Item>
                             <Form inline>
-                                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                                <FormControl to="/search/" type="text" placeholder="Search" className="mr-sm-2" />
                             </Form>
                         </Nav.Item>
                         <Nav.Item>
