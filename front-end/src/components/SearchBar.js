@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dropdown, DropdownButton, InputGroup } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
+import * as Icon from 'react-bootstrap-icons';
 import FormControl from 'react-bootstrap/FormControl';
 
 export class SearchBar extends React.Component {
@@ -25,7 +26,7 @@ export class SearchBar extends React.Component {
             <div className="searchbar">
                 <InputGroup className="input-group-sm mb-3">
                     <InputGroup.Prepend>
-                        <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                        <InputGroup.Text id="basic-addon1"><Icon.Search /></InputGroup.Text>
                     </InputGroup.Prepend>
                     <Form.Control type="text" placeholder="Search" />
                     <DropdownButton
