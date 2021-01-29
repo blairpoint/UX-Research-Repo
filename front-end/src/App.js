@@ -5,6 +5,7 @@ import {NavigationBar} from './components/NavigationBar';
 import {View} from "./View";
 import {Create} from "./Create";
 
+
 function App() {
   return (
       <Router>

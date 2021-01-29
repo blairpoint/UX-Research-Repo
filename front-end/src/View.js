@@ -9,6 +9,11 @@ export class View extends React.Component {
     }
 
     //This will be executed on page load
+    // componentDidMount() {
+    //     Axios.get('http://localhost:3001/get-all').then((res)=>{
+    //        this.setState({data: res.data});
+    //     });
+    // }
     componentDidMount() {
         Axios.get('http://localhost:3001/get-all').then((res)=>{
            this.setState({data: res.data});
@@ -29,41 +34,38 @@ export class View extends React.Component {
     render() {
         return(<div className="container">
             <div className="table-responsive">
+                
                 <table className="table">
                     <thead>
-                        <tr>
-                        <th>ResearchID</th>
-                        <th>Company</th>
-                        <th>ProjectName</th>
-                        <th>IndustryName</th>
-                        <th>Status</th>
-                        <th>Privacy_Level</th>
-                        <th>Problem_Statement</th>
-                        <th>Date</th>
-                        <th>ResearcherID</th>
-                        <th>Time_Length</th>
-                        <th>KeyInsight</th>
-                        <th>KeyPainPoint</th>
-                        <th>SampleSize</th>
+                        <tr><th>	Date	</th>
+                            <th>	ResearchID	</th>
+                            <th>	Country	</th>
+                            <th>	ResearcherID	</th>
+                            <th>	ProjectName	</th>
+                            <th>	Problem_Statement	</th>
+                            <th>	KeyInsight	</th>
+                            <th>	KeyPainPoint	</th>
+                            <th>	Methods	</th>
+                            <th>	Industry	</th>
+                            <th>	Company	</th>
                         </tr>
                     </thead>
                     <tbody>
                         {Array.from(this.state.data).map((val)=>{
+                            
                             return(
                                 <tr>
+                                 <td>{val.Date	}</td>
                                     <td>{val.ResearchID}</td>
-                                    <td>{val.Company}</td>
-                                    <td>{val.ProjectName}</td>
-                                    <td>{val.Industry}</td>
-                                    <td>{val.Status}</td>
-                                    <td>{val.Privacy_Level}</td>
-                                    <td>{val.Problem_Statement}</td>
-                                    <td>{val.Date}</td>
+                                    <td>{val.Country}</td>
                                     <td>{val.ResearcherID}</td>
-                                    <td>{val.Time_length}</td>
+                                    <td>{val.ProjectName}</td>
+                                    <td>{val.Problem_Statement}</td>
                                     <td>{val.KeyInsight}</td>
                                     <td>{val.KeyPainPoint}</td>
-                                    <td>{val.SampleSize}</td>
+                                    <td>{val.Methods}</td>
+                                    <td>{val.Industry}</td>
+                                    <td>{val.Company}</td>
                                     <td><button onClick={()=>this.delete(val._id)}className="btn btn-danger">Delete</button></td>
                                 </tr>
                             )
@@ -71,6 +73,6 @@ export class View extends React.Component {
                     </tbody>
                 </table>
             </div>
-        </div>);
+        </div>); 
     }
 }
