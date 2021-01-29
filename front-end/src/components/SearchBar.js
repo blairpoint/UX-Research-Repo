@@ -14,12 +14,18 @@ export class SearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.state={search:'', cat:this.cat_text};
-        
+        this.onPressEnter = this.onPressEnter.bind(this);        
     }
 
     selectCat(selection) {
-        this.setState({cat: selection});
+        this.setState({cat: selection}); //will move this onto the actual lines at a later date
     };
+
+    onPressEnter(event) {
+        if (event.charCode === 13) {
+            this.setState({ search: event.target.value });
+          }
+    }
 
     render() {
         return(
@@ -28,7 +34,13 @@ export class SearchBar extends React.Component {
                     <InputGroup.Prepend>
                         <InputGroup.Text id="basic-addon1"><Icon.Search /></InputGroup.Text>
                     </InputGroup.Prepend>
-                    <Form.Control type="text" placeholder="Search" />
+                    <FormControl
+                        className="searchbox"
+                        placeholder="Search"
+                        onKeyPress={this.onPressEnter}
+                        onKeyUpCapture={console.log(this.state.search)} //debug
+                        type="text"
+                    />
                     <DropdownButton
                         as={InputGroup.Append}
                         variant="outline-secondary" //Can change the variant later - maddie
@@ -39,13 +51,10 @@ export class SearchBar extends React.Component {
                         <Dropdown.Item><div onClick={(e) => this.selectCat(e.target.textContent)}>{this.cat_two}</div></Dropdown.Item>
                         <Dropdown.Item><div onClick={(e) => this.selectCat(e.target.textContent)}>{this.cat_three}</div></Dropdown.Item>
                         <Dropdown.Divider />
+                        {/*the below is not great will resolve later - Maddie*/}
                         <Dropdown.Item><div onClick={(e) => this.selectCat(e.target.textContent)}>{this.cat_text}</div></Dropdown.Item>
                     </DropdownButton>
                 </InputGroup>
-                
-                {/*<Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                </Form>*/}
             </div>
         );
     }
