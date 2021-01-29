@@ -156,7 +156,7 @@ handleChange(checked) {
                     </FormGroup>
                     <FormGroup className="text-left">
                 <Row>
-                    <Col sm={2}>
+                    {/* <Col sm={2}>
                         <label for="TagsLn1">Suggested Tags</label>
                     </Col>
                     <Col sm={2} id="Tag1">
@@ -200,8 +200,8 @@ handleChange(checked) {
                     </Col>
                     <Col sm={2} id="Tag8">
                         <Form.Control placeholder="#" />
-                    </Col>
-                </Row>
+                    </Col> */}
+                {/* </Row>
                 </FormGroup>
                 <FormGroup className="text-left">
                 <Row>
@@ -212,85 +212,37 @@ handleChange(checked) {
                     </Col>
                     <Col sm={2} id="Tag10">
                         <Form.Control placeholder="#" />
-                    </Col>
+                    </Col> */}
                 </Row>
                 </FormGroup>
                     <FormGroup className="text-left">
                         <Row>
                             <Col sm={2}>
-                            <label for="Insights">Key Insights</label>
+                            <label for="KeyInsights">Key Insights</label>
                             </Col>
                             <Col sm={4} id="KeyInsight">
                             <Form.Control htmlFor="KeyInsight" onChange={event=>this.setState({KeyInsight:event.target.value})} type="text" className="form-control" id="KeyInsight" />
                             </Col>
-                        </Row>
-                    </FormGroup>
-                    <FormGroup className="text-left">
-                    <   Row>
-                            <Col sm={2}>
-                            </Col>
-                            <Col sm={4} id="Insight2">
-                            <Form.Control placeholder="" />
-                            </Col>
-                        </Row>
-                    </FormGroup>
-                    <FormGroup className="text-left">
-                        <Row>
-                            <Col sm={2}>
-                            </Col>
-                            <Col sm={4} id="Insight3">
-                            <Form.Control placeholder="" />
-                            </Col>
-                        </Row>
-                    </FormGroup>
-                    <FormGroup className="text-right">
-                        <Row>
-                            <Col sm={5}>
-                            <label for="AddInsights">Add Insights</label>
-                            </Col>
                             <Col sm={1}>
-                                
-                                <Button id="AddInsights" variant="primary">+</Button>{' '}
-                                
+                            <Button id="AddLinks" variant="primary">+</Button>{' '}
+
                             </Col>
+                            
                         </Row>
                     </FormGroup>
                     <FormGroup className="text-left">
                         <Row>
                             <Col sm={2}>
-                            <label for="PainPoints">Pain Points</label>
+                            <label for="KeyPainPoint">Key Pain Point</label>
                             </Col>
                             <Col sm={4} id="KeyPainPoint">
-                            <Form.Control htmlFor="KeyInsight" onChange={event=>this.setState({KeyPainPoint:event.target.value})} type="text" className="form-control" id="KeyPainPoint" />
-                            </Col>
-                        </Row>
-                    </FormGroup>
-                    <FormGroup className="text-left">
-                    <   Row>
-                            <Col sm={2}>
-                            </Col>
-                            <Col sm={4} id="KeyPainPoint">
-                            <Form.Control placeholder="" />
-                            </Col>
-                        </Row>
-                    </FormGroup>
-                    <FormGroup className="text-left">
-                        <Row>
-                            <Col sm={2}>
-                            </Col>
-                            <Col sm={4} id="PP3">
-                            <Form.Control placeholder="" />
-                            </Col>
-                        </Row>
-                    </FormGroup>
-                    <FormGroup className="text-right">
-                        <Row>
-                            <Col sm={5}>
-                            <label for="AddPP">Add Pain Points</label>
+                            <Form.Control htmlFor="KeyPainPoint" onChange={event=>this.setState({KeyPainPoint:event.target.value})} type="text" className="form-control" id="KeyPainPoint" />
                             </Col>
                             <Col sm={1}>
-                                <Button id="AddPP" variant="primary">+</Button>{' '} 
+                            <Button id="AddLinks" variant="primary">+</Button>{' '}
+
                             </Col>
+                            
                         </Row>
                     </FormGroup>
                     <FormGroup className="text-left">
@@ -319,7 +271,7 @@ handleChange(checked) {
                             <DropdownButton
                                 as={InputGroup.Append}
                                 variant="outline-secondary"
-                                title='V'
+                                title=''
                                 id="input-group-dropdown-2"
                                 >
                                 <Dropdown.Item href="#">Method1</Dropdown.Item>
@@ -347,7 +299,7 @@ handleChange(checked) {
                             <DropdownButton
                                 as={InputGroup.Append}
                                 variant="outline-secondary"
-                                title='V'
+                                title=''
                                 id="input-group-dropdown-2"
                                 >
                                 <Dropdown.Item href="#">Industry1</Dropdown.Item>

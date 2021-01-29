@@ -1,6 +1,5 @@
 import React from 'react';
 import Axios from 'axios';
-import { NavigationBar } from './components/NavigationBar';
 
 export class View extends React.Component {
     constructor(props) {

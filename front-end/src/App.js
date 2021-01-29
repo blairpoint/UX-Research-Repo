@@ -13,7 +13,6 @@ function App() {
         <Switch>
           <Route path="/" exact component={View}/>
           <Route path="/create" exact component={Create}/>
-
         </Switch>
       </Router>
   );
