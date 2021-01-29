@@ -19,3 +19,13 @@ code {
 .searchbar {
   width: 100%;
 }
+
+.problem-statement {
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.eye-badge {
+  text-align: end;
+}

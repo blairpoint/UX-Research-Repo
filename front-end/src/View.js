@@ -1,5 +1,16 @@
 import React from 'react';
 import Axios from 'axios';
+import CardDeck from 'react-bootstrap/CardDeck';
+import Card from 'react-bootstrap/Card';
+import CardColumns from 'react-bootstrap/CardColumns';
+import { Badge, Button, Col, Container, InputGroup, ListGroup, Row } from 'react-bootstrap';
+import * as Icon from 'react-bootstrap-icons';
+
+var EyeBadge = () => {
+    return (
+        <span className="eye-badge"><h2><Badge className="badge-secondary"><Icon.Eye className="view-icon" /></Badge></h2></span>
+    );
+}
 
 export class View extends React.Component {
     constructor(props) {
@@ -32,47 +43,48 @@ export class View extends React.Component {
     }
 
     render() {
-        return(<div className="container">
-            <div className="table-responsive">
-                
-                <table className="table">
-                    <thead>
-                        <tr><th>	Date	</th>
-                            <th>	ResearchID	</th>
-                            <th>	Country	</th>
-                            <th>	ResearcherID	</th>
-                            <th>	ProjectName	</th>
-                            <th>	Problem_Statement	</th>
-                            <th>	KeyInsight	</th>
-                            <th>	KeyPainPoint	</th>
-                            <th>	Methods	</th>
-                            <th>	Industry	</th>
-                            <th>	Company	</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {Array.from(this.state.data).map((val)=>{
+        return(
+            <Container>
+                <CardColumns>
+                    {Array.from(this.state.data).map((val)=>{         
+                        return(
+                            <Card bg="light">
+                                <Card.Header>
+                                        <Row>
+                                            <Col sm={6} className="align-self-center"><small className="font-weight-bold">Start Date: {val.Date}<br />Research ID: {val.ResearchID}</small></Col>
+                                            <Col sm={6}><EyeBadge />{/* Wrap with a Link to for the view single card unless not viewable*/}</Col>
+                                        </Row>                  
+                                </Card.Header>
+                                <Card.Body>
+                                    <Card.Title as="h6">{val.ProjectName}</Card.Title>
+                                    <Card.Text className="problem-statement"><small>Problem Statement:<br />{val.Problem_Statement}</small></Card.Text>
+                                    <Row>
+                                        <Col className="text-center"><Icon.PieChart /><br/><small>0-5</small></Col>
+                                        <Col className="text-center"><Icon.People /><br/><small>{val.ResearcherID}</small></Col>
+                                        <Col className="text-center"><Icon.Unlock /><br/><small>Open</small></Col>
+                                    </Row>
+                                </Card.Body>
+                                <Card.Footer><small>Location: {val.Country}</small></Card.Footer>
+                            </Card>
                             
-                            return(
-                                <tr>
-                                 <td>{val.Date	}</td>
-                                    <td>{val.ResearchID}</td>
-                                    <td>{val.Country}</td>
-                                    <td>{val.ResearcherID}</td>
-                                    <td>{val.ProjectName}</td>
-                                    <td>{val.Problem_Statement}</td>
-                                    <td>{val.KeyInsight}</td>
-                                    <td>{val.KeyPainPoint}</td>
-                                    <td>{val.Methods}</td>
-                                    <td>{val.Industry}</td>
-                                    <td>{val.Company}</td>
-                                    <td><button onClick={()=>this.delete(val._id)}className="btn btn-danger">Delete</button></td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-            </div>
-        </div>); 
+                            /*<tr>
+                                <td>{val.Date}</td>
+                                <td>{val.ResearchID}</td>
+                                <td>{val.Country}</td>
+                                <td>{val.ResearcherID}</td>
+                                <td>{val.ProjectName}</td>
+                                <td>{val.Problem_Statement}</td>
+                                <td>{val.KeyInsight}</td>
+                                <td>{val.KeyPainPoint}</td>
+                                <td>{val.Methods}</td>
+                                <td>{val.Industry}</td>
+                                <td>{val.Company}</td>
+                                <td><button onClick={()=>this.delete(val._id)}className="btn btn-danger">Delete</button></td>
+                            </tr>*/
+                        )
+                    })}
+                </CardColumns>
+            </Container>
+        )
     }
 }
