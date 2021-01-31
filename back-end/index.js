@@ -1,15 +1,23 @@
 const express = require('express');
 const app = express();
-const  cors = require('cors');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const ResearchModel = require('./models/Research');
+/* AMF: ResearchModel2 points to the collection research2. 
+This is a copy of research1 with an index (and different document objectIDs). */
+const ResearchModel2 = require('./models/Research2');
+
+//const AliceModel = require('./models/Alice');
 
 app.use(cors());
 app.use(express.json());
-var yo = "Technologies"
-mongoose.connect('mongodb+srv://blair:admin@cluster0.ohr5j.mongodb.net/test?retryWrites=true&w=majority',{
+var yo = "Technologies";
+
+mongoose.connect('mongodb+srv://alice:admin@cluster0.ohr5j.mongodb.net/test?retryWrites=true&w=majority',{
     useNewUrlParser:true,
-    useUnifiedTopology:true
+    useUnifiedTopology:true,
+    /* AMF: useCreateIndex forces Mongoose not to use a deprecated function */
+    useCreateIndex:true
 });
 
 app.post('/insert', async (req,res)=>{
@@ -55,6 +63,41 @@ app.get('/search',(req,res)=>{
         }
     });
 });
+
+/* AMF: search2 is a search within a specific field. */
+
+app.get('/search2',(req,res)=>{
+    ResearchModel2.find({ Industry: "Technologies" },(err,result)=>{
+        if(err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+/* AMF: search3 is an index keyword text search. At present all fields are indexed. */
+
+app.get('/search3',(req,res)=>{
+    ResearchModel2.find({ $text: {$search: "technologies"} },(err,result)=>{
+        if(err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+// app.get('/searchAlice',(req,res)=>{
+//     AliceModel.find({$text: {$search: "chocolate"}},(err,result)=>{
+//         if(err) {
+//             res.send(err);
+//         } else {
+//             res.send(result);
+//         }
+//     });
+// });
+
 
 app.get('/get-all',(req,res)=>{
     ResearchModel.find({},(err,result)=>{
