@@ -23,6 +23,7 @@ mongoose.connect('mongodb+srv://alice:admin@cluster0.ohr5j.mongodb.net/test?retr
 app.post('/insert', async (req,res)=>{
    // const research = new ResearchModel({ResearchID:req.body.ResearchID,ProjectName:req.body.ProjectName,Industry:req.body.Industry,Status:req.body.Status,PrivacyLevel:req.body.PrivacyLevel,Promblem_Statement:req.body.Problem_Statement,Date:req.body.Date,ResearcherID:req.body.ResearcherID,Time_Length:req.body.Time_Length,KeyInsight:req.body.KeyInsight,KeyPainPoint:req.body.KeyPainPoint,SampleSize:req.body.SampleSize,LocationID:req.body.LocationID});
     const research = new ResearchModel({
+        _id: req.body._id,
         Date:req.body.Date,	
         ResearchID:req.body.ResearchID,	
         Status:req.body.Status,	
@@ -118,6 +119,8 @@ app.get('/get-all',(req,res)=>{
         }
     });
 });
+
+
 
 app.get('/hello', (req,res)=>{
     res.send('Hello from  Express');
