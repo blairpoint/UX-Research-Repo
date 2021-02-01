@@ -6,6 +6,7 @@ import CardColumns from 'react-bootstrap/CardColumns';
 import { Badge, Button, Col, Container, InputGroup, ListGroup, Row } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
 import FormControl from 'react-bootstrap/FormControl';
+import { Link } from 'react-router-dom';
 
 var EyeBadge = () => {
     return (
@@ -87,7 +88,7 @@ export class View extends React.Component {
                                 <Card.Header>
                                         <Row>
                                             <Col sm={6} className="align-self-center"><small className="font-weight-bold">Start Date: {val.Date}<br />Research ID: {val.ResearchID}</small></Col>
-                                            <Col sm={6}><a href='/'><EyeBadge /></a>{ /* Wrap with a Link to for the view single card unless not viewable*/}</Col>
+                                            <Col sm={6}><Link to="/Viewcard?ObjectID=601201340b1f2b3b04992833"><EyeBadge /></Link>{ /* Wrap with a Link to for the view single card unless not viewable*/}</Col>
                                         </Row>                  
                                 </Card.Header>
                                 <Card.Body>
