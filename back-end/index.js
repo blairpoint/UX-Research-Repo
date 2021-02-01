@@ -78,8 +78,18 @@ app.get('/search2',(req,res)=>{
 
 /* AMF: search3 is an index keyword text search. At present all fields are indexed. */
 
-app.get('/search3',(req,res)=>{
-    ResearchModel2.find({ $text: {$search: "technologies"} },(err,result)=>{
+// app.get('/search3',(req,res)=>{
+//     ResearchModel2.find({ $text: {$search: "technologies"} },(err,result)=>{
+//         if(err) {
+//             res.send(err);
+//         } else {
+//             res.send(result);
+//         }
+//     });
+// });
+
+app.get('/search3/:val',(req,res)=>{
+    ResearchModel2.find({ $text: {$search: req.params.val} },(err,result)=>{
         if(err) {
             res.send(err);
         } else {

@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import CardColumns from 'react-bootstrap/CardColumns';
 import { Badge, Button, Col, Container, InputGroup, ListGroup, Row } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
+import FormControl from 'react-bootstrap/FormControl';
 
 var EyeBadge = () => {
     return (
@@ -13,10 +14,33 @@ var EyeBadge = () => {
 }
 
 export class View extends React.Component {
+    
     constructor(props) {
         super(props);
         this.state={data:''};
-        this.componentDidMount = this.componentDidMount.bind(this);
+         this.componentDidMount = this.componentDidMount.bind(this);
+        // this.updateCards = this.updateCards.bind(this);
+        this.onPressEnter = this.onPressEnter.bind(this);
+    }
+
+    // updateCards(searchResult) {
+    //     this.setState({data:searchResult.data});
+    // }
+
+    onPressEnter(event) {
+        if (event.charCode === 13) {
+            if(event.target.value==='') {
+                Axios.get('http://localhost:3001/get-all').then((res)=>{
+                    this.setState({data: res.data});      
+                });
+            } else {
+                Axios.get(`http://localhost:3001/search3/${event.target.value}`).then((res)=>{
+                //Set response to the cards.
+            //console.log(res);
+                this.setState({data:res.data});
+                });
+            }
+        }
     }
 
     //This will be executed on page load
@@ -25,9 +49,9 @@ export class View extends React.Component {
     //        this.setState({data: res.data});
     //     });
     // }
-    componentDidMount() {
+    componentDidMount() {     
         Axios.get('http://localhost:3001/get-all').then((res)=>{
-           this.setState({data: res.data});
+            this.setState({data: res.data});      
         });
     }
 
@@ -42,9 +66,20 @@ export class View extends React.Component {
         });
     }
 
+
+
+    
+
     render() {
         return(
             <Container>
+                <FormControl
+                        className="searchbox"
+                        placeholder="Search"
+                        onKeyPress={(event)=>this.onPressEnter(event)}
+                        onKeyUpCapture={console.log(this.state.search)} //debug
+                        type="text"
+                    />
                 <CardColumns>
                     {Array.from(this.state.data).map((val)=>{         
                         return(
@@ -52,7 +87,7 @@ export class View extends React.Component {
                                 <Card.Header>
                                         <Row>
                                             <Col sm={6} className="align-self-center"><small className="font-weight-bold">Start Date: {val.Date}<br />Research ID: {val.ResearchID}</small></Col>
-                                            <Col sm={6}><EyeBadge />{/* Wrap with a Link to for the view single card unless not viewable*/}</Col>
+                                            <Col sm={6}><a href='/'><EyeBadge /></a>{ /* Wrap with a Link to for the view single card unless not viewable*/}</Col>
                                         </Row>                  
                                 </Card.Header>
                                 <Card.Body>
