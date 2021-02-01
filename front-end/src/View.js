@@ -1,11 +1,11 @@
 import React from 'react';
 import Axios from 'axios';
-import CardDeck from 'react-bootstrap/CardDeck';
 import Card from 'react-bootstrap/Card';
 import CardColumns from 'react-bootstrap/CardColumns';
 import { Badge, Button, Col, Container, InputGroup, ListGroup, Row } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
 import FormControl from 'react-bootstrap/FormControl';
+import {SearchBar} from './components/SearchBar';
 
 var EyeBadge = () => {
     return (
@@ -14,18 +14,13 @@ var EyeBadge = () => {
 }
 
 export class View extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.state={data:''};
-         this.componentDidMount = this.componentDidMount.bind(this);
-        // this.updateCards = this.updateCards.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
         this.onPressEnter = this.onPressEnter.bind(this);
     }
-
-    // updateCards(searchResult) {
-    //     this.setState({data:searchResult.data});
-    // }
 
     onPressEnter(event) {
         if (event.charCode === 13) {
@@ -35,26 +30,19 @@ export class View extends React.Component {
                 });
             } else {
                 Axios.get(`http://localhost:3001/search3/${event.target.value}`).then((res)=>{
-                //Set response to the cards.
-            //console.log(res);
                 this.setState({data:res.data});
                 });
             }
         }
     }
 
-    //This will be executed on page load
-    // componentDidMount() {
-    //     Axios.get('http://localhost:3001/get-all').then((res)=>{
-    //        this.setState({data: res.data});
-    //     });
-    // }
     componentDidMount() {     
         Axios.get('http://localhost:3001/get-all').then((res)=>{
             this.setState({data: res.data});      
         });
     }
 
+    /* Commenting this out until we decide that we need this method
     delete(id) {
         Axios.post('http://localhost:3001/delete',{
             id:id
@@ -64,22 +52,12 @@ export class View extends React.Component {
             });
             this.setState({data:val});
         });
-    }
-
-
-
-    
+    }*/
 
     render() {
         return(
             <Container>
-                <FormControl
-                        className="searchbox"
-                        placeholder="Search"
-                        onKeyPress={(event)=>this.onPressEnter(event)}
-                        onKeyUpCapture={console.log(this.state.search)} //debug
-                        type="text"
-                    />
+                <SearchBar functionCallFromParent={this.onPressEnter.bind(this)} />
                 <CardColumns>
                     {Array.from(this.state.data).map((val)=>{         
                         return(
@@ -87,7 +65,7 @@ export class View extends React.Component {
                                 <Card.Header>
                                         <Row>
                                             <Col sm={6} className="align-self-center"><small className="font-weight-bold">Start Date: {val.Date}<br />Research ID: {val.ResearchID}</small></Col>
-                                            <Col sm={6}><a href='/'><EyeBadge /></a>{ /* Wrap with a Link to for the view single card unless not viewable*/}</Col>
+                                            <Col sm={6}><a href='/'><EyeBadge /></a></Col>
                                         </Row>                  
                                 </Card.Header>
                                 <Card.Body>
@@ -101,21 +79,6 @@ export class View extends React.Component {
                                 </Card.Body>
                                 <Card.Footer><small>Location: {val.Country}</small></Card.Footer>
                             </Card>
-                            
-                            /*<tr>
-                                <td>{val.Date}</td>
-                                <td>{val.ResearchID}</td>
-                                <td>{val.Country}</td>
-                                <td>{val.ResearcherID}</td>
-                                <td>{val.ProjectName}</td>
-                                <td>{val.Problem_Statement}</td>
-                                <td>{val.KeyInsight}</td>
-                                <td>{val.KeyPainPoint}</td>
-                                <td>{val.Methods}</td>
-                                <td>{val.Industry}</td>
-                                <td>{val.Company}</td>
-                                <td><button onClick={()=>this.delete(val._id)}className="btn btn-danger">Delete</button></td>
-                            </tr>*/
                         )
                     })}
                 </CardColumns>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Dropdown, DropdownButton, InputGroup } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
+import { Button, Dropdown, DropdownButton, InputGroup } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
 import FormControl from 'react-bootstrap/FormControl';
+import { Link } from 'react-router-dom';
 
 export class SearchBar extends React.Component {
     
@@ -13,23 +13,22 @@ export class SearchBar extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={search:'', cat:this.cat_text};
-        this.onPressEnter = this.onPressEnter.bind(this);        
+        this.state={search:'', cat:this.cat_text};        
     }
 
     selectCat(selection) {
         this.setState({cat: selection}); //will move this onto the actual lines at a later date
     };
 
-    onPressEnter(event) {
-        if (event.charCode === 13) {
-            this.setState({ search: event.target.value });
-          }
+    getInput = (e) => {
+        //e.preventDefault();
+        this.props.functionCallFromParent(e);
     }
 
     render() {
         return(
             <div className="searchbar">
+                <Link to="/create"><Button className="btn btn-primary btn-sm">+ Add Research File</Button></Link>
                 <InputGroup className="input-group-sm mb-3">
                     <InputGroup.Prepend>
                         <InputGroup.Text id="basic-addon1"><Icon.Search /></InputGroup.Text>
@@ -37,8 +36,7 @@ export class SearchBar extends React.Component {
                     <FormControl
                         className="searchbox"
                         placeholder="Search"
-                        onKeyPress={this.onPressEnter}
-                        onKeyUpCapture={console.log(this.state.search)} //debug
+                        onKeyPress={this.getInput.bind(this)}
                         type="text"
                     />
                     <DropdownButton

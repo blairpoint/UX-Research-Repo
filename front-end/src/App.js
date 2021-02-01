@@ -9,7 +9,7 @@ import {Create} from "./Create";
 function App() {
   return (
       <Router>
-        <NavigationBar />
+        {/*<NavigationBar />*/}
         <Switch>
           <Route path="/" exact component={View}/>
           <Route path="/create" exact component={Create}/>
