@@ -6,6 +6,7 @@ const ResearchModel = require('./models/Research');
 /* AMF: ResearchModel2 points to the collection research2. 
 This is a copy of research1 with an index (and different document objectIDs). */
 const ResearchModel2 = require('./models/Research2');
+const Research_real_data = require('./models/Research_real_data');
 
 //const AliceModel = require('./models/Alice');
 
@@ -23,6 +24,7 @@ mongoose.connect('mongodb+srv://alice:admin@cluster0.ohr5j.mongodb.net/test?retr
 app.post('/insert', async (req,res)=>{
    // const research = new ResearchModel({ResearchID:req.body.ResearchID,ProjectName:req.body.ProjectName,Industry:req.body.Industry,Status:req.body.Status,PrivacyLevel:req.body.PrivacyLevel,Promblem_Statement:req.body.Problem_Statement,Date:req.body.Date,ResearcherID:req.body.ResearcherID,Time_Length:req.body.Time_Length,KeyInsight:req.body.KeyInsight,KeyPainPoint:req.body.KeyPainPoint,SampleSize:req.body.SampleSize,LocationID:req.body.LocationID});
     const research = new ResearchModel({
+        _id: req.body._id,
         Date:req.body.Date,	
         ResearchID:req.body.ResearchID,	
         Status:req.body.Status,	
@@ -98,6 +100,16 @@ app.get('/search3/:val',(req,res)=>{
     });
 });
 
+app.get('/search4/:val',(req,res)=>{
+    Research_real_data.find({ $text: {$search: req.params.val} },(err,result)=>{
+        if(err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 // app.get('/searchAlice',(req,res)=>{
 //     AliceModel.find({$text: {$search: "chocolate"}},(err,result)=>{
 //         if(err) {
@@ -118,6 +130,8 @@ app.get('/get-all',(req,res)=>{
         }
     });
 });
+
+
 
 app.get('/hello', (req,res)=>{
     res.send('Hello from  Express');
