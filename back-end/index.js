@@ -6,6 +6,7 @@ const ResearchModel = require('./models/Research');
 /* AMF: ResearchModel2 points to the collection research2. 
 This is a copy of research1 with an index (and different document objectIDs). */
 const ResearchModel2 = require('./models/Research2');
+const Research_real_data = require('./models/Research_real_data');
 
 //const AliceModel = require('./models/Alice');
 
@@ -91,6 +92,16 @@ app.get('/search2',(req,res)=>{
 
 app.get('/search3/:val',(req,res)=>{
     ResearchModel2.find({ $text: {$search: req.params.val} },(err,result)=>{
+        if(err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
+app.get('/search4/:val',(req,res)=>{
+    Research_real_data.find({ $text: {$search: req.params.val} },(err,result)=>{
         if(err) {
             res.send(err);
         } else {
