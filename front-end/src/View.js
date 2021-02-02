@@ -21,7 +21,7 @@ export class View extends React.Component {
         this.test_researchers = ["Alice Fage", "Blair Robinson", "Juliano Serraro", "Maddie Eckrich"];
         this.test_researchers2 = ["Alice Fage"];
         this.test_researchers3 = ["Alice Fage", "Juliano Serraro"];
-        this.state={data:''};
+        this.state={data:'', search: false, countResults: 0};
         this.componentDidMount = this.componentDidMount.bind(this);
         this.onPressEnter = this.onPressEnter.bind(this);
     }
@@ -30,11 +30,16 @@ export class View extends React.Component {
         if (event.charCode === 13) {
             if(event.target.value==='') {
                 Axios.get('http://localhost:3001/get-all').then((res)=>{
-                    this.setState({data: res.data});      
+                    this.setState({data: res.data});
+                    this.setState({search: false});
+                    this.setState({countResults: 0});      
                 });
             } else {
                 Axios.get(`http://localhost:3001/search3/${event.target.value}`).then((res)=>{
                 this.setState({data:res.data});
+                this.setState({search: true});
+                this.setState({countResults: this.countResults(res.data)});
+
                 });
             }
         }
@@ -57,6 +62,14 @@ export class View extends React.Component {
         }
     }
 
+    countResults(results) {
+        return Array.from(results).length;
+    }
+
+    returnResultSize() {
+        //if results are empty, return empty string, if not, do blah blah blah
+    }
+
     /* Commenting this out until we decide that we need this method
     delete(id) {
         Axios.post('http://localhost:3001/delete',{
@@ -72,7 +85,7 @@ export class View extends React.Component {
     render() {
         return(
             <Container>
-                <SearchBar functionCallFromParent={this.onPressEnter.bind(this)} />
+                <SearchBar functionCallFromParent={this.onPressEnter.bind(this)} valueFromParent={this.value}/>
                 <CardColumns>
                     {Array.from(this.state.data).map((val)=>{         
                         return(
