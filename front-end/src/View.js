@@ -17,6 +17,9 @@ export class View extends React.Component {
 
     constructor(props) {
         super(props);
+        this.test_researchers = ["Alice Fage", "Blair Robinson", "Juliano Serraro", "Maddie Eckrich"];
+        this.test_researchers2 = ["Alice Fage"];
+        this.test_researchers3 = ["Alice Fage", "Juliano Serraro"];
         this.state={data:''};
         this.componentDidMount = this.componentDidMount.bind(this);
         this.onPressEnter = this.onPressEnter.bind(this);
@@ -40,6 +43,17 @@ export class View extends React.Component {
         Axios.get('http://localhost:3001/get-all').then((res)=>{
             this.setState({data: res.data});      
         });
+    }
+
+    formatResearchers(researcherArr) {
+        var arr = Array.from(researcherArr);
+        var extras = arr.length - 1
+        var firstResearcher = arr[0];
+        if (extras == 0) {
+            return firstResearcher
+        } else {
+            return firstResearcher + " +" + extras;
+        }
     }
 
     /* Commenting this out until we decide that we need this method
@@ -73,7 +87,7 @@ export class View extends React.Component {
                                     <Card.Text className="problem-statement"><small>Problem Statement:<br />{val.Problem_Statement}</small></Card.Text>
                                     <Row>
                                         <Col className="text-center"><Icon.PieChart /><br/><small>0-5</small></Col>
-                                        <Col className="text-center"><Icon.People /><br/><small>{val.ResearcherID}</small></Col>
+                                        <Col className="text-center"><Icon.People /><br/><small>{this.ResearcherID}</small></Col>
                                         <Col className="text-center"><Icon.Unlock /><br/><small>Open</small></Col>
                                     </Row>
                                 </Card.Body>

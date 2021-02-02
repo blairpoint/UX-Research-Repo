@@ -21,7 +21,6 @@ export class SearchBar extends React.Component {
     };
 
     getInput = (e) => {
-        //e.preventDefault();
         this.props.functionCallFromParent(e);
     }
 
