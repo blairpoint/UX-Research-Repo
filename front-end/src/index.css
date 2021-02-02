@@ -25,6 +25,11 @@ code {
   margin-top: 10px;
 }
 
+.results {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .problem-statement {
   padding: 10px;
   background-color: white;

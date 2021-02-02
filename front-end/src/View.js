@@ -31,13 +31,13 @@ export class View extends React.Component {
             if(event.target.value==='') {
                 Axios.get('http://localhost:3001/get-all').then((res)=>{
                     this.setState({data: res.data});
-                    this.setState({search: false});
+                    this.setState({search: ''});
                     this.setState({countResults: 0});      
                 });
             } else {
                 Axios.get(`http://localhost:3001/search3/${event.target.value}`).then((res)=>{
                 this.setState({data:res.data});
-                this.setState({search: true});
+                this.setState({search: event.target.value});
                 this.setState({countResults: this.countResults(res.data)});
 
                 });
@@ -67,7 +67,11 @@ export class View extends React.Component {
     }
 
     returnResultSize() {
-        //if results are empty, return empty string, if not, do blah blah blah
+        if (this.state.search != '') {
+            return "Showing " + this.state.countResults + " results for " + this.state.search;
+        } else {
+            return "";
+        }
     }
 
     /* Commenting this out until we decide that we need this method
@@ -86,6 +90,7 @@ export class View extends React.Component {
         return(
             <Container>
                 <SearchBar functionCallFromParent={this.onPressEnter.bind(this)} valueFromParent={this.value}/>
+                <div className="results"><strong>{this.returnResultSize()}</strong></div>
                 <CardColumns>
                     {Array.from(this.state.data).map((val)=>{         
                         return(
