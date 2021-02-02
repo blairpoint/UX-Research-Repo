@@ -65,6 +65,7 @@ handleChange(checked) {
             // Commentary: this.state.Commentary,
         }).then(()=>{
             alert('Research added successfully!!!');
+            window.location.href = "http://localhost:3000";
         });
     }
     render() {
