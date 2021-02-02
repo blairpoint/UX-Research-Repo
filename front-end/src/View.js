@@ -93,7 +93,7 @@ export class View extends React.Component {
                                 <Card.Header>
                                         <Row>
                                             <Col sm={6} className="align-self-center"><small className="font-weight-bold">Start Date: {val.Date}<br />Research ID: {val.ResearchID}</small></Col>
-                                            <Col sm={6}><Link to="/Viewcard?ObjectID=601201340b1f2b3b04992833"><EyeBadge /></Link>{ /* Wrap with a Link to for the view single card unless not viewable*/}</Col>
+                                            <Col sm={6}><Link to={`/Viewcard/${val._id}`}><EyeBadge /></Link>{ /* Wrap with a Link to for the view single card unless not viewable*/}</Col>
                                         </Row>                  
                                 </Card.Header>
                                 <Card.Body>

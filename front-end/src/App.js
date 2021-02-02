@@ -15,7 +15,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={View}/>
           <Route path="/create" exact component={Create}/>
-          <Route path="/viewcard" exact component={Viewcard}/>
+          <Route path="/viewcard/:id" exact component={Viewcard}/>
 
         </Switch>
       </Router>
