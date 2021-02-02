@@ -7,6 +7,7 @@ const ResearchModel = require('./models/Research');
 This is a copy of research1 with an index (and different document objectIDs). */
 const ResearchModel2 = require('./models/Research2');
 const ObjectId = require('mongodb').ObjectId;
+const Research_real_data = require('./models/Research_real_data');
 
 //const AliceModel = require('./models/Alice');
 
@@ -101,7 +102,7 @@ app.get('/search3/:val',(req,res)=>{
 });
 
 app.post('/get-record', (req,res)=>{  
-    ResearchModel2.findById(req.body.id,(err,result)=>{
+    ResearchModel.findById(req.body.id,(err,result)=>{
         // ResearchModel.findById(req.body.id,(err,result)=>{
         if(err) {
             res.send(err);
@@ -109,7 +110,16 @@ app.post('/get-record', (req,res)=>{
             res.send(result);
         }
     });
-})
+});
+app.get('/search4/:val',(req,res)=>{
+    Research_real_data.find({ $text: {$search: req.params.val} },(err,result)=>{
+        if(err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    });
+});
 
 // app.get('/searchAlice',(req,res)=>{
 //     AliceModel.find({$text: {$search: "chocolate"}},(err,result)=>{
