@@ -105,8 +105,8 @@ export class View extends React.Component {
                                     <Card.Title as="h6">{val.ProjectName}</Card.Title>
                                     <Card.Text className="problem-statement"><small>Problem Statement:<br />{val.Problem_Statement}</small></Card.Text>
                                     <Row>
-                                        <Col className="text-center"><Icon.PieChart /><br/><small>0-5</small></Col>
-                                        <Col className="text-center"><Icon.People /><br/><small>{this.ResearcherID}</small></Col>
+                                        <Col className="text-center"><Icon.PieChart /><br/><small>{val.SampleSize}</small></Col>
+                                        <Col className="text-center"><Icon.People /><br/><small>{val.ResearcherID}</small></Col>
                                         <Col className="text-center"><Icon.Unlock /><br/><small>Open</small></Col>
                                     </Row>
                                 </Card.Body>
