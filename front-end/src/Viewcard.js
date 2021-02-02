@@ -40,13 +40,9 @@ export class Viewcard extends React.Component {
                     <Col sm={3}>
                         <label for="Name">Team Members</label>
                         <FormControl readOnly type="text" placeholder={e?e.ResearcherID:''}/>
-                        <label for="Country">Location</label>
-                        <FormControl readOnly type="text"/>
+
                     </Col>
-                    <Col sm={3}>
-                        <label for="ResearcherID">Team Members</label>
-                        <FormControl readOnly type="text"/>
-                        </Col>
+               
                 </Row>
                 </FormGroup>
                 </Card.Header>
@@ -63,7 +59,7 @@ export class Viewcard extends React.Component {
         </Row>
         <Row>
                 <Col sm={10} id="Problem_Statement">
-                    <FormControl readOnly type="text"/>
+                    <FormControl readOnly type="text" placeholder={e?e.Problem_Statement:''} />
                 </Col>
         </Row>
     </Card.Body>
@@ -83,7 +79,7 @@ export class Viewcard extends React.Component {
      </Row>
      <Row>
             <Col sm={10} id="KeyInsight">
-                <FormControl readOnly type="text"/>
+                <FormControl readOnly type="text" placeholder={e?e.KeyInsight:''}/>
             </Col>
     </Row>
     </Card.Body>
@@ -104,7 +100,7 @@ export class Viewcard extends React.Component {
      </Row>
      <Row>
             <Col sm={10} id="KeyPainPoint">
-                <FormControl readOnly type="text"/>
+                <FormControl readOnly type="text" placeholder={e?e.KeyPainPoint:''}/>
             </Col>
     </Row>
     </Card.Body>
@@ -142,7 +138,7 @@ export class Viewcard extends React.Component {
      </Row>
      <Row>
             <Col sm={10} id="URL_ID">
-                <FormControl readOnly type="text"/>
+                <FormControl readOnly type="text" placeholder={e?e.URL_ID:''}/>
             </Col>
     </Row>
     </Card.Body>
