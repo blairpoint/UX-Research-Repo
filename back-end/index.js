@@ -102,7 +102,7 @@ app.get('/search3/:val',(req,res)=>{
 });
 
 app.post('/get-record', (req,res)=>{  
-    ResearchModel.findById(req.body.id,(err,result)=>{
+    ResearchModel2.findById(req.body.id,(err,result)=>{
         // ResearchModel.findById(req.body.id,(err,result)=>{
         if(err) {
             res.send(err);
@@ -133,7 +133,7 @@ app.get('/search4/:val',(req,res)=>{
 
 
 app.get('/get-all',(req,res)=>{
-    ResearchModel.find({},(err,result)=>{
+    ResearchModel2.find({},(err,result)=>{
         if(err) {
             res.send(err);
         } else {

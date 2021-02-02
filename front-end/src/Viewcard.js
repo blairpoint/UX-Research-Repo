@@ -119,7 +119,7 @@ export class Viewcard extends React.Component {
      </Row>
      <Row>
             <Col sm={10} id="Methods">
-                <FormControl readOnly type="text"/>
+            <FormControl readOnly type="text" placeholder={e?e.Methods:''}/>
             </Col>
     </Row>
     </Card.Body>
