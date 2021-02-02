@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Form, Badge, Card, FormGroup, FormControl, Row, Col, label, Switch, Container, Dropdown, DropdownButton, Button, InputGroup } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons';
 
@@ -20,6 +21,7 @@ export class Viewcard extends React.Component {
     render() {
         const e = this.state.data;
         return(<div className="container">
+            <Link to="/"><Button className="btn btn-secondary return-to-search"><Icon.ArrowLeft /> Search</Button></Link>
             <Card>
                 <Card.Header>
                     

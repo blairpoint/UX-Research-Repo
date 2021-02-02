@@ -30,6 +30,11 @@ code {
   margin-bottom: 10px;
 }
 
+.return-to-search {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .problem-statement {
   padding: 10px;
   background-color: white;
