@@ -151,7 +151,7 @@ handleChange(checked) {
                         <label for="Problem">Problem</label>
                     </Col>
                     <Col sm={4} id="Problem">
-                    <Form.Control htmlFor="Problem" onChange={event=>this.setState({Problem:event.target.value})} type="text" className="form-control" id="Problem" />
+                    <Form.Control htmlFor="Problem" onChange={event=>this.setState({Problem_Statement:event.target.value})} type="text" className="form-control" id="Problem_Statement" />
                     </Col>
                     </Row>
                     </FormGroup>
@@ -268,6 +268,7 @@ handleChange(checked) {
                                 placeholder="Click all that apply"
                                 aria-label="Click all that apply"
                                 aria-describedby="basic-addon2"
+                                onChange={event=>this.setState({Methods:event.target.value})}
                                 />
                             <DropdownButton
                                 as={InputGroup.Append}
@@ -296,6 +297,7 @@ handleChange(checked) {
                                 placeholder="Click all that apply"
                                 aria-label="Click all that apply"
                                 aria-describedby="basic-addon2"
+                                onChange={event=>this.setState({IndustryName:event.target.value})}
                                 />
                             <DropdownButton
                                 as={InputGroup.Append}
