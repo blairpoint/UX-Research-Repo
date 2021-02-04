@@ -15,7 +15,7 @@ export class Create extends React.Component {
         ProjectName:'',  
 
         Problem_Statement:'',
-        Tags:'',
+        tags:[],
         KeyInsight:'',
         KeyPainPoint:'',
         SampleSize:'',          
@@ -41,6 +41,7 @@ handleChange(checked) {
     // Get the selectedIndex in the evtKey variable
 }
     addResearch() {
+        console.log(this.state.tags);
         Axios.post('http://localhost:3001/insert', {
             Date: this.state.Date,                      
             Privacy_Level: this.state.Checked,
@@ -48,7 +49,7 @@ handleChange(checked) {
             ResearcherID:this.state.ResearcherID,
             ProjectName: this.state.ProjectName,
             Problem_Statement:this.state.Problem_Statement,
-            Tags:this.state.Tags,
+            Tags:this.state.tags,
             KeyInsight:this.state.KeyInsight,
             KeyPainPoint: this.state.KeyPainPoint,
             SampleSize:this.state.SampleSize,         
@@ -68,6 +69,22 @@ handleChange(checked) {
             window.location.href = "http://localhost:3000";
         });
     }
+
+    
+    inputKeyDown = (e) => {
+        const val = e.target.value;
+        if (e.key === 'Enter' && val) {
+            this.setState({ tags: [...this.state.tags, val] });
+            this.tagInput.value = null;
+        }
+    }
+
+    removeTag = (i) => {
+        const newTags = [...this.state.tags];
+        newTags.splice(i, 1);
+        this.setState({ tags: newTags });
+    }
+
     render() {
         return(<div className="container">
           <Form>
@@ -155,6 +172,20 @@ handleChange(checked) {
                     </Col>
                     </Row>
                     </FormGroup>
+                    {/* <input type="text" onKeyDown={this.inputKeyDown} /> */}
+
+                    <div className="input-tag">
+                        <ul className="input-tag__tags">
+                            {this.state.tags.map((tag, i) => (
+                                <li key={tag}>
+                                    {tag}
+                                    <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
+                                </li>
+                            ))}
+                            <li className="input-tag__tags__input"><input type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
+                        </ul>
+                    </div>
+
                     <FormGroup className="text-left">
                 <Row>
                     {/* <Col sm={2}>

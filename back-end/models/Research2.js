@@ -36,7 +36,7 @@ const ResearchSchema2 = new mongoose.Schema({
         required: false
     },
     Tags:{
-        type:String,
+        type:"array",
         required: false
     },
     KeyInsight:{
