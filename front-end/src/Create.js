@@ -11,7 +11,8 @@ export class Create extends React.Component {
         
                                     Checked: false, 
         ResearchID:'',          Country:'',
-        ResearcherID:'',
+        ResearcherID:'', 
+        // members: [],
         ProjectName:'',  
 
         Problem_Statement:'',
@@ -91,27 +92,10 @@ handleChange(checked) {
               
               <FormGroup className="text-left">
                 <Row>
-                    <Col sm={2}>
-                        <label for="Startdate">Start Date</label>
-                    </Col>
-                    <Col sm={4} id="Date">
-                        <Form.Control htmlFor="Date" onChange={event=>this.setState({Date:event.target.value})} type="text" className="form-control" id="Date"/>
-                    </Col>
+              
                     
-                    {/* <Col sm={4}>
-                        <Form.Check onChange={event=>this.setState({Checked:event.target.value})} className="form-control" id="Privacy_Level"
-                        type="switch" 
-                        id="Privacy_Level"
-                        label="Security" 
-                    />
-                    </Col> */}
-                    <Col sm={4}>
-                        <Form.Check onChange={event=>this.setState({Privacy_Level:event.target.value})}
-                        type="switch" 
-                        id="Privacy_Level"
-                        label="Security"
-                    />
-                    </Col>
+
+               
                 </Row>
                 </FormGroup>
                 <FormGroup className="text-left">
@@ -123,14 +107,16 @@ handleChange(checked) {
                         <Form.Control htmlFor="ResearchID" onChange={event=>this.setState({ResearchID:event.target.value})} type="text" className="form-control" id="ResearchID" />
                     </Col>
                     <Col sm={2}>
+                        <label for="Company">Company</label>
+                        </Col>
+                        <Col sm={4} id="Company">
+                        <Form.Control htmlFor="Company" onChange={event=>this.setState({Company:event.target.value})} type="text" className="form-control" id="Company" />
+                        </Col>
+                    <Col sm={2}>
                         <label for="Location">Location</label>
                     </Col>
                     <Col sm={4} id="Location">
-                    {/* <DropdownButton id="dropdown-basic-button" componentClass="select" title="Select Country" htmlFor="Location" onChange={event=>this.setState({Location:event.target.value})} type="text" >
-                        <Dropdown.Item value="Australia">Australia</Dropdown.Item>
-                        <Dropdown.Item value="New Zealand">New Zealand</Dropdown.Item>
-                        
-                    </DropdownButton> */}
+       
                     <select onChange={event=>this.setState({Country:event.target.value})} componentClass="select" type="text" className="form-control" id="dropdown-basic-button">
 
                 <option value="null"></option>
@@ -142,18 +128,24 @@ handleChange(checked) {
 
                 </select>
                     </Col>
-            
+                    <Col sm={2}>
+                        <label for="Industry">Industry</label>
+                    </Col>
+                    <Col sm={4} id="Industry">
+       
+                    <select onChange={event=>this.setState({IndustryName:event.target.value})} componentClass="select" type="text" className="form-control" id="dropdown-basic-button">
+
+                <option value="null"></option>
+                <option value="Technology">Technology</option>
+                <option value="Finance">Finance</option>
+                <option value="Government">Government</option>
+                <option value="Education">Education</option>
+
+                </select>
+                    </Col>
                 </Row>
                 <FormGroup className="text-left">
-                    <Row>
-                        <Col sm={2}>
-                        <label for="Name">Name</label>
-                        </Col>
-                        <Col sm={4} id="ResearcherID">
-                        <Form.Control htmlFor="ResearcherID" onChange={event=>this.setState({ResearcherID:event.target.value})} type="text" className="form-control" id="ResearcherID" />
-                        </Col>
-                    </Row>
-                    <Row>
+                <Row>
                     <Col sm={2}>
                         <label for="ProjectName">Project Name</label>
                     </Col>
@@ -161,8 +153,69 @@ handleChange(checked) {
                     <Form.Control htmlFor="ProjectName" onChange={event=>this.setState({ProjectName:event.target.value})} type="text" className="form-control" id="ProjectName" />
                     </Col>
                     </Row>
+                    <Row>
+                        <Col sm={2}>
+                        <label for="Name">Created By</label>
+                        </Col>
+                        <Col sm={4} id="ResearcherID">
+                        <Form.Control htmlFor="ResearcherID" onChange={event=>this.setState({ResearcherID:event.target.value})} type="text" className="form-control" id="ResearcherID" />
+                        </Col>
+                        <Col sm={2}>
+                        <label for="Startdate">Start Date</label>
+                    </Col>
+                    <Col sm={4} id="SDate">
+                        <Form.Control htmlFor="SDate" onChange={event=>this.setState({Date:event.target.value})} type="text" className="form-control" id="SDate"/>
+                    </Col>
+                    <Col sm={2}>
+                        <label for="Addmembers">Add Members</label>
+                    </Col>
+                    
+                    <Col>
+                    
+                    
+                    {/* <div className="input-tag">
+                        <ul className="input-tag__tags">
+                            {this.state.tags.map((tag, i) => (
+                                <li key={tag}>
+                                    {tag}
+                                    <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
+                                </li>
+                            ))}
+                            <li className="input-tag__tags__input"><input type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
+                        </ul>
+                    </div> */}
+                    </Col>
+                    <Col sm={2}>
+                        <label for="Enddate">End Date</label>
+                    </Col>
+                    <Col sm={4} id="EDate">
+                        <Form.Control htmlFor="EDate" onChange={event=>this.setState({Date:event.target.value})} type="text" className="form-control" id="EDate"/>
+                    </Col>
+                    </Row>
+                    <Row>
+                     
+                    </Row>
+                   
                 </FormGroup>
+
+
+
+
+
+
+
+
                 <FormGroup className="text-left">
+                <Row>
+                    <Col sm={2}>
+                        <label for="SampleSize">Number of interviewees</label>
+                    </Col>
+                    <Col sm={1} id="SampleSize">
+                    <Form.Control htmlFor="SampleSize" onChange={event=>this.setState({SampleSize:event.target.value})} type="text" className="form-control" id="SampleSize" />
+                    </Col>
+                </Row>
+                </FormGroup>
+                {/* <FormGroup className="text-left">
                     <Row>
                     <Col sm={2}>
                         <label for="Problem">Problem</label>
@@ -171,10 +224,27 @@ handleChange(checked) {
                     <Form.Control htmlFor="Problem" onChange={event=>this.setState({Problem_Statement:event.target.value})} type="text" className="form-control" id="Problem_Statement" />
                     </Col>
                     </Row>
-                    </FormGroup>
-                    {/* <input type="text" onKeyDown={this.inputKeyDown} /> */}
+                    
+                    </FormGroup> */}
+                    <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Problem_Statement: event.target.value })}>
+                        <Form.Label>Problem Statement</Form.Label>
+                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ Problem_Statement: event.target.value })} />
+                        <Col sm={2}>
+                        <label for="Tags">UX Methods </label>
+                    </Col>
+                    </Form.Group>
 
-                    <div className="input-tag">
+  <FormGroup className="text-left">
+                <Row>
+                    <Col sm={2}>
+                        <label for="Tags">Tags #</label>
+                    </Col>
+                    <Col sm={1} id="Tags">
+                    </Col>
+                </Row>
+
+                </FormGroup>
+                <div className="input-tag">
                         <ul className="input-tag__tags">
                             {this.state.tags.map((tag, i) => (
                                 <li key={tag}>
@@ -186,186 +256,42 @@ handleChange(checked) {
                         </ul>
                     </div>
 
-                    <FormGroup className="text-left">
-                <Row>
-                    {/* <Col sm={2}>
-                        <label for="TagsLn1">Suggested Tags</label>
-                    </Col>
-                    <Col sm={2} id="Tag1">
-                        <Form.Control placeholder="#" />
-                    </Col>
-                    <Col sm={2} id="Tag2">
-                        <Form.Control placeholder="#" />
-                    </Col>
-                </Row>
-                </FormGroup>
-                <FormGroup className="text-left">
-                <Row>
-                    <Col sm={2}>
-                    </Col>
-                    <Col sm={2} id="Tag3">
-                        <Form.Control placeholder="#" />
-                    </Col>
-                    <Col sm={2} id="Tag4">
-                        <Form.Control placeholder="#" />
-                    </Col>
-                </Row>
-                </FormGroup>
-                <FormGroup className="text-left">
-                <Row>
-                    <Col sm={2}>
-                    </Col>
-                    <Col sm={2} id="Tag5">
-                        <Form.Control placeholder="#" />
-                    </Col>
-                    <Col sm={2} id="Tag6">
-                        <Form.Control placeholder="#" />
-                    </Col>
-                </Row>
-                </FormGroup>
-                <FormGroup className="text-left">
-                <Row>
-                    <Col sm={2}>
-                    </Col>
-                    <Col sm={2} id="Tag7">
-                        <Form.Control placeholder="#" />
-                    </Col>
-                    <Col sm={2} id="Tag8">
-                        <Form.Control placeholder="#" />
-                    </Col> */}
-                {/* </Row>
-                </FormGroup>
-                <FormGroup className="text-left">
-                <Row>
-                    <Col sm={2}>
-                    </Col>
-                    <Col sm={2} id="Tag9">
-                        <Form.Control placeholder="#" />
-                    </Col>
-                    <Col sm={2} id="Tag10">
-                        <Form.Control placeholder="#" />
-                    </Col> */}
-                </Row>
-                </FormGroup>
-                    <FormGroup className="text-left">
-                        <Row>
-                            <Col sm={2}>
-                            <label for="KeyInsights">Key Insights</label>
-                            </Col>
-                            <Col sm={4} id="KeyInsight">
-                            <Form.Control htmlFor="KeyInsight" onChange={event=>this.setState({KeyInsight:event.target.value})} type="text" className="form-control" id="KeyInsight" />
-                            </Col>
-                            <Col sm={1}>
-                            <Button id="AddLinks" variant="primary">+</Button>{' '}
+              
+                <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Problem_Statement: event.target.value })}>
+                        <Form.Label>Key Insights</Form.Label>
+                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ KeyInsight: event.target.value })} />
+                    </Form.Group>
+               
+                    <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Problem_Statement: event.target.value })}>
+                        <Form.Label>Key Findings</Form.Label>
+                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ KeyPainPoint: event.target.value })} />
+                    </Form.Group>
+                
 
-                            </Col>
-                            
-                        </Row>
-                    </FormGroup>
-                    <FormGroup className="text-left">
-                        <Row>
-                            <Col sm={2}>
-                            <label for="KeyPainPoint">Key Pain Point</label>
-                            </Col>
-                            <Col sm={4} id="KeyPainPoint">
-                            <Form.Control htmlFor="KeyPainPoint" onChange={event=>this.setState({KeyPainPoint:event.target.value})} type="text" className="form-control" id="KeyPainPoint" />
-                            </Col>
-                            <Col sm={1}>
-                            <Button id="AddLinks" variant="primary">+</Button>{' '}
 
-                            </Col>
-                            
-                        </Row>
-                    </FormGroup>
-                    <FormGroup className="text-left">
-                <Row>
-                    <Col sm={2}>
-                        <label for="SampleSize">Sample Size</label>
-                    </Col>
-                    <Col sm={1} id="SampleSize">
-                    <Form.Control htmlFor="SampleSize" onChange={event=>this.setState({SampleSize:event.target.value})} type="text" className="form-control" id="SampleSize" />
-                    </Col>
-                </Row>
-                </FormGroup>
-                <FormGroup>
-                    <Row>
-                    <Col sm={2}>
-                        <label for="Methods">Methods</label>
-                    </Col>
-                    <Col sm={4}>
-                        <InputGroup>
-                            <FormControl 
-                                id="Methods"
-                                placeholder="Click all that apply"
-                                aria-label="Click all that apply"
-                                aria-describedby="basic-addon2"
-                                onChange={event=>this.setState({Methods:event.target.value})}
-                                />
-                            <DropdownButton
-                                as={InputGroup.Append}
-                                variant="outline-secondary"
-                                title=''
-                                id="input-group-dropdown-2"
-                                >
-                                <Dropdown.Item href="#">Method1</Dropdown.Item>
-                                <Dropdown.Item href="#">Method2</Dropdown.Item>
-                                <Dropdown.Item href="#">Method3</Dropdown.Item>
-                                </DropdownButton>
-                        </InputGroup>
-                    </Col>
-                </Row>
-            </FormGroup>
+     
 
-            <FormGroup>
-                    <Row>
-                    <Col sm={2}>
-                        <label for="Industry">Industry</label>
-                    </Col>
-                    <Col sm={4}>
-                        <InputGroup>
-                            <FormControl 
-                                id="Industry"
-                                placeholder="Click all that apply"
-                                aria-label="Click all that apply"
-                                aria-describedby="basic-addon2"
-                                onChange={event=>this.setState({IndustryName:event.target.value})}
-                                />
-                            <DropdownButton
-                                as={InputGroup.Append}
-                                variant="outline-secondary"
-                                title=''
-                                id="input-group-dropdown-2"
-                                >
-                                <Dropdown.Item href="#">Industry1</Dropdown.Item>
-                                <Dropdown.Item href="#">Industry2</Dropdown.Item>
-                                <Dropdown.Item href="#">Industry3</Dropdown.Item>
-                                </DropdownButton>
-                        </InputGroup>
-                    </Col>
-                </Row>
-            </FormGroup>
 
-            <FormGroup className="text-left">
-                    <Row>
-                        <Col sm={2}>
-                        <label for="Company">Company</label>
-                        </Col>
-                        <Col sm={4} id="Company">
-                        <Form.Control htmlFor="Company" onChange={event=>this.setState({Company:event.target.value})} type="text" className="form-control" id="Company" />
-                        </Col>
-                    </Row>
-                    </FormGroup>
 
                     <FormGroup className="text-left">
                     <Row>
                         <Col sm={2}>
                         <label for="Links">Links</label>
                         </Col>
-                        <Col sm={4} id="URL_ID">
-                        <Form.Control htmlFor="URL_ID" onChange={event=>this.setState({URL_ID:event.target.value})} type="text" className="form-control" id="URL_ID" />
+                        <Row>
+                        <Col sm={2}>
+                        <label for="Label">Label URL</label>
+                        </Col>
+                        </Row>
+                        <Col sm={4} id="URL_LABEL">
+                        <Form.Control htmlFor="URL_LABEL"  type="text" className="form-control" id="URL_ID" />
+                        </Col>
+                        
+                        <Col sm={4} id="URL">
+                        <Form.Control htmlFor="URL"  type="text" className="form-control" id="URL_ID" />
                         </Col>
                         <Col sm={1}>
-                        <Button id="AddLinks" variant="primary">+</Button>{' '}
+                        <Button id="AddLinks" variant="primary"onChange={event=>this.setState({URL_ID:event.target.value})}>+</Button>{' '}
 
                         </Col>
                     </Row>
