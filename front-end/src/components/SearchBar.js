@@ -47,12 +47,11 @@ export class SearchBar extends React.Component {
                             <Form.Label><small>Search for a category</small></Form.Label>
                             <Form.Control
                                 as="select"
-                                //variant="outline-secondary" //Can change the variant later - maddie
                                 className="glob-input"
                                 value={this.state.cat}
                                 onChange={(e) => this.selectCat(e.target.value)}
                                 >
-                                <option disabled>{this.cat_text}</option>
+                                <option>{this.cat_text}</option>
                                 <option>{this.cat_one}</option>
                                 <option>{this.cat_two}</option>
                                 <option>{this.cat_three}</option>
