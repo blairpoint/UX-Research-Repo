@@ -114,14 +114,22 @@ body {
   margin-bottom: 10px;
 }
 
-.problem-statement {
-  padding: 10px;
+.card-body {
   background-color: white;
-  border-radius: 5px;
 }
 
-.eye-badge {
-  text-align: end;
+.card-project {
+  max-width: 320px;
+}
+
+.problem-statement {
+  min-height: 100px;
+  max-height: 100px;
+  overflow: hidden;
+  background: linear-gradient(black 60%, white 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /*
