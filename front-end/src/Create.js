@@ -5,31 +5,26 @@ import { Form, FormGroup, FormControl, Row, Col, label, Switch, Container, Dropd
 export class Create extends React.Component {
     constructor(props) {
         super(props);
-        this.state={        
+        this.state={       
+            
+            Industry:'',
+            Company:'',
+            Problem_Statement:'',
+            Methods:'',
+            Tags:[],
+            // Creation_Date:'', 
+            Research_ID:'',  
+            Location:'',
+            Project_Name:'',  
+            Key_Insights:'',
+            Sample_Size:'', 
+            End_Date:'',  
+            Start_Date:'',                
+            Findings:'',
+            Creator:'',
+            Researchers:'',
+            Research_Output:''    
 
-        Date:'',                
-        
-                                    Checked: false, 
-        ResearchID:'',          Country:'',
-        ResearcherID:'', 
-        // members: [],
-        ProjectName:'',  
-
-        Problem_Statement:'',
-        tags:[],
-        KeyInsight:'',
-        KeyPainPoint:'',
-        SampleSize:'',          
-        Methods:[],
-        IndustryName:'',
-        Company:'',
-        URL_ID:'',
-
-        // Time_in_days:'',
-        // Status:'',
-        // Privacy_Level:'',
-        // Demographic:'',
-        // Commentary:'',}
         };
     
     this.handleChange = this.handleChange.bind(this);
@@ -43,29 +38,27 @@ handleChange(checked) {
     // Get the selectedIndex in the evtKey variable
 }
     addResearch() {
-        console.log(this.state.tags);
+        console.log(this.state.Tags);
         Axios.post('http://localhost:3001/insert', {
-            Date: this.state.Date,                      
-            Privacy_Level: this.state.Checked,
-            ResearchID: this.state.ResearchID,          Country: this.state.Country,
-            ResearcherID:this.state.ResearcherID,
-            ProjectName: this.state.ProjectName,
-            Problem_Statement:this.state.Problem_Statement,
-            Tags:this.state.tags,
-            KeyInsight:this.state.KeyInsight,
-            KeyPainPoint: this.state.KeyPainPoint,
-            SampleSize:this.state.SampleSize,         
-            Methods: this.state.Methods,
-            IndustryName: this.state.IndustryName,
+            
+            Industry: this.state.Industry,
             Company: this.state.Company,
-            URL_ID:this.state.URL_ID,
-            
-            
-            // Time_in_days: this.state.Time_Length,
-            // Demographic: this.state.Demographic,
-            // Status:this.state.Status,
-            // 
-            // Commentary: this.state.Commentary,
+            Problem_Statement:this.state.Problem_Statement,
+            Methods: this.state.Methods,
+            Tags:this.state.Tags,
+            // Creation_Date:this.start.Creation_Date,
+            Start_Date: this.state.Start_Date,        
+            End_Date:this.state.End_Date,              
+            Research_ID: this.state.Research_ID,          
+            Location: this.state.Location,
+            Creator: this.state.Creator,
+            Researchers:this.state.Researchers,
+            Research_Outputs:this.state.Research_Outputs,
+            Project_Name: this.state.Project_Name,
+            Key_Insights:this.state.Key_Insights,
+            Findings:this.state.Findings,
+            Sample_Size:this.state.Sample_Size   
+        
         }).then(()=>{
             alert('Research added successfully!!!');
             window.location.href = "http://localhost:3000";
@@ -76,15 +69,15 @@ handleChange(checked) {
     inputKeyDown = (e) => {
         const val = e.target.value;
         if (e.key === 'Enter' && val) {
-            this.setState({ tags: [...this.state.tags, val] });
+            this.setState({ Tags: [...this.state.Tags, val] });
             this.tagInput.value = null;
         }
     }
 
     removeTag = (i) => {
-        const newTags = [...this.state.tags];
+        const newTags = [...this.state.Tags];
         newTags.splice(i, 1);
-        this.setState({ tags: newTags });
+        this.setState({ Tags: newTags });
     }
 
     render() {
@@ -102,10 +95,10 @@ handleChange(checked) {
                 <FormGroup className="text-left">
                     <Row>
                         <Col sm={2}>
-                            <label for="ResearchID">Research ID</label>
+                            <label for="Research_ID">Research ID</label>
                         </Col>
-                        <Col sm={4} id="ResearchID">
-                            <Form.Control htmlFor="ResearchID" onChange={event => this.setState({ ResearchID: event.target.value })} type="text" className="form-control glob-input" id="ResearchID" />
+                        <Col sm={4} id="Research_ID">
+                            <Form.Control htmlFor="Research_ID" onChange={event => this.setState({ Research_ID: event.target.value })} type="text" className="form-control glob-input" id="Research_ID" />
                         </Col>
                         <Col sm={2}>
                             <label for="Company">Company</label>
@@ -121,7 +114,7 @@ handleChange(checked) {
                             <select onChange={event => this.setState({ Country: event.target.value })} componentClass="select" type="text" className="form-control glob-input" id="dropdown-basic-button">
 
                                 <option value="null"></option>
-                                <option value="Austrlia">Australia</option>
+                                <option value="Australia">Australia</option>
                                 <option value="New Zealand">New Zealand</option>
                                 <option value="United States">United States</option>
                                 <option value="Singapore">Singapore</option>
@@ -134,7 +127,7 @@ handleChange(checked) {
                         </Col>
                         <Col sm={4} id="Industry">
 
-                            <select onChange={event => this.setState({ IndustryName: event.target.value })} componentClass="select" type="text" className="form-control glob-input" id="dropdown-basic-button">
+                            <select onChange={event => this.setState({ Industry: event.target.value })} componentClass="select" type="text" className="form-control glob-input" id="dropdown-basic-button">
 
                                 <option value="null"></option>
                                 <option value="Technology">Technology</option>
@@ -148,24 +141,24 @@ handleChange(checked) {
                     <FormGroup className="text-left">
                         <Row>
                             <Col sm={2}>
-                                <label for="ProjectName">Project Name</label>
+                                <label for="Project_Name">Project Name</label>
                             </Col>
-                            <Col sm={4} id="ProjectName">
-                                <Form.Control htmlFor="ProjectName" onChange={event => this.setState({ ProjectName: event.target.value })} type="text" className="form-control glob-input" id="ProjectName" />
+                            <Col sm={4} id="Project_Name">
+                                <Form.Control htmlFor="Project_Name" onChange={event => this.setState({ Project_Name: event.target.value })} type="text" className="form-control glob-input" id="Project_Name" />
                             </Col>
                         </Row>
                         <Row>
                             <Col sm={2}>
-                                <label for="Name">Created By</label>
+                                <label for="Creator">Created By</label>
                             </Col>
-                            <Col sm={4} id="ResearcherID">
-                                <Form.Control htmlFor="ResearcherID" onChange={event => this.setState({ ResearcherID: event.target.value })} type="text" className="form-control glob-input" id="ResearcherID" />
+                            <Col sm={4} id="Creator">
+                                <Form.Control htmlFor="Creator" onChange={event => this.setState({ Creator: event.target.value })} type="text" className="form-control glob-input" id="Creator" />
                             </Col>
                             <Col sm={2}>
-                                <label for="Startdate">Start Date</label>
+                                <label for="Start_Date">Start Date</label>
                             </Col>
-                            <Col sm={4} id="SDate">
-                                <Form.Control htmlFor="SDate" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="SDate" />
+                            <Col sm={4} id="Start_Date">
+                                <Form.Control htmlFor="Start_Date" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="Start_Date" />
                             </Col>
                             <Col sm={2}>
                                 <label for="Addmembers">Add Members</label>
@@ -176,7 +169,7 @@ handleChange(checked) {
 
                                 {/* <div className="input-tag">
                         <ul className="input-tag__tags">
-                            {this.state.tags.map((tag, i) => (
+                            {this.state.Tags.map((tag, i) => (
                                 <li key={tag}>
                                     {tag}
                                     <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
@@ -187,10 +180,10 @@ handleChange(checked) {
                     </div> */}
                             </Col>
                             <Col sm={2}>
-                                <label for="Enddate">End Date</label>
+                                <label for="End_Date">End Date</label>
                             </Col>
-                            <Col sm={4} id="EDate">
-                                <Form.Control htmlFor="EDate" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="EDate" />
+                            <Col sm={4} id="End_Date">
+                                <Form.Control htmlFor="End_Date" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="End_Date" />
                             </Col>
                         </Row>
                         <Row>
@@ -209,10 +202,10 @@ handleChange(checked) {
                     <FormGroup className="text-left">
                         <Row>
                             <Col sm={2}>
-                                <label for="SampleSize">Number of interviewees</label>
+                                <label for="Sample_Size">Number of interviewees</label>
                             </Col>
-                            <Col sm={1} id="SampleSize">
-                                <Form.Control htmlFor="SampleSize" onChange={event => this.setState({ SampleSize: event.target.value })} type="text" className="form-control glob-input" id="SampleSize" />
+                            <Col sm={1} id="Sample_Size">
+                                <Form.Control htmlFor="Sample_Size" onChange={event => this.setState({ Sample_Size: event.target.value })} type="text" className="form-control glob-input" id="Sample_Size" />
                             </Col>
                         </Row>
                     </FormGroup>
@@ -268,7 +261,7 @@ handleChange(checked) {
                     </FormGroup>
                     <div className="input-tag">
                         <ul className="input-tag__tags">
-                            {this.state.tags.map((tag, i) => (
+                            {this.state.Tags.map((tag, i) => (
                                 <li key={tag}>
                                     {tag}
                                     <button type="button" onClick={() => { this.removeTag(i); }}>+</button>

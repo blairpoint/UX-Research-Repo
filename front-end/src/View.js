@@ -43,12 +43,12 @@ const ResearchCard = (props) => {
         <Card bg="light" className="research-card">
             <Card.Header className="border-bottom-0">
                     <Row>
-                        <Col sm={8} md={8} className="text-left"><small className="text-left">#{props.ResearchID}</small></Col>
+                        <Col sm={8} md={8} className="text-left"><small className="text-left">#{props.Research_ID}</small></Col>
                         <Col sm={8} md={4} className="text-right"><Link to={`/Viewcard/${props._id}`}><small>Take a look</small></Link></Col>
                     </Row>
                     <Row>
                         {/* Project Name - Company name as per wireframe */}
-                        <Col><small className="font-weight-bold d-inline-block text-truncate card-project">{props.ProjectName} - {props.Company}</small></Col>
+                        <Col><small className="font-weight-bold d-inline-block text-truncate card-project">{props.Project_Name} - {props.Company}</small></Col>
                     </Row>                  
             </Card.Header>
             <Card.Body>
@@ -58,7 +58,7 @@ const ResearchCard = (props) => {
                 <Row>
                     <Col className="text-left">
                         {/* Created date */}
-                        <small><span className="font-weight-bold">Created:</span> {parseDate(props.Date)}</small> {/* Pass dates through the `parseDate` method */}
+                        <small><span className="font-weight-bold">Created:</span> {parseDate(props.Created_Date)}</small> {/* Pass dates through the `parseDate` method */}
                     </Col>
                     <Col className="text-right">
                         <small><span className="font-weight-bold">Status:</span> Completed</small> {/* Need to create a method to check if a project is complete / has an end date*/}                                  
@@ -71,7 +71,7 @@ const ResearchCard = (props) => {
                     </Col>
                     <Col className="text-right">
                         {/* end date */}
-                        <small>{parseDate(props.Date)}</small> {/* Pass dates through the `parseDate` method */}
+                        <small>{parseDate(props.End_Date)}</small> {/* Pass dates through the `parseDate` method */}
                     </Col>
                 </Row>
                 <Row>
@@ -80,7 +80,7 @@ const ResearchCard = (props) => {
                         <small>{formatResearchers(testArr)}</small> {/* Replace testArr with Array of researchers */}
                     </Col>
                     <Col sm={7} md={7} className="text-right">
-                        <small><span className="font-weight-bold">Location:</span> {props.Country}</small>
+                        <small><span className="font-weight-bold">Location:</span> {props.Location}</small>
                     </Col>
                 </Row>
             </Card.Footer>
@@ -94,15 +94,15 @@ const CardResults = (props) => {
     const rows = resultChunks.map((resultChunk, index) => {
         const cols = resultChunk.map((result, index) => {
             return(
-                <Col md={4} sm={12} ResearchID={result.ResearchID}>
+                <Col md={4} sm={12} Research_ID={result.Research_ID}>
                     <ResearchCard
-                        ResearchID={result.ResearchID}
+                        Research_ID={result.Research_ID}
                         _id={result._id}
-                        ProjectName={result.ProjectName}
+                        Project_Name={result.Project_Name}
                         Company={result.Company}
                         Problem_Statement={result.Problem_Statement}
-                        Date={result.Date}
-                        Country={result.Country}
+                        Created_Date={result.Created_Date}
+                        Location={result.Location}
                     />
                 </Col>
             );
@@ -135,7 +135,7 @@ export class View extends React.Component {
                     this.setState({countResults: 0});      
                 });
             } else {
-                Axios.get(`http://localhost:3001/search3/${event.target.value}`).then((res)=>{
+                Axios.get(`http://localhost:3001/search/${event.target.value}`).then((res)=>{
                 this.setState({data:res.data});
                 this.setState({search: event.target.value});
                 this.setState({countResults: this.countResults(res.data)});
