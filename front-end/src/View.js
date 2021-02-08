@@ -8,6 +8,78 @@ import FormControl from 'react-bootstrap/FormControl';
 import {SearchBar} from './components/SearchBar';
 import { Link } from 'react-router-dom';
 
+const testArr = ["Chip Whistler", "Mandy Bragger", "Ziggy Stardust", "Test Testerson"];
+
+const chunk = (arr, chunkSize = 1, cache = []) => {
+    const tmp = [...arr]
+    if (chunkSize <= 0) return cache
+    while (tmp.length) cache.push(tmp.splice(0, chunkSize))
+    return cache
+  }
+
+const ResearchCard = (props) => {
+    const card = (
+        <Card bg="light">
+            <Card.Header className="border-bottom-0">
+                    <Row>
+                        <Col sm={8} md={8} className="text-left"><small className="text-left">#{props.ResearchID}</small></Col>
+                        <Col sm={8} md={4} className="text-right"><Link to={`/Viewcard/${props._id}`}><small>Take a look</small></Link></Col>
+                    </Row>
+                    <Row>
+                        {/* Project Name - Company name as per wireframe */}
+                        <Col><small className="font-weight-bold d-inline-block text-truncate card-project">{props.ProjectName} - {props.Company}</small></Col>
+                    </Row>                  
+            </Card.Header>
+            <Card.Body>
+                <Card.Text className="problem-statement"><small>{props.Problem_Statement}</small></Card.Text>
+            </Card.Body>
+            <Card.Footer className="border-top-0">
+                <Row>
+                    <Col className="text-left">
+                        <small><span className="font-weight-bold">Created:</span> {this.parseDate(props.Date)}</small> {/* Pass dates through the `parseDate` method */}
+                    </Col>
+                    <Col className="text-right">
+                        <small><span className="font-weight-bold">Status:</span> Completed</small> {/* Need to create a method to check if a project is complete / has an end date*/}                                  
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className="text-left">
+                        {/* Created By */}
+                        <small>{testArr[3]}</small> {/* used last name in the test array for this field */}
+                    </Col>
+                    <Col className="text-right">
+                        {/* end date */}
+                        <small>{this.parseDate(props.Date)}</small> {/* Pass dates through the `parseDate` method */}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className="text-left">
+                        <small><span className="font-weight-bold">Contributors:</span></small>
+                    </Col>
+                    <Col className="text-right">
+                        <small><span className="font-weight-bold">Location:</span> {props.Country}</small>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col className="text-left">
+                        {/* contributors / researchers */}
+                        <small>{this.formatResearchers(testArr)}</small> {/* Replace testArr with Array of researchers */}
+                    </Col>
+                </Row>
+            </Card.Footer>
+        </Card>
+    )
+    return card;
+}
+
+const CardResults = (props) => {
+    const resultChunks = chunk(props.data, 3);
+    const rows = resultChunks.map((resultChunk, index) => {
+        const cols = resultChunk.map
+    })
+}
+
+
 export class View extends React.Component {
 
     constructor(props) {
@@ -15,7 +87,6 @@ export class View extends React.Component {
         this.state={data:'', search: false, countResults: 0};
         this.componentDidMount = this.componentDidMount.bind(this);
         this.onPressEnter = this.onPressEnter.bind(this);
-        this.testArr = ["Chip Whistler", "Mandy Bragger", "Ziggy Stardust", "Test Testerson"];
     }
 
     onPressEnter(event) {
@@ -96,55 +167,7 @@ export class View extends React.Component {
                 <CardColumns>
                     {Array.from(this.state.data).map((val)=>{         
                         return(
-                            <Card bg="light">
-                                <Card.Header className="border-bottom-0">
-                                        <Row>
-                                            <Col sm={8} md={8} className="text-left"><small className="text-left">#{val.ResearchID}</small></Col>
-                                            <Col sm={8} md={4} className="text-right"><Link to={`/Viewcard/${val._id}`}><small>Take a look</small></Link></Col>
-                                        </Row>
-                                        <Row>
-                                            {/* Project Name - Company name as per wireframe */}
-                                            <Col><small className="font-weight-bold d-inline-block text-truncate card-project">{val.ProjectName} - {val.Company}</small></Col>
-                                        </Row>                  
-                                </Card.Header>
-                                <Card.Body>
-                                    <Card.Text className="problem-statement"><small>{val.Problem_Statement}</small></Card.Text>
-                                </Card.Body>
-                                <Card.Footer className="border-top-0">
-                                    <Row>
-                                        <Col className="text-left">
-                                            <small><span className="font-weight-bold">Created:</span> {this.parseDate(val.Date)}</small> {/* Pass dates through the `parseDate` method */}
-                                        </Col>
-                                        <Col className="text-right">
-                                            <small><span className="font-weight-bold">Status:</span> Completed</small> {/* Need to create a method to check if a project is complete / has an end date*/}                                  
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="text-left">
-                                            {/* Created By */}
-                                            <small>{this.testArr[3]}</small> {/* used last name in the test array for this field */}
-                                        </Col>
-                                        <Col className="text-right">
-                                            {/* end date */}
-                                            <small>{this.parseDate(val.Date)}</small> {/* Pass dates through the `parseDate` method */}
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="text-left">
-                                            <small><span className="font-weight-bold">Contributors:</span></small>
-                                        </Col>
-                                        <Col className="text-right">
-                                            <small><span className="font-weight-bold">Location:</span> {val.Country}</small>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col className="text-left">
-                                            {/* contributors / researchers */}
-                                            <small>{this.formatResearchers(this.testArr)}</small> {/* Replace testArr with Array of researchers */}
-                                        </Col>
-                                    </Row>
-                                </Card.Footer>
-                            </Card>
+                            
                         )
                     })}
                 </CardColumns>
