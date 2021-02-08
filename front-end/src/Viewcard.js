@@ -1,8 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Form, Badge, Card, FormGroup, FormControl, Row, Col, label, Switch, Container, Dropdown, DropdownButton, Button, InputGroup } from 'react-bootstrap'
+import { Form, Row, Col, Breadcrumb, Image } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons';
+import './Viewcard.css';
 
 
 export class Viewcard extends React.Component {
@@ -17,138 +18,105 @@ export class Viewcard extends React.Component {
             this.setState({data: res.data});      
         });
     }
-   
+
+
     render() {
         const e = this.state.data;
-        return(<div className="container">
-            <Link to="/"><Button className="btn btn-secondary return-to-search"><Icon.ArrowLeft /> Search</Button></Link>
-            <Card>
-                <Card.Header>
-                    
-                <FormGroup className="text-left">
-                <Row>
-                    <Col sm={3}>
-                        <label for="ResearchID">Research ID</label>
-                        <FormControl readOnly type="text" placeholder={e?e.ResearchID:''}/>
-                    </Col>
-                    <Col sm={2}>
-                        <label for="SampleSize">Sample Size</label>
-                        <FormControl readOnly type="text" placeholder={e?e.SampleSize:''}/>
-                    </Col>
-                    <Col sm={3}>
-                        <label for="Location">Location</label>
-                        <FormControl readOnly type="text" placeholder={e?e.Country:''}/>
-                    </Col>
-                    <Col sm={3}>
-                        <label for="Name">Team Members</label>
-                        <FormControl readOnly type="text" placeholder={e?e.ResearcherID:''}/>
-
-                    </Col>
-               
-                </Row>
-                </FormGroup>
-                </Card.Header>
-                <br />
-
-<div class="row" >
-    <div class="column col-sm-6">
-  <Card bg="light" style={{ width: 'auto' }}>
-    <Card.Body>
-        <Row>
-                <Col sm={4}>
-                    <label for="Problem_Statement">Problem Statement</label>
-                </Col>
-        </Row>
-        <Row>
-                <Col sm={10} id="Problem_Statement">
-                    <FormControl readOnly type="text" placeholder={e?e.Problem_Statement:''} />
-                </Col>
-        </Row>
-    </Card.Body>
-  </Card>
-  </div>
-  <br />
-
-  <div class="column col-sm-6">
-
-  <Card bg="light" style={{ width: 'auto' }}>
-    <Card.Body>
-      
-      <Row>
-            <Col sm={4}>
-            <label for="KeyInsight">Key Insights</label>
-            </Col>
-     </Row>
-     <Row>
-            <Col sm={10} id="KeyInsight">
-                <FormControl readOnly type="text" placeholder={e?e.KeyInsight:''}/>
-            </Col>
-    </Row>
-    </Card.Body>
-  </Card>
-  </div>
-  </div>
-  <br />
-
-  <div class="row" >
-    <div class="column col-sm-6">
-  <Card bg="light" style={{ width: 'auto' }}>
-    <Card.Body>
-      
-      <Row>
-            <Col sm={4}>
-            <label for="KeyPaintPoint">Pain Points</label>
-            </Col>
-     </Row>
-     <Row>
-            <Col sm={10} id="KeyPainPoint">
-                <FormControl readOnly type="text" placeholder={e?e.KeyPainPoint:''}/>
-            </Col>
-    </Row>
-    </Card.Body>
-  </Card>
-  </div>
-  <br />
-
-  <div class="column col-sm-6">
-  <Card bg="light" style={{ width: 'auto' }}>
-    <Card.Body>
-      
-      <Row>
-            <Col sm={4}>
-            <label for="Methods">Methods</label>
-            </Col>
-     </Row>
-     <Row>
-            <Col sm={10} id="Methods">
-            <FormControl readOnly type="text" placeholder={e?e.Methods:''}/>
-            </Col>
-    </Row>
-    </Card.Body>
-  </Card>
-  </div>    
-  </div>
-  <br />
-
-  <Card bg="light" style={{ width: 'fill' }}>
-    <Card.Body>
-      
-      <Row>
-            <Col sm={4}>
-            <label for="URL_ID">Links</label>
-            </Col>
-     </Row>
-     <Row>
-            <Col sm={10} id="URL_ID">
-                <FormControl readOnly type="text" placeholder={e?e.URL_ID:''}/>
-            </Col>
-    </Row>
-    </Card.Body>
-  </Card>
-  <br />
+        return(
              
-        </Card>
-            {/* <button onClick={()=>this.addResearch()} className="btn btn-primary">Submit</button> */}
+        <div className="container align-left">
+        <div className="container">
+            <Row className="my-3" >
+                <h4>Project name</h4>
+            </Row>
+            <Row>
+                <Breadcrumb>
+                <Breadcrumb.Item href="#">UX Research Repository</Breadcrumb.Item>
+                <Breadcrumb.Item active href="[TBC]">Project Name</Breadcrumb.Item>
+                </Breadcrumb>
+            </Row>
+    
+        <div className="jumbotron">
+                    <Row className="justify-content-left mx-5">
+                        <Col sm={6}><h6 className="font-weight-bold">Project Name</h6></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Start Date: <br /></small></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Status: <br /></small></Col>
+                    </Row>     
+
+                    <Row className="justify-content-left mx-5">
+                        <Col sm={6}><h6>#12345678</h6></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Location: <br /></small></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Date completed: <br /></small></Col>
+                    </Row>        
+
+                    <Row className="justify-content-right mx-5">
+                        <Col sm={6}></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Industry: <br /></small></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Company: <br /></small></Col>
+                    </Row>      
+        </div>
+        </div>
+
+        
+            <Row>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Created by: <br /></small></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Role: <br /></small></Col>
+
+            </Row>      
+            
+            <div className="jumbotron">
+                <Row className="text-left"><Icon.People /><br/><small>12 interviewees</small></Row>
+            </div>
+
+            <Row>
+                <Col>
+                    <Form>
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Problem Statement</Form.Label>
+                        <Form.Control as="textarea" rows={6} />
+                        </Form.Group>
+                    </Form>
+                </Col>
+                <Col>
+                    <Form>
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>UX Methods</Form.Label>
+                        <Form.Control as="textarea" rows={6} />
+                        </Form.Group>
+                    </Form>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col>
+                    <Form>
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Key Insights</Form.Label>
+                        <Form.Control as="textarea" rows={6} />
+                        </Form.Group>
+                    </Form>
+                </Col>
+                <Col>
+                    <Form>
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Findings</Form.Label>
+                        <Form.Control as="textarea" rows={6} />
+                        </Form.Group>
+                    </Form>
+                </Col>
+            </Row>
+
+            <Row>
+            <Col sm={6}>
+                    <Form>
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Links</Form.Label>
+                        <Form.Control as="textarea" rows={2} />
+                        </Form.Group>
+                    </Form>
+                </Col>
+            </Row>
+      
             </div>);
             
     }
