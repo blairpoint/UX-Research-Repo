@@ -10,7 +10,7 @@ export class Create extends React.Component {
             Industry:'',
             Company:'',
             Problem_Statement:'',
-            Methods:'',
+            Methods:[],
             Tags:[],
             // Creation_Date:'', 
             Research_ID:'',  
@@ -111,7 +111,7 @@ handleChange(checked) {
                         </Col>
                         <Col sm={4} id="Location">
 
-                            <select onChange={event => this.setState({ Country: event.target.value })} componentClass="select" type="text" className="form-control glob-input" id="dropdown-basic-button">
+                            <select onChange={event => this.setState({ Location: event.target.value })} componentClass="select" type="text" className="form-control glob-input" id="dropdown-basic-button">
 
                                 <option value="null"></option>
                                 <option value="Australia">Australia</option>
@@ -272,14 +272,14 @@ handleChange(checked) {
                     </div>
 
 
-                    <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Problem_Statement: event.target.value })}>
+                    <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Key_Insights: event.target.value })}>
                         <Form.Label>Key Insights</Form.Label>
-                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ KeyInsight: event.target.value })} className="glob-input" />
+                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ Key_Insights: event.target.value })} className="glob-input" />
                     </Form.Group>
 
-                    <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Problem_Statement: event.target.value })}>
-                        <Form.Label>Key Findings</Form.Label>
-                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ KeyPainPoint: event.target.value })} className="glob-input" />
+                    <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Findings: event.target.value })}>
+                        <Form.Label>Findings</Form.Label>
+                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ Findings: event.target.value })} className="glob-input" />
                     </Form.Group>
 
 
@@ -291,7 +291,7 @@ handleChange(checked) {
                     <FormGroup className="text-left">
                         <Row>
                             <Col sm={2}>
-                                <label for="Links">Links</label>
+                                <label for="Links">Research Outputs</label>
                             </Col>
                             <Row>
                                 <Col sm={2}>
@@ -299,14 +299,14 @@ handleChange(checked) {
                                 </Col>
                             </Row>
                             <Col sm={4} id="URL_LABEL">
-                                <Form.Control htmlFor="URL_LABEL" type="text" className="form-control glob-input" id="URL_ID" />
+                                <Form.Control htmlFor="URL_LABEL" type="text" className="form-control glob-input" id="Research_Outputs" />
                             </Col>
 
                             <Col sm={4} id="URL">
-                                <Form.Control htmlFor="URL" type="text" className="form-control glob-input" id="URL_ID" />
+                                <Form.Control htmlFor="URL" type="text" className="form-control glob-input" id="Research_Outputs" />
                             </Col>
                             <Col sm={1}>
-                                <Button id="AddLinks" variant="primary" onChange={event => this.setState({ URL_ID: event.target.value })}>+</Button>{' '}
+                                <Button id="AddLinks" variant="primary" onChange={event => this.setState({ Research_Outputs: event.target.value })}>+</Button>{' '}
 
                             </Col>
                         </Row>
