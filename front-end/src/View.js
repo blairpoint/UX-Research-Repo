@@ -10,6 +10,27 @@ import { Link } from 'react-router-dom';
 
 const testArr = ["Chip Whistler", "Mandy Bragger", "Ziggy Stardust", "Test Testerson"];
 
+function parseDate(input) {
+    if (isNaN(Date.parse(input))) {
+      return input
+    } else {
+      var date = new Date(input);
+      var options = { year: 'numeric', month: '2-digit', day: '2-digit'};
+      return new Intl.DateTimeFormat('en-NZ', options).format(date);
+    };
+  };
+
+function formatResearchers(researcherArr) {
+    var arr = Array.from(researcherArr);
+    var extras = arr.length - 1
+    var firstResearcher = arr[0];
+    if (extras == 0) {
+        return firstResearcher
+    } else {
+        return firstResearcher + " +" + extras;
+    };
+};
+
 const chunk = (arr, chunkSize = 1, cache = []) => {
     const tmp = [...arr]
     if (chunkSize <= 0) return cache
@@ -19,7 +40,7 @@ const chunk = (arr, chunkSize = 1, cache = []) => {
 
 const ResearchCard = (props) => {
     const card = (
-        <Card bg="light">
+        <Card bg="light" className="research-card">
             <Card.Header className="border-bottom-0">
                     <Row>
                         <Col sm={8} md={8} className="text-left"><small className="text-left">#{props.ResearchID}</small></Col>
@@ -36,7 +57,8 @@ const ResearchCard = (props) => {
             <Card.Footer className="border-top-0">
                 <Row>
                     <Col className="text-left">
-                        <small><span className="font-weight-bold">Created:</span> {this.parseDate(props.Date)}</small> {/* Pass dates through the `parseDate` method */}
+                        {/* Created date */}
+                        <small><span className="font-weight-bold">Created:</span> {parseDate(props.Date)}</small> {/* Pass dates through the `parseDate` method */}
                     </Col>
                     <Col className="text-right">
                         <small><span className="font-weight-bold">Status:</span> Completed</small> {/* Need to create a method to check if a project is complete / has an end date*/}                                  
@@ -49,21 +71,16 @@ const ResearchCard = (props) => {
                     </Col>
                     <Col className="text-right">
                         {/* end date */}
-                        <small>{this.parseDate(props.Date)}</small> {/* Pass dates through the `parseDate` method */}
+                        <small>{parseDate(props.Date)}</small> {/* Pass dates through the `parseDate` method */}
                     </Col>
                 </Row>
                 <Row>
-                    <Col className="text-left">
-                        <small><span className="font-weight-bold">Contributors:</span></small>
+                    <Col sm={5} md={5} className="text-left">
+                        <small><span className="font-weight-bold">Contributors:</span></small><br/>
+                        <small>{formatResearchers(testArr)}</small> {/* Replace testArr with Array of researchers */}
                     </Col>
-                    <Col className="text-right">
+                    <Col sm={7} md={7} className="text-right">
                         <small><span className="font-weight-bold">Location:</span> {props.Country}</small>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col className="text-left">
-                        {/* contributors / researchers */}
-                        <small>{this.formatResearchers(testArr)}</small> {/* Replace testArr with Array of researchers */}
                     </Col>
                 </Row>
             </Card.Footer>
@@ -75,9 +92,29 @@ const ResearchCard = (props) => {
 const CardResults = (props) => {
     const resultChunks = chunk(props.data, 3);
     const rows = resultChunks.map((resultChunk, index) => {
-        const cols = resultChunk.map
-    })
-}
+        const cols = resultChunk.map((result, index) => {
+            return(
+                <Col md={4} sm={12} ResearchID={result.ResearchID}>
+                    <ResearchCard
+                        ResearchID={result.ResearchID}
+                        _id={result._id}
+                        ProjectName={result.ProjectName}
+                        Company={result.Company}
+                        Problem_Statement={result.Problem_Statement}
+                        Date={result.Date}
+                        Country={result.Country}
+                    />
+                </Col>
+            );
+        });
+        return <Row key={index} className="card-row">{cols}</Row>
+    });
+    return(
+        <Container className="card-row-container">
+            {rows}
+        </Container>
+    );
+};
 
 
 export class View extends React.Component {
@@ -114,17 +151,6 @@ export class View extends React.Component {
         });
     }
 
-    formatResearchers(researcherArr) {
-        var arr = Array.from(researcherArr);
-        var extras = arr.length - 1
-        var firstResearcher = arr[0];
-        if (extras == 0) {
-            return firstResearcher
-        } else {
-            return firstResearcher + " +" + extras;
-        }
-    }
-
     countResults(results) {
         return Array.from(results).length;
     }
@@ -136,16 +162,6 @@ export class View extends React.Component {
             return "";
         }
     }
-
-    parseDate(input) {
-        if (isNaN(Date.parse(input))) {
-          return input
-        } else {
-          var date = new Date(input);
-          var options = { year: 'numeric', month: '2-digit', day: '2-digit'};
-          return new Intl.DateTimeFormat('en-NZ', options).format(date);
-        }
-      }
 
     /* Commenting this out until we decide that we need this method
     delete(id) {
@@ -164,13 +180,7 @@ export class View extends React.Component {
             <Container>
                 <SearchBar functionCallFromParent={this.onPressEnter.bind(this)} valueFromParent={this.value}/>
                 <div className="results"><strong>{this.returnResultSize()}</strong></div>
-                <CardColumns>
-                    {Array.from(this.state.data).map((val)=>{         
-                        return(
-                            
-                        )
-                    })}
-                </CardColumns>
+                <CardResults data={this.state.data} />
             </Container>
         )
     }
