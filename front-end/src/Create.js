@@ -105,20 +105,20 @@ handleChange(checked) {
                             <label for="ResearchID">Research ID</label>
                         </Col>
                         <Col sm={4} id="ResearchID">
-                            <Form.Control htmlFor="ResearchID" onChange={event => this.setState({ ResearchID: event.target.value })} type="text" className="form-control" id="ResearchID" />
+                            <Form.Control htmlFor="ResearchID" onChange={event => this.setState({ ResearchID: event.target.value })} type="text" className="form-control glob-input" id="ResearchID" />
                         </Col>
                         <Col sm={2}>
                             <label for="Company">Company</label>
                         </Col>
                         <Col sm={4} id="Company">
-                            <Form.Control htmlFor="Company" onChange={event => this.setState({ Company: event.target.value })} type="text" className="form-control" id="Company" />
+                            <Form.Control htmlFor="Company" onChange={event => this.setState({ Company: event.target.value })} type="text" className="form-control glob-input" id="Company" />
                         </Col>
                         <Col sm={2}>
                             <label for="Location">Location</label>
                         </Col>
                         <Col sm={4} id="Location">
 
-                            <select onChange={event => this.setState({ Country: event.target.value })} componentClass="select" type="text" className="form-control" id="dropdown-basic-button">
+                            <select onChange={event => this.setState({ Country: event.target.value })} componentClass="select" type="text" className="form-control glob-input" id="dropdown-basic-button">
 
                                 <option value="null"></option>
                                 <option value="Austrlia">Australia</option>
@@ -134,7 +134,7 @@ handleChange(checked) {
                         </Col>
                         <Col sm={4} id="Industry">
 
-                            <select onChange={event => this.setState({ IndustryName: event.target.value })} componentClass="select" type="text" className="form-control" id="dropdown-basic-button">
+                            <select onChange={event => this.setState({ IndustryName: event.target.value })} componentClass="select" type="text" className="form-control glob-input" id="dropdown-basic-button">
 
                                 <option value="null"></option>
                                 <option value="Technology">Technology</option>
@@ -151,7 +151,7 @@ handleChange(checked) {
                                 <label for="ProjectName">Project Name</label>
                             </Col>
                             <Col sm={4} id="ProjectName">
-                                <Form.Control htmlFor="ProjectName" onChange={event => this.setState({ ProjectName: event.target.value })} type="text" className="form-control" id="ProjectName" />
+                                <Form.Control htmlFor="ProjectName" onChange={event => this.setState({ ProjectName: event.target.value })} type="text" className="form-control glob-input" id="ProjectName" />
                             </Col>
                         </Row>
                         <Row>
@@ -159,13 +159,13 @@ handleChange(checked) {
                                 <label for="Name">Created By</label>
                             </Col>
                             <Col sm={4} id="ResearcherID">
-                                <Form.Control htmlFor="ResearcherID" onChange={event => this.setState({ ResearcherID: event.target.value })} type="text" className="form-control" id="ResearcherID" />
+                                <Form.Control htmlFor="ResearcherID" onChange={event => this.setState({ ResearcherID: event.target.value })} type="text" className="form-control glob-input" id="ResearcherID" />
                             </Col>
                             <Col sm={2}>
                                 <label for="Startdate">Start Date</label>
                             </Col>
                             <Col sm={4} id="SDate">
-                                <Form.Control htmlFor="SDate" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control" id="SDate" />
+                                <Form.Control htmlFor="SDate" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="SDate" />
                             </Col>
                             <Col sm={2}>
                                 <label for="Addmembers">Add Members</label>
@@ -190,7 +190,7 @@ handleChange(checked) {
                                 <label for="Enddate">End Date</label>
                             </Col>
                             <Col sm={4} id="EDate">
-                                <Form.Control htmlFor="EDate" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control" id="EDate" />
+                                <Form.Control htmlFor="EDate" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="EDate" />
                             </Col>
                         </Row>
                         <Row>
@@ -212,7 +212,7 @@ handleChange(checked) {
                                 <label for="SampleSize">Number of interviewees</label>
                             </Col>
                             <Col sm={1} id="SampleSize">
-                                <Form.Control htmlFor="SampleSize" onChange={event => this.setState({ SampleSize: event.target.value })} type="text" className="form-control" id="SampleSize" />
+                                <Form.Control htmlFor="SampleSize" onChange={event => this.setState({ SampleSize: event.target.value })} type="text" className="form-control glob-input" id="SampleSize" />
                             </Col>
                         </Row>
                     </FormGroup>
@@ -229,7 +229,7 @@ handleChange(checked) {
                     </FormGroup> */}
                     <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Problem_Statement: event.target.value })}>
                         <Form.Label>Problem Statement</Form.Label>
-                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ Problem_Statement: event.target.value })} />
+                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ Problem_Statement: event.target.value })} className="glob-input" />
                         
                            
                         
@@ -274,19 +274,19 @@ handleChange(checked) {
                                     <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
                                 </li>
                             ))}
-                            <li className="input-tag__tags__input"><input type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
+                            <li className="input-tag__tags__input "><input type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
                         </ul>
                     </div>
 
 
                     <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Problem_Statement: event.target.value })}>
                         <Form.Label>Key Insights</Form.Label>
-                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ KeyInsight: event.target.value })} />
+                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ KeyInsight: event.target.value })} className="glob-input" />
                     </Form.Group>
 
                     <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Problem_Statement: event.target.value })}>
                         <Form.Label>Key Findings</Form.Label>
-                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ KeyPainPoint: event.target.value })} />
+                        <Form.Control as="textarea" rows={3} onChange={event => this.setState({ KeyPainPoint: event.target.value })} className="glob-input" />
                     </Form.Group>
 
 
@@ -306,11 +306,11 @@ handleChange(checked) {
                                 </Col>
                             </Row>
                             <Col sm={4} id="URL_LABEL">
-                                <Form.Control htmlFor="URL_LABEL" type="text" className="form-control" id="URL_ID" />
+                                <Form.Control htmlFor="URL_LABEL" type="text" className="form-control glob-input" id="URL_ID" />
                             </Col>
 
                             <Col sm={4} id="URL">
-                                <Form.Control htmlFor="URL" type="text" className="form-control" id="URL_ID" />
+                                <Form.Control htmlFor="URL" type="text" className="form-control glob-input" id="URL_ID" />
                             </Col>
                             <Col sm={1}>
                                 <Button id="AddLinks" variant="primary" onChange={event => this.setState({ URL_ID: event.target.value })}>+</Button>{' '}
