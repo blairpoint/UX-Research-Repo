@@ -150,6 +150,17 @@ app.get('/search/:val',(req,res)=>{
     });
 });
 
+app.get('/get-all-researchers',(req,res)=>{
+
+    ResearcherModel_sp2.find({},(err,result)=>{
+        if(err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    });
+    });
+
  app.get('/searchResearcher/:val',(req,res)=>{
 
     var re = new RegExp(req.params.val, 'i');
