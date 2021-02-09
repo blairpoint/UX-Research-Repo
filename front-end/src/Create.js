@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import { Form, FormGroup, FormControl, Row, Col, label, Switch, Container, Dropdown, DropdownButton, Button, InputGroup } from 'react-bootstrap'
+import { Token, Typeahead } from 'react-bootstrap-typeahead';
 
 export class Create extends React.Component {
     constructor(props) {
@@ -23,13 +24,28 @@ export class Create extends React.Component {
             Findings:'',
             Creator:'',
             Researchers:'',
-            Research_Output:''    
+            Research_Output:'',
+            researchersSel: [],    
 
+            researcher_list: []
         };
-    
+        this.componentDidMount = this.componentDidMount.bind(this);
 
-}
+    }
 
+    componentDidMount() {
+        Axios.get('http://localhost:3001/get-all-researchers').then((res)=>{
+            this.setState({researcher_list: res.data});      
+        });
+    }
+
+    getNames() {
+        const names = []
+        Array.from(this.state.researcher_list).forEach(r => 
+            names.push(r.fName + " " + r.lName)   
+        );
+        return names;
+    }
 
     addResearch() {
         console.log(this.state.Tags);
@@ -189,30 +205,29 @@ export class Create extends React.Component {
                             <Col sm={4} id="Start_Date">
                                 <Form.Control htmlFor="Start_Date" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="Start_Date" />
                             </Col>
-                            <Col sm={2}>
-                                <label for="Addmembers">Add Members</label>
-                            </Col>
-
-                            <Col>
-
-
-                                {/* <div className="input-tag">
-                        <ul className="input-tag__tags">
-                            {this.state.Tags.map((tag, i) => (
-                                <li key={tag}>
-                                    {tag}
-                                    <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
-                                </li>
-                            ))}
-                            <li className="input-tag__tags__input"><input type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
-                        </ul>
-                    </div> */}
-                            </Col>
+                            <Col sm={6}/>
                             <Col sm={2}>
                                 <label for="End_Date">End Date</label>
                             </Col>
                             <Col sm={4} id="End_Date">
                                 <Form.Control htmlFor="End_Date" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="End_Date" />
+                            </Col>
+                            
+                        </Row>
+                        <Row>
+                            
+                        <Col sm={12}>
+                                <label for="Addmembers">Add Members</label>
+                                <Typeahead 
+                                    className="glob-input"
+                                    id="basic-typeahead-multiple"
+                                    labelKey="name"
+                                    multiple
+                                    onChange={(e) => this.setState({researchersSel: e.value})}
+                                    options={this.getNames()}
+                                    placeholder="Choose contributors..."
+                                    selected={this.state.researchersSel}
+                                />
                             </Col>
                         </Row>
                         <Row>

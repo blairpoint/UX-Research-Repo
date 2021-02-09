@@ -39,7 +39,7 @@ const chunk = (arr, chunkSize = 1, cache = []) => {
   }
 
 const ResearchCard = (props) => {
-    const status;
+    let status = ''
     if (props.End_Date === null || props.End_Date === '') {
         status = "In Progress"
     } else {
