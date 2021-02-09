@@ -2,7 +2,7 @@ import React from 'react';
 import Axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import CardColumns from 'react-bootstrap/CardColumns';
-import { Accordion, Badge, Button, Col, Container, InputGroup, ListGroup, Row } from 'react-bootstrap';
+import { Accordion, Badge, Button, Col, Container, Form, InputGroup, ListGroup, Row } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
 import FormControl from 'react-bootstrap/FormControl';
 import {SearchBar} from './components/SearchBar';
@@ -119,9 +119,43 @@ const CardResults = (props) => {
 
 export class View extends React.Component {
 
+    cat_text = 'Choose an option...'
+    location_list = [
+        "Wellington",
+        "Auckland",
+        "Christchurch"
+    ]
+    industry_list = [
+        "Agriculture, Forestry and Fishing",
+        "Mining",
+        "Manufacturing",
+        "Electricity, Gas, Water and Waste Services",
+        "Construction",
+        "Wholesale Trade",
+        "Retail Trade",
+        "Accommodation and Food Services",
+        "Transport, Postal and Warehousing",
+        "Information Media and Telecommunications",
+        "Financial and Insurance Services",
+        "Rental, Hiring and Real Estate Services",
+        "Professional, Scientific and Technical Services",
+        "Administrative and Support Services",
+        "Public Administration and Safety",
+        "Education and Training",
+        "Health Care and Social Assistance",
+        "Arts and Recreation Services",
+        "Other Services"
+    ]
+    method_list = [
+        "Agile",
+        "Garage",
+        "Lean Startup",
+        "Design Thinking"
+    ]
+
     constructor(props) {
         super(props);
-        this.state={data:'', search: false, countResults: 0};
+        this.state={data:'', search: false, countResults: 0, location: this.cat_text, industry: this.cat_text, method: this.cat_text};
         this.componentDidMount = this.componentDidMount.bind(this);
         this.onPressEnter = this.onPressEnter.bind(this);
     }
@@ -132,14 +166,13 @@ export class View extends React.Component {
                 Axios.get('http://localhost:3001/get-all').then((res)=>{
                     this.setState({data: res.data});
                     this.setState({search: ''});
-                    this.setState({countResults: 0});      
+                    this.setState({countResults: 0});    
                 });
             } else {
                 Axios.get(`http://localhost:3001/search/${event.target.value}`).then((res)=>{
                 this.setState({data:res.data});
                 this.setState({search: event.target.value});
                 this.setState({countResults: this.countResults(res.data)});
-
                 });
             }
         }
@@ -163,6 +196,13 @@ export class View extends React.Component {
         }
     }
 
+    insertOptionsList(list) {
+        const options = list.map((option, index) => {
+            return(<option>{option}</option>)
+        });
+        return options;
+    }
+
     /* Commenting this out until we decide that we need this method
     delete(id) {
         Axios.post('http://localhost:3001/delete',{
@@ -179,6 +219,50 @@ export class View extends React.Component {
         return(
             <Container>
                 <SearchBar functionCallFromParent={this.onPressEnter.bind(this)} valueFromParent={this.value}/>
+                <Row>
+                    <Col sm={4} md={4}>
+                        <Form.Group>
+                            <Form.Label><small>Search by location</small></Form.Label>
+                            <Form.Control
+                                as="select"
+                                className="glob-input"
+                                value={this.state.location}
+                                onChange={(e) => this.setState({location: e.target.value})}
+                                >
+                                <option>{this.cat_text}</option>
+                                {this.insertOptionsList(this.location_list)}
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col sm={4} md={4}>
+                        <Form.Group>
+                            <Form.Label><small>Search by industry</small></Form.Label>
+                            <Form.Control
+                                as="select"
+                                className="glob-input"
+                                value={this.state.industry}
+                                onChange={(e) => this.setState({industry: e.target.value})}
+                                >
+                                <option>{this.cat_text}</option>
+                                {this.insertOptionsList(this.industry_list)}
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col sm={4} md={4}>
+                        <Form.Group>
+                            <Form.Label><small>Search by method</small></Form.Label>
+                            <Form.Control
+                                as="select"
+                                className="glob-input"
+                                value={this.state.method}
+                                onChange={(e) => this.setState({method: e.target.value})}
+                                >
+                                <option>{this.cat_text}</option>
+                                {this.insertOptionsList(this.method_list)}
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                </Row>
                 <div className="results"><strong>{this.returnResultSize()}</strong></div>
                 <CardResults data={this.state.data} />
             </Container>

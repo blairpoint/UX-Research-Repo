@@ -29,7 +29,7 @@ export class SearchBar extends React.Component {
             <div className="searchbar">
                 <Link to="/create"><Button className="btn btn-primary">Add Research +</Button></Link>
                 <Row>
-                    <Col sm={8} md={7} className="align-self-end">
+                    <Col sm={12} md={12} className="align-self-end">
                         <InputGroup className="input-group mb-3">
                             <InputGroup.Prepend>
                                 <InputGroup.Text id="basic-addon1" className="glob-input"><Icon.Search /></InputGroup.Text>
@@ -42,25 +42,7 @@ export class SearchBar extends React.Component {
                             />
                         </InputGroup>
                     </Col>
-                    <Col sm={4} md={4}>
-                        <Form.Group>
-                            <Form.Label><small>Search for a category</small></Form.Label>
-                            <Form.Control
-                                as="select"
-                                className="glob-input"
-                                value={this.state.cat}
-                                onChange={(e) => this.selectCat(e.target.value)}
-                                >
-                                <option>{this.cat_text}</option>
-                                <option>{this.cat_one}</option>
-                                <option>{this.cat_two}</option>
-                                <option>{this.cat_three}</option>
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
                 </Row>
-                    
-                    
             </div>
         );
     }
