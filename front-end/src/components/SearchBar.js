@@ -5,11 +5,6 @@ import FormControl from 'react-bootstrap/FormControl';
 import { Link } from 'react-router-dom';
 
 export class SearchBar extends React.Component {
-    
-    cat_text = 'Choose an option...'
-    cat_one = 'Category 1'
-    cat_two = 'Category 2'
-    cat_three = 'Category 3'
 
     constructor(props) {
         super(props);

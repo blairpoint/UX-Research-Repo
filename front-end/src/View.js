@@ -202,7 +202,7 @@ export class View extends React.Component {
         });
         return options;
     }
-
+    
     /* Commenting this out until we decide that we need this method
     delete(id) {
         Axios.post('http://localhost:3001/delete',{
