@@ -23,9 +23,14 @@ export class Create extends React.Component {
             Findings:'',
             Creator:'',
             Researchers:'',
-            Research_Output:''    
+            Research_Outputs:[],    
+            tempTitle:'',
+            tempURL:'',
+            titleArray:[],
+            urlArray:[]
 
         };
+        this.child = React.createRef();
     
 
 }
@@ -89,10 +94,29 @@ export class Create extends React.Component {
         }
     }
 
+    addURL = (e) => {
+        console.log("add url");
+        let outputs = new Map();
+        outputs["Title"]=this.state.tempTitle;
+        outputs["URL"]=this.state.tempURL;
+        this.state.Research_Outputs.push(outputs);
+        // console.log(this.state.Research_Outputs);
+        // console.log(this.state.tempTitle);
+        // console.log(this.state.tempURL);
+        this.state.urlArray.push({title:this.state.tempTitle, url:this.state.tempURL});
+        this.child.current.populateData(this.state.urlArray);
+    }
+
     removeTag = (i) => {
         const newTags = [...this.state.Tags];
         newTags.splice(i, 1);
         this.setState({ Tags: newTags });
+    }
+    insertLinks() {
+        const links = this.state.Research_Outputs.map((link, index) => {
+            return(<a href={link["URL"]}>{link["Title"]}</a>)
+        })
+        return links;
     }
 
     render() {
@@ -196,17 +220,7 @@ export class Create extends React.Component {
                             <Col>
 
 
-                                {/* <div className="input-tag">
-                        <ul className="input-tag__tags">
-                            {this.state.Tags.map((tag, i) => (
-                                <li key={tag}>
-                                    {tag}
-                                    <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
-                                </li>
-                            ))}
-                            <li className="input-tag__tags__input"><input type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
-                        </ul>
-                    </div> */}
+              
                             </Col>
                             <Col sm={2}>
                                 <label for="End_Date">End Date</label>
@@ -238,17 +252,7 @@ export class Create extends React.Component {
                             </Col>
                         </Row>
                     </FormGroup>
-                    {/* <FormGroup className="text-left">
-                    <Row>
-                    <Col sm={2}>
-                        <label for="Problem">Problem</label>
-                    </Col>
-                    <Col sm={4} id="Problem">
-                    <Form.Control htmlFor="Problem" onChange={event=>this.setState({Problem_Statement:event.target.value})} type="text" className="form-control" id="Problem_Statement" />
-                    </Col>
-                    </Row>
-                    
-                    </FormGroup> */}
+         
                     <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Problem_Statement: event.target.value })}>
                         <Form.Label>Problem Statement</Form.Label>
                         <Form.Control as="textarea" rows={3} onChange={event => this.setState({ Problem_Statement: event.target.value })} className="glob-input" />
@@ -278,27 +282,7 @@ export class Create extends React.Component {
 </Form>
                     </Form.Group>
 
-                    <FormGroup className="text-left">
-                        <Row>
-                            <Col sm={2}>
-                                <label for="Tags">Tags #</label>
-                            </Col>
-                            <Col sm={1} id="Tags">
-                            </Col>
-                        </Row>
-
-                    </FormGroup>
-                    <div className="input-tag">
-                        <ul className="input-tag__tags">
-                            {this.state.Tags.map((tag, i) => (
-                                <li key={tag}>
-                                    {tag}
-                                    <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
-                                </li>
-                            ))}
-                            <li className="input-tag__tags__input "><input type="text" onKeyDown={this.inputKeyDown} ref={c => { this.tagInput = c; }} /></li>
-                        </ul>
-                    </div>
+               
 
 
                     <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Key_Insights: event.target.value })}>
@@ -328,16 +312,20 @@ export class Create extends React.Component {
                                 </Col>
                             </Row>
                             <Col sm={4} id="URL_LABEL">
-                                <Form.Control htmlFor="URL_LABEL" type="text" className="form-control glob-input" id="Research_Outputs" />
+                                <Form.Control htmlFor="Title" type="text" onChange={event => this.setState({ tempTitle: event.target.value })} className="form-control glob-input" id="Research_Outputs" />
                             </Col>
 
                             <Col sm={4} id="URL">
-                                <Form.Control htmlFor="URL" type="text" className="form-control glob-input" id="Research_Outputs" />
+                                <Form.Control htmlFor="URL" type="text" onChange={event => this.setState({ tempURL: event.target.value })} className="form-control glob-input" id="Research_Outputs" />
                             </Col>
                             <Col sm={1}>
-                                <Button id="AddLinks" variant="primary" onChange={event => this.setState({ Research_Outputs: event.target.value })}>+</Button>{' '}
+                                <Button id="AddLinks" variant="primary" onClick={() => this.addURL()}>+</Button>{' '}
 
                             </Col>
+                            <URLLabels ref={this.child}/>
+                        </Row>
+                        <Row>
+                            
                         </Row>
                     </FormGroup>
 
@@ -348,5 +336,31 @@ export class Create extends React.Component {
             <button onClick={() => this.addResearch()} className="btn btn-primary">Submit</button>
 
         </div>);
+    }
+}
+
+export default class URLLabels extends React.Component {
+    constructor(props){
+        super(props);
+        this.state={url:''}
+    }
+
+    populateData(uArray) {
+        console.log(uArray);
+        this.setState({url:uArray});
+    }
+
+    render() {
+        return(
+            <div>
+            {Array.from(this.state.url).map((val)=>{
+                return(
+                    <tr>
+                        <td><a href={val.url}>{val.title}</a></td>
+                    </tr>
+                )
+            })}
+            </div>
+        )
     }
 }
