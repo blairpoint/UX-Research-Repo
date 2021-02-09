@@ -39,6 +39,13 @@ const chunk = (arr, chunkSize = 1, cache = []) => {
   }
 
 const ResearchCard = (props) => {
+    const status;
+    if (props.End_Date === null || props.End_Date === '') {
+        status = "In Progress"
+    } else {
+        status = "Completed"
+    }
+
     const card = (
         <Card bg="light" className="research-card">
             <Card.Header className="border-bottom-0">
@@ -103,6 +110,7 @@ const CardResults = (props) => {
                         Problem_Statement={result.Problem_Statement}
                         Created_Date={result.Created_Date}
                         Location={result.Location}
+                        End_Date={result.End_Date}
                     />
                 </Col>
             );
