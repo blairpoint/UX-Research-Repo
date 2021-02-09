@@ -9,7 +9,7 @@
     right:auto;
 }
 
-p {
+.text-boxes p {
   outline:1px solid #E0E0E0;
   height:150px;
 }

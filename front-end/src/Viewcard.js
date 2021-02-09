@@ -68,7 +68,7 @@ export class Viewcard extends React.Component {
                 <Row className="text-left"><Icon.People /><br/><small>12 interviewees</small></Row>
             </div>
 
-        <div className="mx-4">
+        <div className="mx-4 text-boxes">
         <Row>
                 <Col>
                    
