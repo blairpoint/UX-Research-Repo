@@ -11,7 +11,7 @@ const ObjectId = require('mongodb').ObjectId;
 const ResearchModel_sp2 = require('./models/Research_sp2');
 const ResearcherModel_sp2 = require('./models/Researcher_sp2');
 const CounterModel_sp2 = require('./models/Counter_sp2');
-var new_rid;
+
 
 app.use(cors());
 app.use(express.json());
@@ -26,7 +26,7 @@ mongoose.connect('mongodb+srv://alice:admin@cluster0.ohr5j.mongodb.net/sprint2?r
 });
 
 app.post('/insert', async (req,res)=>{
-
+    var new_rid = 0;
     // CounterModel_sp2.findByIdAndUpdate(
     //     { _id: "research_id" },
     //     { $inc: { seq:1 } },
@@ -35,20 +35,21 @@ app.post('/insert', async (req,res)=>{
 
     //var new_rid;
 
-        CounterModel_sp2.findByIdAndUpdate("research_id", { $inc: { seq:1 } }, { new: true }, 
+        await CounterModel_sp2.findByIdAndUpdate("research_id", { $inc: { seq:1 } }, { new: true }, 
         function (err, ridres) { 
             if (err){ 
             console.log(err) 
             } 
             else{ 
             new_rid = ridres.seq;
-            console.log(new_rid);
+             console.log(new_rid);
             } 
-            }); 
+            })
 
     const research_sp2 = new ResearchModel_sp2(
         
         {
+            
          Industry:req.body.Industry,
          Company:req.body.Company,	
          Problem_Statement:req.body.Problem_Statement,
@@ -56,7 +57,6 @@ app.post('/insert', async (req,res)=>{
          Tags:req.body.Tags,
          Creation_Date:req.body.Creation_Date,
          Research_ID:new_rid,
-        // Research_ID:CounterModel_sp2.findById("research_id", '-_id seq').exec(),
          Location:req.body.Location,
          Project_Name:req.body.Project_Name,
          Key_Insights:req.body.Key_Insights,
@@ -69,15 +69,13 @@ app.post('/insert', async (req,res)=>{
          Research_Outputs:req.body.Research_Outputs
         	
  });
-
+    console.log(new_rid);
      await research_sp2.save();
      res.send('Inserted Data');
  });
 
  // backup
 //  app.post('/insert', async (req,res)=>{
-
-    
 
 //     const research_sp2 = new ResearchModel_sp2({
 
@@ -176,6 +174,18 @@ app.get('/search/:val',(req,res)=>{
         });
     });
 
+    app.get('/filterSearch/:val1/:val2',(req,res)=>{
+        ResearchModel_sp2.find({
+            Industry: req.params.val1,
+            $text: {$search: req.params.val2} },(err,result)=>{
+            if(err) {
+                res.send(err);
+            } else {
+                res.send(result);
+            }
+        });
+    });
+
     app.get('/filterSearchIndustry/:val1/:val2',(req,res)=>{
         ResearchModel_sp2.find({ 
             Industry: req.params.val1,
@@ -188,22 +198,41 @@ app.get('/search/:val',(req,res)=>{
         });
     });
 
-
- app.get('/rid',(req,res)=>{
-
-    CounterModel_sp2.findByIdAndUpdate(
-        { _id: "research_id" },
-        { $inc: { seq:1 } },
-        { new: true },
-        function(err, result) {
-            if (err) {
-              res.send(err);
+    app.get('/get-record/:val', (req,res)=>{  
+        ResearchModel_sp2.findById(req.params.val,(err,result)=>{
+            if(err) {
+                res.send(err);
             } else {
-              res.send(result);
+                res.send(result);
             }
-          });
-        }
-);
+        });
+    });
+
+// app.get('/get-record', (req,res)=>{  
+//     ResearchModel_sp2.findById(req.body.id,(err,result)=>{
+//         if(err) {
+//             res.send(err);
+//         } else {
+//             res.send(result);
+//         }
+//     });
+// });
+
+//  app.get('/rid',(req,res)=>{
+
+//     CounterModel_sp2.findByIdAndUpdate(
+//         { _id: "research_id" },
+//         { $inc: { seq:1 } },
+//         { new: true },
+//         function(err, result) {
+//             if (err) {
+//               res.send(err);
+//             } else {
+//               res.send(result);
+//             }
+//           });
+//         }
+// );
 
 /*  Pre-sprint2 database changes */
 // app.post('/insert', async (req,res)=>{

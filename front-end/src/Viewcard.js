@@ -4,68 +4,82 @@ import { Link } from 'react-router-dom';
 import { Form, Row, Col, Breadcrumb, FormLabel } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons';
 import './Viewcard.css';
+let oid = 0;
 
+function parseDate(input) {
+    if (isNaN(Date.parse(input))) {
+      return input
+    } else {
+      var date = new Date(input);
+      var options = { year: 'numeric', month: '2-digit', day: '2-digit'};
+      return new Intl.DateTimeFormat('en-NZ', options).format(date);
+    };
+  };
 
 export class Viewcard extends React.Component {
     constructor(props) {
         super(props);
         this.state={data:''};
         this.componentDidMount = this.componentDidMount.bind(this);
+        var oidArray = window.location.pathname.split('/');
+        oid = oidArray[2];
+        //console.log(oid);
 }
 
     componentDidMount() {     
-        Axios.post('http://localhost:3001/get-record',{id:this.props.match.params.id}).then((res)=>{
-            this.setState({data: res.data});      
+        Axios.get(`http://localhost:3001/get-record/${oid}`,{id:this.props.match.params.id}).then((res)=>{
+
+//        Axios.get('http://localhost:3001/get-record',{id:this.props.match.params.id}).then((res)=>{
+            this.setState({data: res.data});
         });
     }
 
-
     render() {
         const e = this.state.data;
+        console.log(e.Project_Name);
         return(
              
         <div className="container align-left">
         <div className="container">
             <Row className="my-3 mx-3" >
-                <h4>Project name</h4>
+                <h4>Project Name: {e.Project_Name}</h4>
             </Row>
             <Row>
                 <Breadcrumb className="mx-4">
                 <Breadcrumb.Item href="#">UX Research Repository</Breadcrumb.Item>
-                <Breadcrumb.Item active href="[TBC]">Project Name</Breadcrumb.Item>
+                <Breadcrumb.Item active href="[TBC]">{e.Project_Name}</Breadcrumb.Item>
                 </Breadcrumb>
             </Row>
     
         <div className="jumbotron">
                     <Row className="justify-content-left">
                         <Col sm={6}><h6 className="font-weight-bold">Project Name</h6></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Start Date: <br /></small></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Start Date: <br />{parseDate(e.Start_Date)}</small></Col>
                         <Col sm={3} className="align-self-center"><small className="font-weight-bold">Status: <br /></small></Col>
                     </Row>     
 
                     <Row className="justify-content-left">
-                        <Col sm={6}><h6>#12345678</h6></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Location: <br /></small></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Date completed: <br /></small></Col>
+                        <Col sm={6}><h6>Research ID: {e.Research_ID}</h6></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Location: <br />{e.Location}</small></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Date completed: <br />{parseDate(e.End_Date)}</small></Col>
                     </Row>        
 
                     <Row className="justify-content-right">
                         <Col sm={6}></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Industry: <br /></small></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Company: <br /></small></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Industry: <br />{e.Industry}</small></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Company: <br />{e.Company}</small></Col>
                     </Row>      
         </div>
         </div>
 
         
             <Row className="mx-3">
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Created by: <br /></small></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Role: <br /></small></Col>
-
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Created by: <br />{e.Creator}</small></Col>
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Role: <br />[need to work out how to get researchers]</small></Col>
             </Row>      
             
             <div className="jumbotron mx-4">
-                <Row className="text-left"><Icon.People /><br/><small>12 interviewees</small></Row>
+                <Row className="text-left"><Icon.People /><br/><small> {e.Sample_Size} interviewees</small></Row>
             </div>
 
         <div className="mx-4">
@@ -74,6 +88,7 @@ export class Viewcard extends React.Component {
                    
                         <FormLabel>Problem Statement</FormLabel>
                         <p>
+                        {e.Problem_Statement}
                         </p> 
                  
                 </Col>
@@ -81,6 +96,7 @@ export class Viewcard extends React.Component {
                    
                         <FormLabel>UX Methods</FormLabel>
                         <p>
+                        {e.Methods}
                         </p> 
                  
                 </Col>
@@ -91,13 +107,15 @@ export class Viewcard extends React.Component {
                    
                    <FormLabel>Key Insights</FormLabel>
                    <p>
+                   {e.Key_Insights}
                 </p> 
             
            </Col>
            <Col>
                    
-                   <FormLabel>Key Findings</FormLabel>
+                   <FormLabel>Findings</FormLabel>
                    <p>
+                   {e.Findings}
                    </p> 
             
            </Col>
@@ -108,6 +126,7 @@ export class Viewcard extends React.Component {
                    
                    <FormLabel>Links</FormLabel>
                    <p id="links">
+                   {e.Research_Output}
                   </p>
             
            </Col>
