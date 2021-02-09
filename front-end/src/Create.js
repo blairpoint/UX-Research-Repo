@@ -27,16 +27,10 @@ export class Create extends React.Component {
 
         };
     
-    this.handleChange = this.handleChange.bind(this);
 
 }
 
-handleChange(checked) {
-    this.setState({ checked });
-  };
-  handleSelect = (evtKey, evt) => {
-    // Get the selectedIndex in the evtKey variable
-}
+
     addResearch() {
         console.log(this.state.Tags);
         Axios.post('http://localhost:3001/insert', {
@@ -65,6 +59,27 @@ handleChange(checked) {
         });
     }
 
+    methodChange(e) {
+        // current array of methods
+        console.log("Called " +e.target.value);
+        const Methods = this.state.Methods
+        let index
+    
+        // check if the check box is checked or unchecked
+        if (e.target.checked) {
+          // add the numerical value of the checkbox to methods array
+          console.log("push " +e.target.value);
+          Methods.push(e.target.value)
+        } else {
+          // or remove the value from the unchecked checkbox from the array
+          console.log("indexoF");
+          index = Methods.indexOf(e.target.value)
+          Methods.splice(index, 1)
+        }
+    
+        // update the state with the new array of methods
+        this.setState({ Methods: Methods })
+      }
     
     inputKeyDown = (e) => {
         const val = e.target.value;
@@ -94,12 +109,7 @@ handleChange(checked) {
                 </FormGroup>
                 <FormGroup className="text-left">
                     <Row>
-                        <Col sm={2}>
-                            <label for="Research_ID">Research ID</label>
-                        </Col>
-                        <Col sm={4} id="Research_ID">
-                            <Form.Control htmlFor="Research_ID" onChange={event => this.setState({ Research_ID: event.target.value })} type="text" className="form-control glob-input" id="Research_ID" />
-                        </Col>
+                      
                         <Col sm={2}>
                             <label for="Company">Company</label>
                         </Col>
@@ -134,6 +144,25 @@ handleChange(checked) {
                                 <option value="Finance">Finance</option>
                                 <option value="Government">Government</option>
                                 <option value="Education">Education</option>
+                                <option value="Agriculture, Forestry and Fishing">Agriculture, Forestry and Fishing</option>
+                                <option value="Mining">Mining</option>
+                                <option value="Manufacturing">Manufacturing</option>
+                                <option value="Electricity, Gas, Water and Waste Services">Electricity, Gas, Water and Waste Services</option>
+                                <option value="Construction">Construction</option>
+                                <option value="Wholesale Trade">Wholesale Trade</option>
+                                <option value="Retail Trade">Retail Trade</option>
+                                <option value="Accommodation and Food Services">Accommodation and Food Services</option>
+                                <option value="Transport, Postal and Warehousing">Transport, Postal and Warehousing</option>
+                                <option value="Information Media and Telecommunications">Information Media and Telecommunications</option>
+                                <option value="Financial and Insurance Services">Financial and Insurance Services</option>
+                                <option value="Rental, Hiring and Real Estate Services">Rental, Hiring and Real Estate Services</option>
+                                <option value="Professional, Scientific and Technical Services">Professional, Scientific and Technical Services</option>
+                                <option value="Administrative and Support Services">Administrative and Support Services</option>
+                                <option value="Public Administration and Safety">Public Administration and Safety</option>
+                                <option value="Education and Training">Education and Training</option>
+                                <option value="Health Care and Social Assistance">Health Care and Social Assistance</option>
+                                <option value="Arts and Recreation Services">Arts and Recreation Services</option>
+                                <option value="Other Services">Other Services</option>
 
                             </select>
                         </Col>
@@ -237,10 +266,10 @@ handleChange(checked) {
                         <Form>
   {['checkbox'].map((type) => (
     <div key={`inline-${type}`} className="mb-3">
-      <Form.Check inline label="Agile" type={type} id={`inline-${type}-1`} />
-      <Form.Check inline label="Garage" type={type} id={`inline-${type}-2`} />
-      <Form.Check inline label="Lean Startup" type={type} id={`inline-${type}-2`} />
-      <Form.Check inline label="Design Thinking" type={type} id={`inline-${type}-2`} />
+      <Form.Check inline label="Agile" type={type} id={`inline-${type}-1`} value="Agile" onChange={(e) => this.methodChange(e)} />
+      <Form.Check inline label="Garage" type={type} id={`inline-${type}-2`} value="Garage" onChange={(e) => this.methodChange(e)}/>
+      <Form.Check inline label="Lean Startup" type={type} id={`inline-${type}-2`} value="Lean Startup" onChange={(e) => this.methodChange(e)}/>
+      <Form.Check inline label="Design Thinking" type={type} id={`inline-${type}-2`} value="Design Thinking" onChange={(e) => this.methodChange(e)}/>
 
 
   
