@@ -13,7 +13,7 @@ export class Create extends React.Component {
             Methods:[],
             Tags:[],
             // Creation_Date:'', 
-            Research_ID:'',  
+            //Research_ID:'',  
             Location:'',
             Project_Name:'',  
             Key_Insights:'',
