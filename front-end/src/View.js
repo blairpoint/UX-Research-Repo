@@ -16,7 +16,7 @@ function parseDate(input) {
     } else {
       var date = new Date(input);
       var options = { year: 'numeric', month: '2-digit', day: '2-digit'};
-      return new Intl.DateTimeFormat('en-NZ', options).format(date);
+      return new Intl.DateTimeFormat('en-AU', options).format(date);
     };
   };
 
@@ -138,9 +138,11 @@ export class View extends React.Component {
 
     cat_text = 'Choose an option...'
     location_list = [
-        "Wellington",
-        "Auckland",
-        "Christchurch"
+        "Australia",
+        "New Zealand",
+        "United States",
+        "Singapore",
+        "United Kingdom"
     ]
     industry_list = [
         "Agriculture, Forestry and Fishing",
@@ -235,6 +237,7 @@ export class View extends React.Component {
     render() {
         return(
             <Container>
+                <h1 className="margin-5">UX Research Repository</h1>
                 <SearchBar functionCallFromParent={this.onPressEnter.bind(this)} valueFromParent={this.value}/>
                 <Row>
                     <Col sm={4} md={4}>

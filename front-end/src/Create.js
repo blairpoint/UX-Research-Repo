@@ -146,7 +146,7 @@ export class Create extends React.Component {
     render() {
         return (<div className="container">
              <Row className="mt-4 mx-2">
-                <h4>Add UX Research</h4>
+                <h1>Add UX Research</h1>
             </Row>
             <Row className="mt-2">
                 <Breadcrumb className="mx-4">

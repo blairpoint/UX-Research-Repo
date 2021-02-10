@@ -12,7 +12,7 @@ function parseDate(input) {
     } else {
       var date = new Date(input);
       var options = { year: 'numeric', month: '2-digit', day: '2-digit'};
-      return new Intl.DateTimeFormat('en-NZ', options).format(date);
+      return new Intl.DateTimeFormat('en-AU', options).format(date);
     };
   };
 
