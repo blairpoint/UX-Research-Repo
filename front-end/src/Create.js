@@ -194,10 +194,6 @@ export class Create extends React.Component {
                             <select onChange={event => this.setState({ Industry: event.target.value })} componentClass="select" type="text" className="form-control glob-input" id="dropdown-basic-button">
 
                                 <option value="null"></option>
-                                <option value="Technology">Technology</option>
-                                <option value="Finance">Finance</option>
-                                <option value="Government">Government</option>
-                                <option value="Education">Education</option>
                                 <option value="Agriculture, Forestry and Fishing">Agriculture, Forestry and Fishing</option>
                                 <option value="Mining">Mining</option>
                                 <option value="Manufacturing">Manufacturing</option>

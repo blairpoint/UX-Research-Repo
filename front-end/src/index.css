@@ -151,6 +151,30 @@ body {
   color: transparent;
 }
 
+.rbt-input-multi {
+  cursor: text !important;
+  overflow: hidden !important;
+  position: relative !important;
+  background-color: #F3F3F3 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom-color: #161616 !important;
+}
+
+.rbt-input-wrapper {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -4px;
+  margin-top: -1px;
+  overflow: hidden;
+}
+
+.rbt-input-main {
+  margin: 1px 0 4px;
+}
+
 .rbt-token {
   background-color: #0F61FD;
   border: 0;
@@ -170,7 +194,7 @@ body {
 
 .rbt-token-remove-button {
     bottom: 0;
-    color: white;
+    color: white !important;
     font-size: inherit;
     font-weight: normal;
     opacity: 1;
@@ -180,6 +204,24 @@ body {
     right: 0;
     text-shadow: none;
     top: -2px;
+  }
+
+  .rbt-token-disabled {
+    background-color: #383838;
+    color: white;
+    pointer-events: none;
+  }
+
+  .rbt-token-removeable {
+    cursor: pointer;
+    padding-right: 21px;
+  }
+
+  .rbt-token-active {
+    background-color: #4488FF;
+    color: white;
+    outline: none;
+    text-decoration: none;
   }
 
 .margin-5{
