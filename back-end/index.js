@@ -65,7 +65,7 @@ app.post('/insert', async (req,res)=>{
          Start_Date:req.body.Start_Date,
          Findings:req.body.Findings,
          Creator:req.body.Creator,
-         Researchers:req.body.Researcher_ID,
+         Researchers:req.body.Researchers,
          Research_Outputs:req.body.Research_Outputs
         	
  });
