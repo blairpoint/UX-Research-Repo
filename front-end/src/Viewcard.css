@@ -2,20 +2,37 @@
   padding-top: 10px !important;
   padding-bottom: 10px !important;
   margin-left: 10px !important;
+  margin-right: 10px !important;
+  margin-bottom: 10px !important;
+  background-color: #F3F3F3 !important;
+}
+
+.people {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.interviewees {
+  background-color: white !important;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
 }
 
 .breadcrumb{
     left:0;
     right:auto;
+    background-color: white !important ;
 }
 
 .text-boxes p {
-  outline:1px solid #E0E0E0;
-  padding: 10px;
+  outline:1px solid #F3F3F3;
+  background-color: #F3F3F3;
+  padding: 20px;
   
 }
 
+/*
 #links{
   height:50px;
-}
+}*/
 
