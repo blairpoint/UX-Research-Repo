@@ -27,7 +27,7 @@ export class Viewcard extends React.Component {
 }
 
     componentDidMount() {     
-        Axios.get(`http://localhost:3001/get-record/${oid}`,{id:this.props.match.params.id}).then((res)=>{
+        Axios.get(`http://localhost:3001/get-record/${oid}`).then((res)=>{
 
 //        Axios.get('http://localhost:3001/get-record',{id:this.props.match.params.id}).then((res)=>{
             this.setState({data: res.data});
@@ -36,7 +36,7 @@ export class Viewcard extends React.Component {
 
     render() {
         const e = this.state.data;
-        console.log(e.Project_Name);
+
         return(
              
         <div className="container align-left">
@@ -46,37 +46,40 @@ export class Viewcard extends React.Component {
             </Row>
             <Row>
                 <Breadcrumb className="mx-4">
-                <Breadcrumb.Item href="#">UX Research Repository</Breadcrumb.Item>
-                <Breadcrumb.Item active href="[TBC]">{e.Project_Name}</Breadcrumb.Item>
+                    {/* Link not routing yet  */}
+                <Breadcrumb.Item href="/..">UX Research Repository</Breadcrumb.Item>
+                <Breadcrumb.Item active>{e.Project_Name}</Breadcrumb.Item>
                 </Breadcrumb>
             </Row>
     
         <div className="jumbotron">
                     <Row className="justify-content-left">
-                        <Col sm={6}><h6 className="font-weight-bold">Project Name</h6></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Start Date: <br />{parseDate(e.Start_Date)}</small></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Status: <br /></small></Col>
+                        <Col sm={3}><h6 className="font-weight-bold">Project Name</h6></Col>
+                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Start Date:{parseDate(e.Start_Date)}</small></Col>
+                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Status:</small></Col>
                     </Row>     
 
                     <Row className="justify-content-left">
-                        <Col sm={6}><h6>Research ID: {e.Research_ID}</h6></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Location: <br />{e.Location}</small></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Date completed: <br />{parseDate(e.End_Date)}</small></Col>
+                        <Col sm={3}><h6>Research ID: {e.Research_ID}</h6></Col>
+                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Location:{e.Location}</small></Col>
+                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Date completed:{parseDate(e.End_Date)}</small></Col>
                     </Row>        
 
                     <Row className="justify-content-right">
-                        <Col sm={6}></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Industry: <br />{e.Industry}</small></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Company: <br />{e.Company}</small></Col>
+                        <Col sm={3}></Col>
+                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Industry:{e.Industry}</small></Col>
+                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Company:{e.Company}</small></Col>
                     </Row>      
         </div>
         </div>
 
-        
+            <div className="mx-4">
             <Row className="mx-3">
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Created by: <br />{e.Creator}</small></Col>
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Role: <br />[need to work out how to get researchers]</small></Col>
-            </Row>      
+                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Created by:{e.Creator}</small></Col>
+                        <Col sm={7} className="align-self-center"><small className="font-weight-bold">Role:[need to work out how to get researchers]</small></Col>
+            </Row>   
+            </div>   
+            
             
             <div className="jumbotron mx-4">
                 <Row className="text-left"><Icon.People /><br/><small> {e.Sample_Size} interviewees</small></Row>
@@ -109,6 +112,7 @@ export class Viewcard extends React.Component {
                    <p>
                    {e.Key_Insights}
                 </p> 
+
             
            </Col>
            <Col>
