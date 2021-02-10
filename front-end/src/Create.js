@@ -23,15 +23,15 @@ export class Create extends React.Component {
             Start_Date:'',                
             Findings:'',
             Creator:'',
-            Researchers:'',
-            Research_Output:'',
-            researchersSel: [],    
+            Researchers:[],
+            Research_Output:'',   
             Research_Outputs:[],    
             tempTitle:'',
             tempURL:'',
             titleArray:[],
             urlArray:[],
 
+            selected: [],
             researcher_list: []
         };
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -54,14 +54,28 @@ export class Create extends React.Component {
         return names;
     }
 
+    convertNamesToIds() {
+        const Researchers = this.state.Researchers
+        Array.from(this.state.selected).forEach(s =>
+            Array.from(this.state.researcher_list).forEach(r =>
+              {if (r.fName + " " + r.lName == s) {
+                Researchers.push(r._id);
+                console.log(r._id);
+              }  
+            })
+        );
+        this.setState({Researchers: Researchers});
+    }
+
     addResearch() {
-        console.log(this.state.Tags);
+        this.convertNamesToIds();
+        console.log(this.state.Researchers);
         Axios.post('http://localhost:3001/insert', {
             
             Industry: this.state.Industry,
             Company: this.state.Company,
             Problem_Statement:this.state.Problem_Statement,
-            Methods: this.state.Methods,
+            Methods:this.state.Methods,
             Tags:this.state.Tags,
             // Creation_Date:this.start.Creation_Date,
             Start_Date: this.state.Start_Date,        
@@ -71,11 +85,10 @@ export class Create extends React.Component {
             Creator: this.state.Creator,
             Researchers:this.state.Researchers,
             Research_Outputs:this.state.Research_Outputs,
-            Project_Name: this.state.Project_Name,
             Key_Insights:this.state.Key_Insights,
             Findings:this.state.Findings,
             Sample_Size:this.state.Sample_Size   
-        
+            
         }).then(()=>{
             alert('Research added successfully!!!');
             window.location.href = "http://localhost:3000";
@@ -249,10 +262,10 @@ export class Create extends React.Component {
                                     id="basic-typeahead-multiple"
                                     labelKey="name"
                                     multiple
-                                    onChange={(e) => this.setState({researchersSel: e.value})}
+                                    onChange={(selected) => this.setState({selected})}
                                     options={this.getNames()}
                                     placeholder="Choose contributors..."
-                                    selected={this.state.researchersSel}
+                                    selected={this.state.selected}
                                 />
                             </Col>
                         </Row>
@@ -280,7 +293,7 @@ export class Create extends React.Component {
                         </Row>
                     </FormGroup>
          
-                    <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Problem_Statement: event.target.value })}>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Problem Statement</Form.Label>
                         <Form.Control as="textarea" rows={3} onChange={event => this.setState({ Problem_Statement: event.target.value })} className="glob-input" />
                         
@@ -312,12 +325,12 @@ export class Create extends React.Component {
                
 
 
-                    <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Key_Insights: event.target.value })}>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Key Insights</Form.Label>
                         <Form.Control as="textarea" rows={3} onChange={event => this.setState({ Key_Insights: event.target.value })} className="glob-input" />
                     </Form.Group>
 
-                    <Form.Group controlId="exampleForm.ControlTextarea1" onChange={event => this.setState({ Findings: event.target.value })}>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Findings</Form.Label>
                         <Form.Control as="textarea" rows={3} onChange={event => this.setState({ Findings: event.target.value })} className="glob-input" />
                     </Form.Group>
