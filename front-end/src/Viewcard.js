@@ -29,7 +29,7 @@ function parseDate(input) {
 export class Viewcard extends React.Component {
     constructor(props) {
         super(props);
-        this.state={data:'', methods:[], links:[]};
+        this.state={data:'', methods:[], links:[], researchers:[]};
         this.componentDidMount = this.componentDidMount.bind(this);
         var oidArray = window.location.pathname.split('/');
         oid = oidArray[2];
@@ -40,6 +40,10 @@ export class Viewcard extends React.Component {
             this.setState({data: res.data});
             this.setState({methods: res.data.Methods});
             this.setState({links: res.data.Research_Outputs});
+        });
+        Axios.get(`http://localhost:3001/get-record-researchers/${oid}`).then((res)=>{
+            this.setState({researchers: res.data});
+            console.log(res.data);
         });
     }
 

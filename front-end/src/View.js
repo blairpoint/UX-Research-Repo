@@ -9,6 +9,7 @@ import {SearchBar} from './components/SearchBar';
 import { Link } from 'react-router-dom';
 
 const testArr = ["Chip Whistler", "Mandy Bragger", "Ziggy Stardust", "Test Testerson"];
+var researchers = [];
 
 function parseDate(input) {
     if (isNaN(Date.parse(input))) {
@@ -30,15 +31,24 @@ function parseDate(input) {
       }
   }
 
-function formatResearchers(researcherArr) {
-    var arr = Array.from(researcherArr);
-    var extras = arr.length - 1
-    var firstResearcher = arr[0];
-    if (extras == 0) {
-        return firstResearcher
+function formatResearchers(ids, researcher_list) {
+    console.log(researcher_list);
+    if (ids.length <= 0) {
+        return "None Recorded";
     } else {
-        return firstResearcher + " +" + extras;
-    };
+        var name = "";
+        var extras = ids.length - 1;
+        var first = ids[0];
+        Array.from(researcher_list).forEach(r => {
+            if (first == r._id) {
+                name = r.fName + " " + r.lName;
+            }
+        });
+        if (extras > 0) {
+            name = name + " +" + extras;
+        }
+        return name;
+    }
 };
 
 const chunk = (arr, chunkSize = 1, cache = []) => {
@@ -87,10 +97,14 @@ const ResearchCard = (props) => {
                 <Row>
                     <Col sm={5} md={5} className="text-left">
                         <small><span className="font-weight-bold">Contributors:</span></small><br/>
-                        <small>{formatResearchers(testArr)}</small> {/* Replace testArr with Array of researchers */}
                     </Col>
                     <Col sm={7} md={7} className="text-right">
                         <small><span className="font-weight-bold">Location:</span> {props.Location}</small>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col sm={12} md={12} className="text-left">
+                        <small>{props.Researchers}</small>
                     </Col>
                 </Row>
             </Card.Footer>
@@ -103,6 +117,8 @@ const CardResults = (props) => {
     const resultChunks = chunk(props.data, 3);
     const rows = resultChunks.map((resultChunk, index) => {
         const cols = resultChunk.map((result, index) => {
+            const researcher_ids = result.Researchers;
+            
             return(
                 <Col md={4} sm={12} Research_ID={result.Research_ID}>
                     <ResearchCard
@@ -115,6 +131,7 @@ const CardResults = (props) => {
                         Location={result.Location}
                         End_Date={result.End_Date}
                         Creator={result.Creator}
+                        Researchers={formatResearchers(researcher_ids, props.researcher_list)}
                     />
                 </Col>
             );
@@ -169,7 +186,7 @@ export class View extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={data:'', search: false, countResults: 0, location: this.cat_text, industry: this.cat_text, method: this.cat_text};
+        this.state={data:'', search: false, countResults: 0, location: this.cat_text, industry: this.cat_text, method: this.cat_text, researcher_list:[]};
         this.componentDidMount = this.componentDidMount.bind(this);
         this.onPressEnter = this.onPressEnter.bind(this);
     }
@@ -195,6 +212,9 @@ export class View extends React.Component {
     componentDidMount() {     
         Axios.get('http://localhost:3001/get-all').then((res)=>{
             this.setState({data: res.data});      
+        });
+        Axios.get(`http://localhost:3001/get-all-researchers`).then((res)=>{
+            this.setState({researcher_list: res.data});  
         });
     }
 
@@ -279,7 +299,7 @@ export class View extends React.Component {
                     </Col>
                 </Row>
                 <div className="results"><strong>{this.returnResultSize()}</strong></div>
-                <CardResults data={this.state.data} />
+                <CardResults data={this.state.data} researcher_list={this.state.researcher_list} />
             </Container>
         )
     }

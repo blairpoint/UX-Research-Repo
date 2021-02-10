@@ -277,7 +277,7 @@ export class Create extends React.Component {
                                 <label for="Sample_Size">Number of interviewees</label>
                             </Col>
                             <Col sm={1} id="Sample_Size">
-                                <Form.Control htmlFor="Sample_Size" onChange={event => this.setState({ Sample_Size: event.target.value })} type="number" className="form-control glob-input" id="Sample_Size" />
+                                <Form.Control htmlFor="Sample_Size" onChange={event => this.setState({ Sample_Size: event.target.value })} type="number" min={0} className="form-control glob-input" id="Sample_Size" />
                             </Col>
                         </Row>
                     </FormGroup>
