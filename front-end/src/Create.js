@@ -194,10 +194,6 @@ export class Create extends React.Component {
                             <select onChange={event => this.setState({ Industry: event.target.value })} componentClass="select" type="text" className="form-control glob-input" id="dropdown-basic-button">
 
                                 <option value="null"></option>
-                                <option value="Technology">Technology</option>
-                                <option value="Finance">Finance</option>
-                                <option value="Government">Government</option>
-                                <option value="Education">Education</option>
                                 <option value="Agriculture, Forestry and Fishing">Agriculture, Forestry and Fishing</option>
                                 <option value="Mining">Mining</option>
                                 <option value="Manufacturing">Manufacturing</option>
@@ -277,7 +273,7 @@ export class Create extends React.Component {
                                 <label for="Sample_Size">Number of interviewees</label>
                             </Col>
                             <Col sm={1} id="Sample_Size">
-                                <Form.Control htmlFor="Sample_Size" onChange={event => this.setState({ Sample_Size: event.target.value })} type="number" className="form-control glob-input" id="Sample_Size" />
+                                <Form.Control htmlFor="Sample_Size" onChange={event => this.setState({ Sample_Size: event.target.value })} type="number" min={0} className="form-control glob-input" id="Sample_Size" />
                             </Col>
                         </Row>
                     </FormGroup>
