@@ -55,7 +55,6 @@ app.post('/insert', async (req, res) => {
             Research_Outputs: req.body.Research_Outputs
 
         });
-    console.log(new_rid);
     await research_sp2.save();
     res.send('Inserted Data');
 });
@@ -130,27 +129,16 @@ app.get('/filterSearchIndustry/:val1/:val2', (req, res) => {
         });
 });
 
-// app.get('/filterSearch/:val1/:val2/:val3/:val4',(req,res)=>{
-//     ResearchModel_sp2.find({
-//         { $or: [
 
-//             {lName: {$regex: re}},
-//             {fName: {$regex: re}},
-//             {Position: {$regex: re}},
-//             {Email: {$regex: re}}
-
-//             ] },
-
-//         Industry: req.params.val1,
-//         $text: {$search: req.params.val2} },(err,result)=>{
-//         if(err) {
-//             res.send(err);
-//         } else {
-//             res.send(result);
-//         }
-//     });
-// });
-
+app.get('/filterSearchIndustryBlank/:val1', (req, res) => {
+    ResearchModel_sp2.find({ Industry: req.params.val1 }, (err, result) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(result);
+            }
+        });
+});
 
 
 app.get('/get-record/:val', (req, res) => {
