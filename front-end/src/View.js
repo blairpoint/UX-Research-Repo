@@ -193,17 +193,29 @@ export class View extends React.Component {
 
     onPressEnter(event) {
         if (event.charCode === 13) {
-            if(event.target.value==='') {
+            if(event.target.value==='' && this.state.industry == this.cat_text) {
                 Axios.get('http://localhost:3001/get-all').then((res)=>{
                     this.setState({data: res.data});
                     this.setState({search: ''});
                     this.setState({countResults: 0});    
                 });
+            } else if (event.target.value==='' && this.state.industry != this.cat_text) {
+                Axios.get(`http://localhost:3001/filterSearchIndustryBlank/${this.state.industry}`).then((res)=>{
+                    this.setState({data:res.data});
+                    this.setState({search: event.target.value});
+                    this.setState({countResults: this.countResults(res.data)});
+                });
+            } else if (this.state.industry != this.cat_text) {
+                Axios.get(`http://localhost:3001/filterSearchIndustry/${this.state.industry}/${event.target.value}`).then((res)=>{
+                    this.setState({data:res.data});
+                    this.setState({search: event.target.value});
+                    this.setState({countResults: this.countResults(res.data)});
+                });
             } else {
                 Axios.get(`http://localhost:3001/search/${event.target.value}`).then((res)=>{
-                this.setState({data:res.data});
-                this.setState({search: event.target.value});
-                this.setState({countResults: this.countResults(res.data)});
+                    this.setState({data:res.data});
+                    this.setState({search: event.target.value});
+                    this.setState({countResults: this.countResults(res.data)});
                 });
             }
         }
