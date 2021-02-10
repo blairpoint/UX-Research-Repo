@@ -1,7 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Form, Row, Col, Breadcrumb, FormLabel } from 'react-bootstrap'
+import { Form, Row, Col, Breadcrumb, FormLabel, ListGroupItem, ListGroup } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons';
 import './Viewcard.css';
 let oid = 0;
@@ -16,10 +16,24 @@ function parseDate(input) {
     };
   };
 
+  const MethodList = (props) => {
+    const methods = Array.from(props.Methods);
+    const list = methods.map((method) => {
+        return (
+            <ListGroup.Item>{method}</ListGroup.Item>
+        )
+    });
+    return (
+        <ListGroup>
+            {list}
+        </ListGroup>
+    );
+}
+
 export class Viewcard extends React.Component {
     constructor(props) {
         super(props);
-        this.state={data:''};
+        this.state={data:'', methods:[], links:[]};
         this.componentDidMount = this.componentDidMount.bind(this);
         var oidArray = window.location.pathname.split('/');
         oid = oidArray[2];
@@ -31,6 +45,8 @@ export class Viewcard extends React.Component {
 
 //        Axios.get('http://localhost:3001/get-record',{id:this.props.match.params.id}).then((res)=>{
             this.setState({data: res.data});
+            this.setState({methods: res.data.Methods});
+            this.setState({links: res.data.Research_Outputs});
         });
     }
 
@@ -98,9 +114,9 @@ export class Viewcard extends React.Component {
                 <Col>
                    
                         <FormLabel>UX Methods</FormLabel>
-                        <p>
-                        {e.Methods}
-                        </p> 
+                        <p className="p-wrap"><ul>{this.state.methods.map((method) => {
+                            return (<li>{method}</li>)
+                        })}</ul></p>
                  
                 </Col>
         </Row>
@@ -129,8 +145,10 @@ export class Viewcard extends React.Component {
             <Col sm={6}>
                    
                    <FormLabel>Links</FormLabel>
-                   <p id="links">
-                   {e.Research_Output}
+                   <p id="links" className="p-wrap">
+                   <ul>{this.state.links.map((link) => {
+                            return (<li><a href={link.URL}>{link.Title}</a></li>)
+                        })}</ul>
                   </p>
             
            </Col>
