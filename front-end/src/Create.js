@@ -1,12 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
-<<<<<<< HEAD
 import { Form, FormGroup, FormControl, Row, Col, label, Switch, Container, Dropdown, DropdownButton, Button, InputGroup } from 'react-bootstrap'
 import { Token, Typeahead } from 'react-bootstrap-typeahead';
-=======
-import { Form, FormGroup, FormControl, Row, Col, FormLabel, label, Switch, Container, Dropdown, DropdownButton, Button, InputGroup } from 'react-bootstrap'
-
->>>>>>> Juliano9
 
 export class Create extends React.Component {
     constructor(props) {
@@ -20,7 +15,6 @@ export class Create extends React.Component {
             Tags: [],
             // Creation_Date:'', 
             //Research_ID:'',  
-<<<<<<< HEAD
             Location:'',
             Project_Name:'',  
             Key_Insights:'',
@@ -36,22 +30,6 @@ export class Create extends React.Component {
             tempURL:'',
             titleArray:[],
             urlArray:[],
-=======
-            Location: '',
-            Project_Name: '',
-            Key_Insights: '',
-            Sample_Size: '',
-            End_Date: '',
-            Start_Date: '',
-            Findings: '',
-            Creator: '',
-            Researchers: '',
-            Research_Outputs: [],
-            tempTitle: '',
-            tempURL: '',
-            titleArray: [],
-            urlArray: []
->>>>>>> Juliano9
 
             selected: [],
             researcher_list: []
@@ -59,16 +37,12 @@ export class Create extends React.Component {
         this.componentDidMount = this.componentDidMount.bind(this);
         this.child = React.createRef();
 
-<<<<<<< HEAD
     }
 
     componentDidMount() {
         Axios.get('http://localhost:3001/get-all-researchers').then((res)=>{
             this.setState({researcher_list: res.data});      
         });
-=======
-
->>>>>>> Juliano9
     }
 
     getNames() {
@@ -99,30 +73,15 @@ export class Create extends React.Component {
 
             Industry: this.state.Industry,
             Company: this.state.Company,
-<<<<<<< HEAD
             Problem_Statement:this.state.Problem_Statement,
             Methods:this.state.Methods,
             Tags:this.state.Tags,
-=======
-            Problem_Statement: this.state.Problem_Statement,
-            Methods: this.state.Methods,
-            Tags: this.state.Tags,
->>>>>>> Juliano9
             // Creation_Date:this.start.Creation_Date,
             Start_Date: this.state.Start_Date,
             End_Date: this.state.End_Date,
             Research_ID: this.state.Research_ID,
             Location: this.state.Location,
             Creator: this.state.Creator,
-<<<<<<< HEAD
-            Researchers:this.state.Researchers,
-            Research_Outputs:this.state.Research_Outputs,
-            Key_Insights:this.state.Key_Insights,
-            Findings:this.state.Findings,
-            Sample_Size:this.state.Sample_Size   
-            
-        }).then(()=>{
-=======
             Researchers: this.state.Researchers,
             Research_Outputs: this.state.Research_Outputs,
             Project_Name: this.state.Project_Name,
@@ -131,7 +90,6 @@ export class Create extends React.Component {
             Sample_Size: this.state.Sample_Size
 
         }).then(() => {
->>>>>>> Juliano9
             alert('Research added successfully!!!');
             window.location.href = "http://localhost:3000";
         });
@@ -286,20 +244,6 @@ export class Create extends React.Component {
                             <Col sm={4} id="Creator">
                                 <Form.Control htmlFor="Creator" onChange={event => this.setState({ Creator: event.target.value })} type="text" className="form-control glob-input" id="Creator" />
                             </Col>
-                            <Col sm={2}>
-                                <label for="Start_Date">Start Date</label>
-                            </Col>
-                            <Col sm={4} id="Start_Date">
-                                <Form.Control htmlFor="Start_Date" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="Start_Date" />
-                            </Col>
-                            <Col sm={6}/>
-                            <Col sm={2}>
-                                <label for="End_Date">End Date</label>
-                            </Col>
-                            <Col sm={4} id="End_Date">
-                                <Form.Control htmlFor="End_Date" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="End_Date" />
-                            </Col>
-                            
                         </Row>
                         <Row>
                             
@@ -317,11 +261,6 @@ export class Create extends React.Component {
                                 />
                             </Col>
 
-                        </Row>
-                        <Row>
-                            <Col sm={2}>
-                                <label for="Addmembers">Add Members</label>
-                            </Col>
                         </Row>
 
                     </FormGroup>
@@ -343,8 +282,8 @@ export class Create extends React.Component {
                         <Form.Control as="textarea" rows={3} onChange={event => this.setState({ Problem_Statement: event.target.value })} className="glob-input" />
                         <Form.Group controlId="formBasicCheckbox">
 
-                            <Row className="spacer">
-                            </Row>
+                    <Row className="spacer"></Row>
+                    
                         </Form.Group>
                         <Form>
                             <Col>
@@ -411,8 +350,10 @@ export class Create extends React.Component {
                 </FormGroup>
 
             </Form>
-            <button onClick={() => this.addResearch()} className="btn btn-primary">Submit</button>
-
+            
+            <Row className="spacer mx-1">
+                <button onClick={() => this.addResearch()} className="btn btn-primary">Submit</button>
+            </Row>
         </div>);
     }
 }
