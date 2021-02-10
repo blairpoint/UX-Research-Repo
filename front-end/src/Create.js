@@ -2,6 +2,7 @@ import React from 'react';
 import Axios from 'axios';
 import { Form, FormGroup, Breadcrumb, FormControl, Row, Col, label, Switch, Container, Dropdown, DropdownButton, Button, InputGroup } from 'react-bootstrap'
 import { Token, Typeahead } from 'react-bootstrap-typeahead';
+import { Link } from 'react-router-dom';
 
 export class Create extends React.Component {
     constructor(props) {
@@ -90,7 +91,7 @@ export class Create extends React.Component {
             Sample_Size: this.state.Sample_Size
 
         }).then(() => {
-            alert('Research added successfully!!!');
+            alert('Research added successfully.');
             window.location.href = "http://localhost:3000";
         });
     }
@@ -152,7 +153,7 @@ export class Create extends React.Component {
             <Row className="mt-2">
                 <Breadcrumb className="mx-4">
                     {/* Link not routing yet  */}
-                <Breadcrumb.Item href="/..">UX Research Repository</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to="/">UX Research Repository</Link></Breadcrumb.Item>
                 <Breadcrumb.Item active>Add Research</Breadcrumb.Item>
                 </Breadcrumb>
             </Row>
@@ -324,7 +325,7 @@ export class Create extends React.Component {
                         </Row>
                         <Row>
                             <Col sm={2}>
-                                <label for="Label">Label URL</label>
+                                <label for="Label">Output Title</label>
                             </Col>
 
                             <Col sm={4} id="URL_LABEL">

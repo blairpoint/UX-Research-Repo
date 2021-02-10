@@ -71,7 +71,7 @@ export class Viewcard extends React.Component {
             <Row>
                 <Breadcrumb className="mx-4">
                     {/* Link not routing yet  */}
-                <Breadcrumb.Item href="/..">UX Research Repository</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to="/">UX Research Repository</Link></Breadcrumb.Item>
                 <Breadcrumb.Item active>{e.Project_Name}</Breadcrumb.Item>
                 </Breadcrumb>
             </Row>
