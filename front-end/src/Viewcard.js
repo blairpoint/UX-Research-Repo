@@ -90,7 +90,7 @@ export class Viewcard extends React.Component {
                 <Col>
                    
                         <FormLabel>Problem Statement</FormLabel>
-                        <p>
+                        <p className="p-wrap">
                         {e.Problem_Statement}
                         </p> 
                  
@@ -109,7 +109,7 @@ export class Viewcard extends React.Component {
             <Col>
                    
                    <FormLabel>Key Insights</FormLabel>
-                   <p>
+                   <p className="p-wrap">
                    {e.Key_Insights}
                 </p> 
 
@@ -118,7 +118,7 @@ export class Viewcard extends React.Component {
            <Col>
                    
                    <FormLabel>Findings</FormLabel>
-                   <p>
+                   <p className="p-wrap">
                    {e.Findings}
                    </p> 
             

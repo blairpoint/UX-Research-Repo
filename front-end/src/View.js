@@ -23,6 +23,8 @@ function parseDate(input) {
   function checkEndDate(input) {
       if (isNaN(Date.parse(input)) || Date.parse(input) == null) {
           return "In Progress"
+      } else if(Date.parse(input) > Date.now()) {
+          return "In Progress"
       } else {
           return "Completed"
       }
@@ -47,13 +49,6 @@ const chunk = (arr, chunkSize = 1, cache = []) => {
   }
 
 const ResearchCard = (props) => {
-    let status = ''
-    if (props.End_Date === null || props.End_Date === '') {
-        status = "In Progress"
-    } else {
-        status = "Completed"
-    }
-
     const card = (
         <Card bg="light" className="research-card">
             <Card.Header className="border-bottom-0">
@@ -67,7 +62,7 @@ const ResearchCard = (props) => {
                     </Row>                  
             </Card.Header>
             <Card.Body>
-                <Card.Text className="problem-statement"><small>{props.Problem_Statement}</small></Card.Text>
+                <Card.Text className="problem-statement p-wrap"><small>{props.Problem_Statement}</small></Card.Text>
             </Card.Body>
             <Card.Footer className="border-top-0">
                 <Row>

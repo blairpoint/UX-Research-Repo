@@ -136,6 +136,7 @@ export class Create extends React.Component {
         newTags.splice(i, 1);
         this.setState({ Tags: newTags });
     }
+
     insertLinks() {
         const links = this.state.Research_Outputs.map((link, index) => {
             return (<a href={link["URL"]}>{link["Title"]}</a>)
@@ -223,7 +224,7 @@ export class Create extends React.Component {
                             <label for="Start_Date">Start Date</label>
                         </Col>
                         <Col sm={4} id="Start_Date">
-                            <Form.Control htmlFor="Start_Date" onChange={event => this.setState({ Date: event.target.value })} type="date" className="form-control glob-input" id="Start_Date" />
+                            <Form.Control htmlFor="Start_Date" onChange={event => this.setState({ Start_Date: event.target.value })} type="date" className="form-control glob-input" id="Start_Date" />
                         </Col>
                     </Row>
                     <FormGroup className="text-left">
@@ -238,7 +239,7 @@ export class Create extends React.Component {
                                 <label for="End_Date">End Date</label>
                             </Col>
                             <Col sm={4} id="End_Date">
-                                <Form.Control htmlFor="End_Date" onChange={event => this.setState({ Date: event.target.value })} type="date" className="form-control glob-input" id="End_Date" />
+                                <Form.Control htmlFor="End_Date" onChange={event => this.setState({ End_Date: event.target.value })} type="date" className="form-control glob-input" id="End_Date" />
                             </Col>
                         </Row>
                         <Row>

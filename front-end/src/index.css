@@ -230,3 +230,7 @@ body {
 .spacer {
   margin-bottom: 15px;
 }
+
+.p-wrap {
+  white-space: pre-line;
+}
