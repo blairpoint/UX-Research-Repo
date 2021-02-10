@@ -69,7 +69,6 @@ app.post('/insert', async (req,res)=>{
          Research_Outputs:req.body.Research_Outputs
         	
  });
-    console.log(new_rid);
      await research_sp2.save();
      res.send('Inserted Data');
  });

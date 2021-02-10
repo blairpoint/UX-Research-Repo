@@ -68,16 +68,14 @@ export class Create extends React.Component {
 
     addResearch() {
         this.convertNamesToIds();
-        console.log(this.state.Researchers);
-        console.log(this.state.Start_Date);
-        console.log(this.state.End_Date);
+        console.log(this.state.Research_Outputs);
         Axios.post('http://localhost:3001/insert', {
 
             Industry: this.state.Industry,
             Company: this.state.Company,
             Problem_Statement:this.state.Problem_Statement,
             Methods:this.state.Methods,
-            Tags:this.state.Tags,
+            //Tags:this.state.Tags,
             // Creation_Date:this.start.Creation_Date,
             Start_Date: this.state.Start_Date,
             End_Date: this.state.End_Date,
@@ -129,15 +127,13 @@ export class Create extends React.Component {
 
     addURL = (e) => {
         console.log("add url");
-        let outputs = new Map();
+        /*let outputs = new Map();
         outputs["Title"] = this.state.tempTitle;
         outputs["URL"] = this.state.tempURL;
-        this.state.Research_Outputs.push(outputs);
-        // console.log(this.state.Research_Outputs);
-        // console.log(this.state.tempTitle);
-        // console.log(this.state.tempURL);
-        this.state.urlArray.push({ title: this.state.tempTitle, url: this.state.tempURL });
-        this.child.current.populateData(this.state.urlArray);
+        this.state.Research_Outputs.push(outputs);*/
+        this.state.Research_Outputs.push({ Title: this.state.tempTitle, URL: this.state.tempURL });
+        this.child.current.populateData(this.state.Research_Outputs);
+        this.setState({tempTitle: '', tempURL: ''});
     }
 
     removeTag = (i) => {
@@ -340,13 +336,13 @@ export class Create extends React.Component {
                             </Col>
 
                             <Col sm={4} id="URL_LABEL">
-                                <Form.Control htmlFor="Title" type="text" onChange={event => this.setState({ tempTitle: event.target.value })} className="form-control glob-input" id="Research_Outputs" />
+                                <Form.Control htmlFor="Title" type="text" value={this.state.tempTitle} onChange={event => this.setState({ tempTitle: event.target.value })} className="form-control glob-input" id="Research_Outputs" />
                             </Col>
                             <Col sm={1}>
                                 <label for="URL">URL</label>
                             </Col>
                             <Col sm={4} id="URL">
-                                <Form.Control htmlFor="URL" type="text" onChange={event => this.setState({ tempURL: event.target.value })} className="form-control glob-input" id="Research_Outputs" />
+                                <Form.Control htmlFor="URL" type="text" value={this.state.tempURL} onChange={event => this.setState({ tempURL: event.target.value })} className="form-control glob-input" id="Research_Outputs" />
                             </Col>
                             <Col sm={1}>
                                 <Button id="AddLinks" variant="primary" onClick={() => this.addURL()}>+</Button>{' '}
@@ -374,24 +370,24 @@ export class Create extends React.Component {
 export default class URLLabels extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { url: '' }
+        this.state = { URL: '' }
     }
 
     populateData(uArray) {
         console.log(uArray);
-        this.setState({ url: uArray });
+        this.setState({ URL: uArray });
     }
 
     render() {
         return (
             <div>
 
-                {Array.from(this.state.url).map((val) => {
+                {Array.from(this.state.URL).map((val) => {
                     return (
 
 
                         <tr>
-                            <td><a href={val.url}>{val.title}</a></td>
+                            <td><a href={val.URL}>{val.Title}</a></td>
                         </tr>
 
                     )

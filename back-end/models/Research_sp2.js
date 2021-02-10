@@ -21,7 +21,7 @@ const ResearchSchema_sp2 = new mongoose.Schema({
     Creator:String,
 //    Creator: {type: mongoose.Schema.Types.ObjectId, ref: 'Researcher_sp2'},
     Researchers:[ { type: mongoose.Schema.Types.ObjectId, ref: 'Researcher_sp2' } ],
-    Research_Outputs:[{ Title: [String], URL:[String ]}]
+    Research_Outputs:[{ Title: String, URL: String }]
 })
 
 /* AMF: this sets up the index information. */
