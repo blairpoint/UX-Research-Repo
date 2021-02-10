@@ -126,11 +126,6 @@ export class Create extends React.Component {
     }
 
     addURL = (e) => {
-        console.log("add url");
-        /*let outputs = new Map();
-        outputs["Title"] = this.state.tempTitle;
-        outputs["URL"] = this.state.tempURL;
-        this.state.Research_Outputs.push(outputs);*/
         this.state.Research_Outputs.push({ Title: this.state.tempTitle, URL: this.state.tempURL });
         this.child.current.populateData(this.state.Research_Outputs);
         this.setState({tempTitle: '', tempURL: ''});
