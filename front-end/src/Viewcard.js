@@ -26,6 +26,18 @@ function parseDate(input) {
     }
 }
 
+const Researchers = (props) => {
+    const rows = Array.from(props.researchers).map((researcher, index) => {
+        return(
+            <Row className="mx-3 people">
+                <Col sm={4} className="align-self-center"><small>{researcher.fName + " " + researcher.lName}</small></Col>
+                <Col sm={7} className="align-self-center"><small>{researcher.Position}</small></Col>
+            </Row>
+        );
+    });
+    return rows;
+}
+
 export class Viewcard extends React.Component {
     constructor(props) {
         super(props);
@@ -43,7 +55,6 @@ export class Viewcard extends React.Component {
         });
         Axios.get(`http://localhost:3001/get-record-researchers/${oid}`).then((res)=>{
             this.setState({researchers: res.data});
-            console.log(res.data);
         });
     }
 
@@ -94,10 +105,7 @@ export class Viewcard extends React.Component {
             <Row className="mx-3 people">
                 <Col sm={4} className="align-self-center"><small><strong>Contributors:</strong></small></Col>
             </Row>
-            <Row className="mx-3 people">
-                <Col sm={4} className="align-self-center"><small></small></Col>
-                <Col sm={7} className="align-self-center"><small></small></Col>
-            </Row>
+            <Researchers researchers={this.state.researchers} />
             <Jumbotron className="mx-4 interviewees">
                 <Row className="text-left"><div><large><Icon.People /></large> {e.Sample_Size} interviewees</div></Row>
             </Jumbotron>  
