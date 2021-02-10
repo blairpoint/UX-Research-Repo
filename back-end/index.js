@@ -117,6 +117,8 @@ app.get('/searchResearcher/:val', (req, res) => {
         });
 });
 
+/* val1 = industry type, val2 = keyword */
+
 app.get('/filterSearchIndustry/:val1/:val2', (req, res) => {
     ResearchModel_sp2.find(
 
@@ -129,6 +131,7 @@ app.get('/filterSearchIndustry/:val1/:val2', (req, res) => {
         });
 });
 
+/* val1 = industry type */
 
 app.get('/filterSearchIndustryBlank/:val1', (req, res) => {
     ResearchModel_sp2.find({ Industry: req.params.val1 }, (err, result) => {
@@ -183,13 +186,11 @@ app.get('/get-record-researchers/:val', async (req, res) => {
 
 });
 
-
-
 app.get('/hello', (req, res) => {
     res.send('Hello from  Express');
 });
 
 app.listen(3001, () => {
-    console.log('Server is running');
+    console.log('Server is running on port 3001');
 });
 
