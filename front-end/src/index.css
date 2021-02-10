@@ -210,3 +210,15 @@ body {
   flex-grow: 1;
   padding: 0;
 }
+
+.margin-5{
+  margin-top: 30px;
+}
+
+.margin-5 .row {
+  margin-top:15px;
+}
+
+.spacer {
+  margin-bottom: 15px;
+}
