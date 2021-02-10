@@ -19,8 +19,8 @@ export class Create extends React.Component {
             Project_Name:'',  
             Key_Insights:'',
             Sample_Size:'', 
-            End_Date:'',  
-            Start_Date:'',                
+            End_Date: new Date(),  
+            Start_Date: new Date(),                
             Findings:'',
             Creator:'',
             Researchers:[],
@@ -69,6 +69,8 @@ export class Create extends React.Component {
     addResearch() {
         this.convertNamesToIds();
         console.log(this.state.Researchers);
+        console.log(this.state.Start_Date);
+        console.log(this.state.End_Date);
         Axios.post('http://localhost:3001/insert', {
 
             Industry: this.state.Industry,
@@ -230,7 +232,7 @@ export class Create extends React.Component {
                             <label for="Start_Date">Start Date</label>
                         </Col>
                         <Col sm={4} id="Start_Date">
-                            <Form.Control htmlFor="Start_Date" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="Start_Date" />
+                            <Form.Control htmlFor="Start_Date" onChange={event => this.setState({ Date: event.target.value })} type="date" className="form-control glob-input" id="Start_Date" />
                         </Col>
                     </Row>
                     <FormGroup className="text-left">
@@ -245,7 +247,7 @@ export class Create extends React.Component {
                                 <label for="End_Date">End Date</label>
                             </Col>
                             <Col sm={4} id="End_Date">
-                                <Form.Control htmlFor="End_Date" onChange={event => this.setState({ Date: event.target.value })} type="text" className="form-control glob-input" id="End_Date" />
+                                <Form.Control htmlFor="End_Date" onChange={event => this.setState({ Date: event.target.value })} type="date" className="form-control glob-input" id="End_Date" />
                             </Col>
                         </Row>
                         <Row>
@@ -283,7 +285,7 @@ export class Create extends React.Component {
                                 <label for="Sample_Size">Number of interviewees</label>
                             </Col>
                             <Col sm={1} id="Sample_Size">
-                                <Form.Control htmlFor="Sample_Size" onChange={event => this.setState({ Sample_Size: event.target.value })} type="text" className="form-control glob-input" id="Sample_Size" />
+                                <Form.Control htmlFor="Sample_Size" onChange={event => this.setState({ Sample_Size: event.target.value })} type="number" className="form-control glob-input" id="Sample_Size" />
                             </Col>
                         </Row>
                     </FormGroup>
