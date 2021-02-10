@@ -65,7 +65,7 @@ const ResearchCard = (props) => {
                 <Row>
                     <Col className="text-left">
                         {/* Created date */}
-                        <small><span className="font-weight-bold">Created:</span> {parseDate(props.Created_Date)}</small> {/* Pass dates through the `parseDate` method */}
+                        <small><span className="font-weight-bold">Created:</span> {parseDate(props.Creation_Date)}</small> {/* Pass dates through the `parseDate` method */}
                     </Col>
                     <Col className="text-right">
                         <small><span className="font-weight-bold">Status:</span> Completed</small> {/* Need to create a method to check if a project is complete / has an end date*/}                                  
@@ -108,7 +108,7 @@ const CardResults = (props) => {
                         Project_Name={result.Project_Name}
                         Company={result.Company}
                         Problem_Statement={result.Problem_Statement}
-                        Created_Date={result.Created_Date}
+                        Creation_Date={result.Creation_Date}
                         Location={result.Location}
                         End_Date={result.End_Date}
                     />
