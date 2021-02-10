@@ -1,7 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Form, Row, Col, Breadcrumb, FormLabel, ListGroupItem, ListGroup } from 'react-bootstrap'
+import { Form, Row, Col, Breadcrumb, FormLabel, ListGroupItem, ListGroup, Jumbotron } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons';
 import './Viewcard.css';
 let oid = 0;
@@ -16,18 +16,14 @@ function parseDate(input) {
     };
   };
 
-  const MethodList = (props) => {
-    const methods = Array.from(props.Methods);
-    const list = methods.map((method) => {
-        return (
-            <ListGroup.Item>{method}</ListGroup.Item>
-        )
-    });
-    return (
-        <ListGroup>
-            {list}
-        </ListGroup>
-    );
+  function checkEndDate(input) {
+    if (isNaN(Date.parse(input)) || Date.parse(input) == null) {
+        return "In Progress"
+    } else if(Date.parse(input) > Date.now()) {
+        return "In Progress"
+    } else {
+        return "Completed"
+    }
 }
 
 export class Viewcard extends React.Component {
@@ -37,13 +33,10 @@ export class Viewcard extends React.Component {
         this.componentDidMount = this.componentDidMount.bind(this);
         var oidArray = window.location.pathname.split('/');
         oid = oidArray[2];
-        //console.log(oid);
 }
 
     componentDidMount() {     
         Axios.get(`http://localhost:3001/get-record/${oid}`).then((res)=>{
-
-//        Axios.get('http://localhost:3001/get-record',{id:this.props.match.params.id}).then((res)=>{
             this.setState({data: res.data});
             this.setState({methods: res.data.Methods});
             this.setState({links: res.data.Research_Outputs});
@@ -68,38 +61,43 @@ export class Viewcard extends React.Component {
                 </Breadcrumb>
             </Row>
     
-        <div className="jumbotron">
+            <Jumbotron>
                     <Row className="justify-content-left">
-                        <Col sm={3}><h6 className="font-weight-bold">Project Name</h6></Col>
-                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Start Date:{parseDate(e.Start_Date)}</small></Col>
-                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Status:</small></Col>
+                        <Col sm={4}><small className="font-weight-bold">{e.Project_Name}</small></Col>
+                        <Col sm={4} className="align-self-center"><small><strong>Start Date:</strong> {parseDate(e.Start_Date)}</small></Col>
+                        <Col sm={4} className="align-self-center"><small><strong>Status:</strong> {checkEndDate(e.End_Date)}</small></Col>
                     </Row>     
 
                     <Row className="justify-content-left">
-                        <Col sm={3}><h6>Research ID: {e.Research_ID}</h6></Col>
-                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Location:{e.Location}</small></Col>
-                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Date completed:{parseDate(e.End_Date)}</small></Col>
+                        <Col sm={4}><small>#{e.Research_ID}</small></Col>
+                        <Col sm={4} className="align-self-center"><small><strong>Location:</strong> {e.Location}</small></Col>
+                        <Col sm={4} className="align-self-center"><small><strong>Date completed:</strong> {parseDate(e.End_Date)}</small></Col>
                     </Row>        
 
                     <Row className="justify-content-right">
-                        <Col sm={3}></Col>
-                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Industry:{e.Industry}</small></Col>
-                        <Col sm={4} className="align-self-center"><small className="font-weight-bold">Company:{e.Company}</small></Col>
+                        <Col sm={4}></Col>
+                        <Col sm={4} className="align-self-center"><small><strong>Industry:</strong> {e.Industry}</small></Col>
+                        <Col sm={4} className="align-self-center"><small><strong>Company:</strong> {e.Company}</small></Col>
                     </Row>      
+            </Jumbotron>
+            <Row className="mx-3 people">
+                <Col sm={4} className="align-self-center"><small><strong>Created by:</strong></small></Col>
+                <Col sm={7} className="align-self-center"><small className="font-weight-bold">Role:</small></Col>
+            </Row>
+            <Row className="mx-3 people">
+                <Col sm={4} className="align-self-center"><small>{e.Creator}</small></Col>
+            </Row>
+            <Row className="mx-3 people">
+                <Col sm={4} className="align-self-center"><small><strong>Contributors:</strong></small></Col>
+            </Row>
+            <Row className="mx-3 people">
+                <Col sm={4} className="align-self-center"><small></small></Col>
+                <Col sm={7} className="align-self-center"><small></small></Col>
+            </Row>
+            <Jumbotron className="mx-4 interviewees">
+                <Row className="text-left"><div><large><Icon.People /></large> {e.Sample_Size} interviewees</div></Row>
+            </Jumbotron>  
         </div>
-        </div>
-
-            <div className="mx-4">
-            <Row className="mx-3">
-                        <Col sm={3} className="align-self-center"><small className="font-weight-bold">Created by:{e.Creator}</small></Col>
-                        <Col sm={7} className="align-self-center"><small className="font-weight-bold">Role:[need to work out how to get researchers]</small></Col>
-            </Row>   
-            </div>   
-            
-            
-            <div className="jumbotron mx-4">
-                <Row className="text-left"><Icon.People /><br/><small> {e.Sample_Size} interviewees</small></Row>
-            </div>
 
         <div className="mx-4 text-boxes">
         <Row>
