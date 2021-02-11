@@ -154,9 +154,6 @@ app.get('/get-record/:val', (req, res) => {
     });
 });
 
-
-app.get
-
 app.get('/get-record-researchers/:val', async (req, res) => {
 
     let record_res2 = new Array;
