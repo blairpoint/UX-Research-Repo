@@ -235,8 +235,9 @@ export class View extends React.Component {
     }
 
     returnResultSize() {
+        const resultWord = this.state.countResults == 1 ? "result" : "results";
         if (this.state.search != '') {
-            return "Showing " + this.state.countResults + " results for " + this.state.search;
+            return "Showing " + this.state.countResults + " " + resultWord + " for " + this.state.search;
         } else {
             return "";
         }
