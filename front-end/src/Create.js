@@ -80,7 +80,7 @@ export class Create extends React.Component {
             // Creation_Date:this.start.Creation_Date,
             Start_Date: this.state.Start_Date,
             End_Date: this.state.End_Date,
-            Research_ID: this.state.Research_ID,
+            //Research_ID: this.state.Research_ID,
             Location: this.state.Location,
             Creator: this.state.Creator,
             Researchers: this.state.Researchers,
