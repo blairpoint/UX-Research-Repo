@@ -11,6 +11,11 @@ import { Link } from 'react-router-dom';
 const testArr = ["Chip Whistler", "Mandy Bragger", "Ziggy Stardust", "Test Testerson"];
 var researchers = [];
 
+/**
+ * Takes a string representation of a Date and returns it in an Australian date format: dd/mm/yyyy.
+ * If the input is not a valid JavaScript Date, it will return as a string
+ * @param {String} input 
+ */
 function parseDate(input) {
     if (isNaN(Date.parse(input))) {
       return input
@@ -21,6 +26,11 @@ function parseDate(input) {
     };
   };
 
+  /**
+   * Takes a String representation of a Date and determines a String representing the status of the Research Project.
+   * Return either "In Progress" or "Completed".
+   * @param {String} input 
+   */
   function checkEndDate(input) {
       if (isNaN(Date.parse(input)) || Date.parse(input) == null) {
           return "In Progress"
@@ -31,6 +41,12 @@ function parseDate(input) {
       }
   }
 
+/**
+ * Takes a string representation of Researcher ids and a list of Researcher Objects. Return a String
+ * formatted as: [Full Name of Researcher at index 0] +[Number of additional Researcher ids].
+ * @param {String} ids 
+ * @param {List} researcher_list 
+ */
 function formatResearchers(ids, researcher_list) {
     console.log(researcher_list);
     if (ids.length <= 0) {
@@ -51,6 +67,13 @@ function formatResearchers(ids, researcher_list) {
     }
 };
 
+/**
+ * Takes in a List and returns a List of Lists (the cache) with each internal List being of length chunkSize.
+ * This allows the retrieved search results to display in the relevant order row by row in a maximum of chunkSize columns.
+ * @param {List} arr 
+ * @param {Number} chunkSize 
+ * @param {List} cache 
+ */
 const chunk = (arr, chunkSize = 1, cache = []) => {
     const tmp = [...arr]
     if (chunkSize <= 0) return cache
@@ -58,6 +81,10 @@ const chunk = (arr, chunkSize = 1, cache = []) => {
     return cache
   }
 
+/**
+ * Populates and returns a formated Research Card with the properties of that Research popluated in the correct formats.
+ * @param {Object} props 
+ */
 const ResearchCard = (props) => {
     const card = (
         <Card bg="light" className="research-card">
@@ -113,6 +140,12 @@ const ResearchCard = (props) => {
     return card;
 }
 
+/**
+ * React constant which splits the returned search results into chunks to then be displayed in the correct order.
+ * This populates each ResearchCard with the relevant properties, puts them into columns, puts the columns into rows,
+ * and returns the rows within a Container.
+ * @param {Object} props 
+ */
 const CardResults = (props) => {
     const resultChunks = chunk(props.data, 3);
     const rows = resultChunks.map((resultChunk, index) => {
@@ -191,6 +224,11 @@ export class View extends React.Component {
         this.onPressEnter = this.onPressEnter.bind(this);
     }
 
+    /**
+     * Determines what call to make to the database when a user presses enter while focused on the SearchBar;
+     * uses Axios to get the search results and subsequently update the View's state.
+     * @param {Event} event 
+     */
     onPressEnter(event) {
         if (event.charCode === 13) {
             if(event.target.value==='' && this.state.industry == this.cat_text) {
@@ -221,6 +259,9 @@ export class View extends React.Component {
         }
     }
 
+    /**
+     * On page load, gets all research and researcher records in the database and updates the View's state.
+     */
     componentDidMount() {     
         Axios.get('http://localhost:3001/get-all').then((res)=>{
             this.setState({data: res.data});      
@@ -230,10 +271,17 @@ export class View extends React.Component {
         });
     }
 
+    /**
+     * Returns the number of results retrieved.
+     * @param {List} results 
+     */
     countResults(results) {
         return Array.from(results).length;
     }
 
+    /**
+     * Returns a String in the format: "Showing [Number of results] for [Search keyword(s)]"
+     */
     returnResultSize() {
         const resultWord = this.state.countResults == 1 ? "result" : "results";
         if (this.state.search != '') {
@@ -243,25 +291,21 @@ export class View extends React.Component {
         }
     }
 
+    /**
+     * Takes a list of strings, and returns the Strings as HTML <option> elements.
+     * @param {List} list 
+     */
     insertOptionsList(list) {
         const options = list.map((option, index) => {
             return(<option>{option}</option>)
         });
         return options;
     }
-    
-    /* Commenting this out until we decide that we need this method
-    delete(id) {
-        Axios.post('http://localhost:3001/delete',{
-            id:id
-        }).then(()=>{
-            const val = this.state.data.filter((val)=>{
-                return val.ResearchID != id;
-            });
-            this.setState({data:val});
-        });
-    }*/
 
+    /**
+     * Renders the View Component. This renders the entire index/home page and includes a Header, a SearchBar component,
+     * dropdown filter options, and the results of the search.
+     */
     render() {
         return(
             <Container>

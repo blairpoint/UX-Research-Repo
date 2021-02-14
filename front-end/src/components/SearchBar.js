@@ -8,17 +8,20 @@ export class SearchBar extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state={search:'', cat:this.cat_text};       
+        this.state={search:''};       
     }
 
-    selectCat(selection) {
-        this.setState({cat: selection}); //will move this onto the actual lines at a later date
-    };
-
+    /**
+     * Calls the function call from the parent class (View). This sends the searched keyword(s) to the View screen.
+     * @param {Event} e 
+     */
     getInput = (e) => {
         this.props.functionCallFromParent(e);
     }
 
+    /**
+     * Renders the SerachBar component. Sends the user input to the View class.
+     */
     render() {
         return(
             <div className="searchbar">

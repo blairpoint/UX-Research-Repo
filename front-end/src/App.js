@@ -7,7 +7,9 @@ import {Create} from "./Create";
 import {Viewcard} from "./Viewcard";
 
 
-
+/**
+ * Returns the current path of the application via a Router & Switch
+ */
 function App() {
   return (
       <Router>
