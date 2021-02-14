@@ -115,31 +115,10 @@ export class Create extends React.Component {
         this.setState({ Methods: Methods })
     }
 
-    inputKeyDown = (e) => {
-        const val = e.target.value;
-        if (e.key === 'Enter' && val) {
-            this.setState({ Tags: [...this.state.Tags, val] });
-            this.tagInput.value = null;
-        }
-    }
-
     addURL = (e) => {
         this.state.Research_Outputs.push({ Title: this.state.tempTitle, URL: this.state.tempURL });
         this.child.current.populateData(this.state.Research_Outputs);
         this.setState({tempTitle: '', tempURL: ''});
-    }
-
-    removeTag = (i) => {
-        const newTags = [...this.state.Tags];
-        newTags.splice(i, 1);
-        this.setState({ Tags: newTags });
-    }
-
-    insertLinks() {
-        const links = this.state.Research_Outputs.map((link, index) => {
-            return (<a href={link["URL"]}>{link["Title"]}</a>)
-        })
-        return links;
     }
 
     render() {

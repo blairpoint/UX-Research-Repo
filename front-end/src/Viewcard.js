@@ -6,6 +6,10 @@ import * as Icon from 'react-bootstrap-icons';
 import './Viewcard.css';
 let oid = 0;
 
+/**
+ * 
+ * @param {*} input 
+ */
 function parseDate(input) {
     if (isNaN(Date.parse(input))) {
       return input
@@ -26,6 +30,11 @@ function parseDate(input) {
     }
 }
 
+/**
+ * React constant which maps the Researcher names to their ids, and returns React components for rendering the
+ * Researchers and their roles on the screen.
+ * @param {Object} props 
+ */
 const Researchers = (props) => {
     const rows = Array.from(props.researchers).map((researcher, index) => {
         return(
@@ -38,6 +47,7 @@ const Researchers = (props) => {
     return rows;
 }
 
+
 export class Viewcard extends React.Component {
     constructor(props) {
         super(props);
@@ -47,6 +57,9 @@ export class Viewcard extends React.Component {
         oid = oidArray[2];
 }
 
+    /**
+     * On page load, retrieves the data for the given Research id, including a list of Researcher Objects.
+     */
     componentDidMount() {     
         Axios.get(`http://localhost:3001/get-record/${oid}`).then((res)=>{
             this.setState({data: res.data});
