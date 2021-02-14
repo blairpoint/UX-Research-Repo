@@ -1,7 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
-import { Form, FormGroup, Breadcrumb, FormControl, Row, Col, label, Switch, Container, Dropdown, DropdownButton, Button, InputGroup } from 'react-bootstrap'
-import { Token, Typeahead } from 'react-bootstrap-typeahead';
+import { Form, FormGroup, Breadcrumb, Row, Col, Button } from 'react-bootstrap'
+import { Typeahead } from 'react-bootstrap-typeahead';
 import { Link } from 'react-router-dom';
 
 export class Create extends React.Component {
@@ -39,13 +39,19 @@ export class Create extends React.Component {
         this.child = React.createRef();
 
     }
-
+    
+    /**
+     * On page load, retrieves the full list of Researcher objects.
+     */
     componentDidMount() {
         Axios.get('http://localhost:3001/get-all-researchers').then((res)=>{
             this.setState({researcher_list: res.data});      
         });
     }
 
+    /**
+     * Returns the list of Researcher names from the list of Researcher objects.
+     */
     getNames() {
         const names = []
         Array.from(this.state.researcher_list).forEach(r => 
@@ -54,6 +60,9 @@ export class Create extends React.Component {
         return names;
     }
 
+    /**
+     * Converts the selected list of Researcher names into a list of Rearcher IDs and saves them to the Create’s state.
+     */
     convertNamesToIds() {
         const Researchers = this.state.Researchers
         Array.from(this.state.selected).forEach(s =>
@@ -67,6 +76,9 @@ export class Create extends React.Component {
         this.setState({Researchers: Researchers});
     }
 
+    /**
+     * Calls convertNamesToIds. Posts to the Node/Express.js insert route all the data entered into the form. Alerts the user that the Research was added to the database.
+     */
     addResearch() {
         this.convertNamesToIds();
         console.log(this.state.Research_Outputs);
@@ -93,6 +105,10 @@ export class Create extends React.Component {
         });
     }
 
+    /**
+     * Handles the Methods state whenever the user checks or unchecks a method option on the form.
+     * @param {Event} e 
+     */
     methodChange(e) {
         // current array of methods
         console.log("Called " + e.target.value);
@@ -115,12 +131,19 @@ export class Create extends React.Component {
         this.setState({ Methods: Methods })
     }
 
+    /**
+     * Saves the currently entered Output information as an Object to the Research_Outputs state. Clears the associated fields.
+     * @param {Event} e 
+     */
     addURL = (e) => {
         this.state.Research_Outputs.push({ Title: this.state.tempTitle, URL: this.state.tempURL });
         this.child.current.populateData(this.state.Research_Outputs);
         this.setState({tempTitle: '', tempURL: ''});
     }
 
+    /**
+     * Renders the Create component. This renders the entire create page, with all input fields. Includes a URLLabels component.
+     */
     render() {
         return (<div className="container">
              <Row className="mt-4 mx-2">
@@ -336,17 +359,27 @@ export class Create extends React.Component {
     }
 }
 
+/**
+ * Component which renders entered Research_Outputs as hyperlinks to external sources.
+ */
 export default class URLLabels extends React.Component {
     constructor(props) {
         super(props);
         this.state = { URL: '' }
     }
 
-    populateData(uArray) {
-        console.log(uArray);
-        this.setState({ URL: uArray });
+    /**
+     * sets the URL state equal to the given outputs object.
+     * @param {Object} output 
+     */
+    populateData(output) {
+        console.log(output);
+        this.setState({ URL: output });
     }
 
+    /**
+     * Maps each Output into a table of hyperlinks to be rendered from the Create component.
+     */
     render() {
         return (
             <div>

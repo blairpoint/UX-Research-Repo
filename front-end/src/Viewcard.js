@@ -7,8 +7,8 @@ import './Viewcard.css';
 let oid = 0;
 
 /**
- * 
- * @param {*} input 
+ * Takes a string representation of a Date and returns it in an Australian date format: dd/mm/yyyy. If the input is not a valid JavaScript Date, it will return as a string.
+ * @param {String} input 
  */
 function parseDate(input) {
     if (isNaN(Date.parse(input))) {
@@ -18,9 +18,13 @@ function parseDate(input) {
       var options = { year: 'numeric', month: '2-digit', day: '2-digit'};
       return new Intl.DateTimeFormat('en-AU', options).format(date);
     };
-  };
+};
 
-  function checkEndDate(input) {
+/**
+ * Takes a String representation of a Date and determines a String representing the status of the Research Project. Return either "In Progress" or "Completed".
+ * @param {String} input 
+ */
+function checkEndDate(input) {
     if (isNaN(Date.parse(input)) || Date.parse(input) == null) {
         return "In Progress"
     } else if(Date.parse(input) > Date.now()) {
@@ -71,6 +75,10 @@ export class Viewcard extends React.Component {
         });
     }
 
+    /**
+     * Renders the Viewcard component. This renders the entire view/[id] page for the specific Research id given. It displays the detailed properties of the Research record. 
+     * Any property retrieved in a list is mapped to HTML <li> elements for display purposes.
+     */
     render() {
         const e = this.state.data;
 
