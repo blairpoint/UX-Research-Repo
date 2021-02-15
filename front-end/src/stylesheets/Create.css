@@ -1,0 +1,73 @@
+.rbt-input-multi {
+    cursor: text !important;
+    overflow: hidden !important;
+    position: relative !important;
+    background-color: #F3F3F3 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom-color: #161616 !important;
+  }
+  
+  .rbt-input-wrapper {
+    align-items: flex-start !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin-bottom: -4px !important;
+    margin-top: -1px !important;
+    overflow: hidden !important;
+  }
+  
+  .rbt-input-main {
+    margin: 1px 0 4px !important;
+  }
+  
+  .rbt-token {
+    background-color: #0F61FD !important;
+    border: 0 !important;
+    border-radius: .25rem !important;
+    color: white !important;
+    display: inline-block !important;
+    line-height: 1em !important;
+    margin: 1px 3px 2px 0 !important;
+    padding: 4px 7px !important;
+    position: relative !important;
+  }
+  
+  .rbt-token-removeable {
+      cursor: pointer !important;
+      padding-right: 21px !important;
+    }
+  
+  .rbt-token-remove-button {
+      bottom: 0 !important;
+      color: white !important;
+      font-size: inherit !important;
+      font-weight: normal !important;
+      opacity: 1 !important;
+      outline: none !important;
+      padding: 3px 7px !important;
+      position: absolute !important;
+      right: 0 !important;
+      text-shadow: none !important;
+      top: -2px !important;
+    }
+  
+    .rbt-token-disabled {
+      background-color: #383838 !important;
+      color: white !important;
+      pointer-events: none !important;
+    }
+  
+    .rbt-token-removeable {
+      cursor: pointer !important;
+      padding-right: 21px !important;
+    }
+  
+    .rbt-token-active {
+      background-color: #4488FF !important;
+      color: white !important;
+      outline: none !important;
+      text-decoration: none !important;
+    }
+  

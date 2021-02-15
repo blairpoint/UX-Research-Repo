@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { Form, FormGroup, Breadcrumb, Row, Col, Button } from 'react-bootstrap'
 import { Typeahead } from 'react-bootstrap-typeahead';
 import { Link } from 'react-router-dom';
+import './stylesheets/Create.css';
 
 export class Create extends React.Component {
     constructor(props) {

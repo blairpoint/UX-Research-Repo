@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, Col, Dropdown, DropdownButton, Form, InputGroup, Row } from 'react-bootstrap';
+import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
-import FormControl from 'react-bootstrap/FormControl';
 import { Link } from 'react-router-dom';
+import '../stylesheets/SearchBar.css';
 
 export class SearchBar extends React.Component {
 

@@ -1,12 +1,10 @@
 import React from 'react';
 import Axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import CardColumns from 'react-bootstrap/CardColumns';
-import { Accordion, Badge, Button, Col, Container, Form, InputGroup, ListGroup, Row } from 'react-bootstrap';
-import * as Icon from 'react-bootstrap-icons';
-import FormControl from 'react-bootstrap/FormControl';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import {SearchBar} from './components/SearchBar';
 import { Link } from 'react-router-dom';
+import './stylesheets/View.css';
 
 const testArr = ["Chip Whistler", "Mandy Bragger", "Ziggy Stardust", "Test Testerson"];
 var researchers = [];

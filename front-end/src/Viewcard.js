@@ -1,9 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Form, Row, Col, Breadcrumb, FormLabel, ListGroupItem, ListGroup, Jumbotron } from 'react-bootstrap'
+import { Row, Col, Breadcrumb, FormLabel, Jumbotron } from 'react-bootstrap'
 import * as Icon from 'react-bootstrap-icons';
-import './Viewcard.css';
+import './stylesheets/Viewcard.css';
 let oid = 0;
 
 /**
