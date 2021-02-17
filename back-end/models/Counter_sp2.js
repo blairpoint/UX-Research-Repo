@@ -1,3 +1,5 @@
+/* Describes the Schema for the Counter_sp2 MongoDB database collection. */
+
 const mongoose = require('mongoose');
 const CounterSchema_sp2 = new mongoose.Schema({
 

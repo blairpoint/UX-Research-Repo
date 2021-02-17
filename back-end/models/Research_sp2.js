@@ -1,13 +1,13 @@
+/* Describes the Schema for the Research_sp2 MongoDB database collection.  */
+
 const mongoose = require('mongoose');
-/* AMF: ResearchSchema_sp2 is for the collection research_sp2. 
-This is a copy of research1 with an index (and different document objectIDs). */
+
 const ResearchSchema_sp2 = new mongoose.Schema({
 
     Industry:String,
     Company:String,
     Problem_Statement:String,
     Methods:[String],
-    //Tags:[String],
     Creation_Date:{ type: Date, default: Date.now},
     Research_ID:Number,
     Location:String,
@@ -27,9 +27,6 @@ const ResearchSchema_sp2 = new mongoose.Schema({
 /* AMF: this sets up the index information. */
 
 ResearchSchema_sp2.index({'$**': 'text'});
-
-/* AMF: ResearchModel2 points to the collection research2. 
-This is a copy of research1 with an index (and different document objectIDs). */
 
 const ResearchModel_sp2 = mongoose.model('research_sp2', ResearchSchema_sp2);
 module.exports = ResearchModel_sp2;

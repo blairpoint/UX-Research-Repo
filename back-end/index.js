@@ -18,6 +18,16 @@ mongoose.connect('mongodb+srv://alice:admin@cluster0.ohr5j.mongodb.net/sprint2?r
     useFindAndModify: false
 });
 
+/* Node.js Express Routes */
+
+/* /insert
+Receives the form input from the front-end Create.js form, and maps the input from the request
+body to the fields in the research_sp2 collection schema. When the data has been saved to the
+database it sends a confirmation message to the front-end code.
+It also contains a function to increment the research ID counter in the MongoDB counter_sp2
+collection and retrieve the new counter number. The number is incremented at this point so that
+if there is a failure later in the process there will not be a clash of research IDs in the future. */
+
 app.post('/insert', (req, res) => {
     
     let new_rid;
@@ -61,6 +71,10 @@ app.post('/insert', (req, res) => {
     
 });
 
+/* /get-all
+Called by the View.js front-end code, retrieves all research documents from the MongoDB
+research_sp2 collection and passes it to the front-end. */
+
 app.get('/get-all', (req, res) => {
     ResearchModel_sp2.find({}, (err, result) => {
         if (err) {
@@ -70,6 +84,10 @@ app.get('/get-all', (req, res) => {
         }
     });
 });
+
+/* /search/:val
+Called by the View.js front-end code which passes in a keyword. The MongoDB research_sp2 text
+index is searched for the keyword and the result is passed back to the front-end code. */
 
 app.get('/search/:val', (req, res) => {
     ResearchModel_sp2.find({ $text: { $search: req.params.val } }, (err, result) => {
@@ -81,6 +99,12 @@ app.get('/search/:val', (req, res) => {
     });
 });
 
+/* /get-all-researchers
+Called by the Create.js front-end code to bring in a list of researchers from the MongoDB
+researchers_sp2 collection. This is a placeholder function so that we could demonstrate the flow
+of adding researchers to a research document, as it is anticipated that the product will be
+integrated with an IBM identity management interface in the future. */
+
 app.get('/get-all-researchers', (req, res) => {
 
     ResearcherModel_sp2.find({}, (err, result) => {
@@ -91,6 +115,13 @@ app.get('/get-all-researchers', (req, res) => {
         }
     });
 });
+
+/* /searchResearcher/:val
+Converts the request value to a regular expression and searches all fields of the MongoDB
+researcher_sp2 collection (first name, last name, position and email) and returns matches on
+sub-strings. We did not end up using this function in the front-end, but it has been retained for
+now to consider something similar for expanding the research document search capability to
+include a sub-string/wildcard search in future. */
 
 app.get('/searchResearcher/:val', (req, res) => {
 
@@ -118,6 +149,12 @@ app.get('/searchResearcher/:val', (req, res) => {
         });
 });
 
+/* /filterSearchIndustry/:val1/val2: 
+Called by the View.js front-end code when choosing an Industry type to search for with a keyword. Created
+for the demonstration to return all documents in the MongoDB research_sp2 collection that contain a match
+for the request value in the Industry field and a match for the keyword in the research_sp2 text index. This
+would not be used in production code as the filtering would be rewritten. */ 
+
 /* val1 = industry type, val2 = keyword */
 
 app.get('/filterSearchIndustry/:val1/:val2', (req, res) => {
@@ -132,6 +169,12 @@ app.get('/filterSearchIndustry/:val1/:val2', (req, res) => {
         });
 });
 
+/* /filterSearchIndustryBlank/:val1 
+Called by the View.js front-end code when choosing an Industry type to search for with no keyword. Created
+for the demonstration to return all documents in the MongoDB research_sp2 collection that contain a match
+for the request value in the Industry field. This would not be used in production code as the filtering would
+be rewritten.  */
+
 /* val1 = industry type */
 
 app.get('/filterSearchIndustryBlank/:val1', (req, res) => {
@@ -144,6 +187,10 @@ app.get('/filterSearchIndustryBlank/:val1', (req, res) => {
         });
 });
 
+/* /get-record/:val 
+Called by the Viewcard.js front-end code, retrieves the requested research document from the MongoDB
+research_sp2 collection and passes it to the front-end. The research document is referenced by MongoDB
+document ObjectID.  */
 
 app.get('/get-record/:val', (req, res) => {
     ResearchModel_sp2.findById(req.params.val, (err, result) => {
@@ -154,6 +201,12 @@ app.get('/get-record/:val', (req, res) => {
         }
     });
 });
+
+/* /get-record-researchers/:val 
+Called by the Viewcard.js front-end code. Returns an array of researcher documents from the MongoDB
+researcher_sp2 collection. The relevant researchers are identified from their ObjectIDs that are stored in
+the research documents. This is a workaround due to issues using Mongoose populate(). Researchers is a 
+placeholder until integrated with IBM Identity Management directory. */
 
 app.get('/get-record-researchers/:val', async (req, res) => {
 
@@ -184,9 +237,9 @@ app.get('/get-record-researchers/:val', async (req, res) => {
 
 });
 
-app.get('/hello', (req, res) => {
-    res.send('Hello from  Express');
-});
+// app.get('/hello', (req, res) => {
+//     res.send('Hello from  Express');
+// });
 
 app.listen(3001, () => {
     console.log('Server is running on port 3001');
