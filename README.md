@@ -50,18 +50,28 @@ of all Node modules installed.
 Install the following modules using the command line:
 
 npm install express
+
 npm install cors
+
 npm install mongoose
+
 
 Change directory to the front-end directory.
 
 npx create-react-app .
+
 npm install axios
+
 npm install bootstrap
+
 npm install react-bootstrap
+
 npm install react-bootstrap-icons
+
 npm install react-bootstrap-typeahead
+
 npm install react-router-dom
+
 
 Download the code package from the GitLab repository:
 https://gitlab.ecs.vuw.ac.nz/eckricmade/ibm-research-repository
