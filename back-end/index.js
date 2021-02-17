@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
-const ObjectId = require('mongodb').ObjectId;
+//const ObjectId = require('mongodb').ObjectId;
 const ResearchModel_sp2 = require('./models/Research_sp2');
 const ResearcherModel_sp2 = require('./models/Researcher_sp2');
 const CounterModel_sp2 = require('./models/Counter_sp2');
@@ -18,47 +18,48 @@ mongoose.connect('mongodb+srv://alice:admin@cluster0.ohr5j.mongodb.net/sprint2?r
     useFindAndModify: false
 });
 
-app.post('/insert', async (req, res) => {
-    var new_rid = 0;
+app.post('/insert', (req, res) => {
+    
+    let new_rid;
 
-    await CounterModel_sp2.findByIdAndUpdate("research_id", { $inc: { seq: 1 } }, { new: true },
+     CounterModel_sp2.findByIdAndUpdate("research_id", { $inc: { seq: 1 } }, { new: true },
         function (err, ridres) {
             if (err) {
                 console.log(err)
             }
             else {
-                new_rid = ridres.seq;
-                console.log(new_rid);
+                new_rid = ridres.seq;  
+            
+                const research_sp2 = new ResearchModel_sp2(
+                    {
+            
+                        Industry: req.body.Industry,
+                        Company: req.body.Company,
+                        Problem_Statement: req.body.Problem_Statement,
+                        Methods: req.body.Methods,
+                        Tags: req.body.Tags,
+                        Creation_Date: req.body.Creation_Date,
+                        Research_ID: new_rid,
+                        Location: req.body.Location,
+                        Project_Name: req.body.Project_Name,
+                        Key_Insights: req.body.Key_Insights,
+                        Sample_Size: req.body.Sample_Size,
+                        End_Date: req.body.End_Date,
+                        Start_Date: req.body.Start_Date,
+                        Findings: req.body.Findings,
+                        Creator: req.body.Creator,
+                        Researchers: req.body.Researchers,
+                        Research_Outputs: req.body.Research_Outputs
+            
+                    });
+                research_sp2.save();
+                res.send('Inserted Data');
+
             }
         })
 
-    const research_sp2 = new ResearchModel_sp2(
-
-        {
-
-            Industry: req.body.Industry,
-            Company: req.body.Company,
-            Problem_Statement: req.body.Problem_Statement,
-            Methods: req.body.Methods,
-            Tags: req.body.Tags,
-            Creation_Date: req.body.Creation_Date,
-            Research_ID: new_rid,
-            Location: req.body.Location,
-            Project_Name: req.body.Project_Name,
-            Key_Insights: req.body.Key_Insights,
-            Sample_Size: req.body.Sample_Size,
-            End_Date: req.body.End_Date,
-            Start_Date: req.body.Start_Date,
-            Findings: req.body.Findings,
-            Creator: req.body.Creator,
-            Researchers: req.body.Researchers,
-            Research_Outputs: req.body.Research_Outputs
-
-        });
-    await research_sp2.save();
-    res.send('Inserted Data');
+    
 });
-
 
 app.get('/get-all', (req, res) => {
     ResearchModel_sp2.find({}, (err, result) => {
