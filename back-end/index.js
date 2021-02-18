@@ -10,6 +10,8 @@ const CounterModel_sp2 = require('./models/Counter_sp2');
 app.use(cors());
 app.use(express.json());
 
+/* MongoDB Connection String */
+
 mongoose.connect('mongodb+srv://alice:admin@cluster0.ohr5j.mongodb.net/sprint2?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
