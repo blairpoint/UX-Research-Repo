@@ -1,29 +1,27 @@
 import React from 'react';
-import { Button, Col, Dropdown, DropdownButton, Form, InputGroup, Row } from 'react-bootstrap';
+import { Button, Col, Form, InputGroup, Row } from 'react-bootstrap';
 import * as Icon from 'react-bootstrap-icons';
-import FormControl from 'react-bootstrap/FormControl';
 import { Link } from 'react-router-dom';
+import '../stylesheets/SearchBar.css';
 
 export class SearchBar extends React.Component {
-    
-    cat_text = 'Choose an option...'
-    cat_one = 'Category 1'
-    cat_two = 'Category 2'
-    cat_three = 'Category 3'
 
     constructor(props) {
         super(props);
-        this.state={search:'', cat:this.cat_text};       
+        this.state={search:''};       
     }
 
-    selectCat(selection) {
-        this.setState({cat: selection}); //will move this onto the actual lines at a later date
-    };
-
+    /**
+     * Calls the function call from the parent class (View). This sends the searched keyword(s) to the View screen.
+     * @param {Event} e 
+     */
     getInput = (e) => {
         this.props.functionCallFromParent(e);
     }
 
+    /**
+     * Renders the SerachBar component. Sends the user input to the View class.
+     */
     render() {
         return(
             <div className="searchbar">

@@ -1,3 +1,4 @@
+/* Carbon Design References */
 :root {
 
   /* Colors: */
@@ -62,7 +63,7 @@
 
 @font-face {
   font-family: 'IBM Plex Sans';
-  src: local('IBM Plex Sans'), url(./fonts/IBMPlexSans-Regular.ttf), format('truetype');
+  src: local('IBM Plex Sans'), url(../fonts/IBMPlexSans-Regular.ttf), format('truetype');
 }
 
 * {
@@ -88,125 +89,18 @@ body {
   border-bottom-color: #161616 !important;
 }
 
-.categories {
-  width: auto !important;
-  display: block !important;
-  background-color: #F3F3F3 !important;
-  border-color: #161616 !important;
+.margin-5{
+  margin-top: 30px;
 }
 
-.nav-item {
-  padding: 5px;
+.margin-5 .row {
+  margin-top:15px;
 }
 
-.searchbar {
-  margin-top: 10px;
-  margin-bottom: 10px;
+.spacer {
+  margin-bottom: 15px;
 }
 
-.searchbar .row {
-  margin-top: 20px;
-}
-
-.results {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.return-to-search {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.card-body {
-  background-color: white;
-}
-
-.card-project {
-  max-width: 320px;
-}
-
-.research-card {
-  min-width: 350px !important;
-  max-width: 350px !important;
-  min-height: 350px !important;
-  max-height: 350px !important;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.card-row-container {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  scroll-behavior: smooth;
-}
-
-.problem-statement {
-  min-height: 100px;
-  max-height: 100px;
-  overflow: hidden;
-  background: linear-gradient(black 60%, white 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.input-tag {
-  background: white;
-  border: 1px solid #d6d6d6;
-  border-radius: 2px;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 5px 5px 0;
-}
-
-.input-tag input {
-  border: none;
-  width: 100%;
-}
-
-.input-tag__tags {
-  display: inline-flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-.input-tag__tags li {
-  align-items: center;
-  background: #85A3BF;
-  border-radius: 2px;
-  color: white;
-  display: flex;
-  font-weight: 300;
-  list-style: none;
-  margin-bottom: 5px;
-  margin-right: 5px;
-  padding: 5px 10px;
-}
-
-.input-tag__tags li button {
-  align-items: center;
-  appearance: none;
-  background: #333333;
-  border: none;
-  border-radius: 50%;
-  color: white;
-  cursor: pointer;
-  display: inline-flex;
-  font-size: 12px;
-  height: 15px;
-  justify-content: center;
-  line-height: 0;
-  margin-left: 8px;
-  padding: 0;
-  transform: rotate(45deg);
-  width: 15px;
-}
-
-.input-tag__tags li.input-tag__tags__input {
-  background: none;
-  flex-grow: 1;
-  padding: 0;
+.p-wrap {
+  white-space: pre-line;
 }
